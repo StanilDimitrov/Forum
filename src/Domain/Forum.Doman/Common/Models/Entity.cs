@@ -1,9 +1,24 @@
-﻿namespace Forum.Domain.Common.Models
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace Forum.Domain.Common.Models
 {
-    public abstract class Entity<TId>
-       where TId : struct
+    public abstract class Entity<TId> : IEntity
+         where TId : struct
     {
+        private readonly ICollection<IDomainEvent> events;
+
+        protected Entity() => this.events = new List<IDomainEvent>();
+
         public TId Id { get; private set; } = default;
+
+        public IReadOnlyCollection<IDomainEvent> Events
+            => this.events.ToList().AsReadOnly();
+
+        public void ClearEvents() => this.events.Clear();
+
+        protected void AddEvent(IDomainEvent domainEvent)
+            => this.events.Add(domainEvent);
 
         public override bool Equals(object? obj)
         {
