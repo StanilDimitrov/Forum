@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{47F33970-E4F5-4C6F-AD38-3FB81738DEBB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{87FE174D-0C76-4FD1-B8C0-3DE6082A8346}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{A3E9BA8E-AFD6-4B8F-83EB-01FCD3BAA18B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forum.Doman", "src\Domain\Forum.Doman\Forum.Doman.csproj", "{050A6CC5-35D0-438B-9348-65C113D19FA0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{050A6CC5-35D0-438B-9348-65C113D19FA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{050A6CC5-35D0-438B-9348-65C113D19FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{050A6CC5-35D0-438B-9348-65C113D19FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{050A6CC5-35D0-438B-9348-65C113D19FA0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A3E9BA8E-AFD6-4B8F-83EB-01FCD3BAA18B} = {47F33970-E4F5-4C6F-AD38-3FB81738DEBB}
+		{050A6CC5-35D0-438B-9348-65C113D19FA0} = {A3E9BA8E-AFD6-4B8F-83EB-01FCD3BAA18B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EADE3413-AE6A-48F1-B89A-A55321E49B9F}
+	EndGlobalSection
+EndGlobal
