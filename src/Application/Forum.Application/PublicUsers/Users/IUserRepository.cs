@@ -13,7 +13,9 @@ namespace Forum.Application.PublicUsers.Users
 
         Task<int> GetUserId(string userId, CancellationToken cancellationToken = default);
 
-        Task<bool> HasPost(int dealerId, int carAdId, CancellationToken cancellationToken = default);
+        Task<bool> HasPost(int userId, int postId, CancellationToken cancellationToken = default);
+
+        Task<bool> HasComment(int userId, int commentId, CancellationToken cancellationToken = default);
 
         Task<UserDetailsOutputModel> GetDetails(int id, CancellationToken cancellationToken = default);
 

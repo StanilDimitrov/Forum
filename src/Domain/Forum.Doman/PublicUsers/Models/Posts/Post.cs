@@ -58,12 +58,21 @@ namespace Forum.Doman.PublicUsers.Models.Posts
 
         public IReadOnlyCollection<Comment> Comments => this.comments.ToList().AsReadOnly();
 
-        public void AddComment(Comment comment)
+        public void AddComment(string description, string imageUrl, string userId)
         {
+            var comment = new Comment(description, imageUrl, userId);
             this.comments.Add(comment);
         }
 
         public Post UpdateImageUrl(string imageUrl)
+        {
+            this.ValidateImageUrl(imageUrl);
+            this.ImageUrl = imageUrl;
+
+            return this;
+        }
+
+        public Post UpdateComment(string imageUrl)
         {
             this.ValidateImageUrl(imageUrl);
             this.ImageUrl = imageUrl;
