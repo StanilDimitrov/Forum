@@ -41,14 +41,14 @@ namespace Forum.Application.PublicUsers.Posts.Commands.Edit
                 }
 
                 var post = await this.postRepository
-                    .Find(request.Id, cancellationToken);
+                    .Find(request.PostId, cancellationToken);
 
-                //post.UpdateDescription(request.Description)
-                //    .UpdateCategory(category)
-                //    .UpdateImageUrl(request.ImageUrl);
+                post.UpdateComment(
+                    request.Id,
+                    request.Description,
+                    request.ImageUrl);
 
                 await this.postRepository.Save(post, cancellationToken);
-
                 return Result.Success;
             }
         }

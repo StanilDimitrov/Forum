@@ -72,12 +72,22 @@ namespace Forum.Doman.PublicUsers.Models.Posts
             return this;
         }
 
-        public Post UpdateComment(string imageUrl)
+        public Comment DeleteComment(int commentId)
         {
-            this.ValidateImageUrl(imageUrl);
-            this.ImageUrl = imageUrl;
+            var comment = FindComment(commentId);
+            this.comments.Remove(comment);
+            return comment;
+        }
 
-            return this;
+        public Comment UpdateComment(
+            int commentId,
+            string description,
+            string imageUrl)
+        {
+            var comment = FindComment(commentId);
+                comment.UpdateDescription(description);
+                comment.UpdateImageUrl(imageUrl);
+            return comment;
         }
 
         public Post UpdateDescription(string description)
@@ -128,5 +138,8 @@ namespace Forum.Doman.PublicUsers.Models.Posts
 
             throw new InvalidPostException($"'{categoryName}' is not a valid category. Allowed values are: {allowedCategoryNames}.");
         }
+
+        private Comment FindComment(int commentId) =>
+            this.comments.FirstOrDefault(c => c.Id == commentId);
     }
 }

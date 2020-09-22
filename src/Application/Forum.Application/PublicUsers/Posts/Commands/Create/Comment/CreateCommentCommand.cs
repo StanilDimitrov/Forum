@@ -26,7 +26,7 @@ namespace Forum.Application.PublicUsers.Posts.Commands.Create.Comment
                 CancellationToken cancellationToken)
             {
                 var post = await this.postRepository.Find(
-                    request.Id,
+                    request.PostId,
                     cancellationToken);
 
                 post.AddComment(request.Description, request.ImageUrl, currentUser.UserId);

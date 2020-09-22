@@ -8,6 +8,8 @@ namespace Forum.Application.PublicUsers.Posts.Commands.Common
     {
         public string Description { get; set; } = default!;
 
+        public int PostId { get; set; } = default!;
+
         public string ImageUrl { get; set; } = default!;
 
         public DateTime CreatedOn { get; set; }
