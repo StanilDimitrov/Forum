@@ -3,7 +3,7 @@ using Forum.Doman.PublicUsers.Models.Posts;
 using System;
 using System.Linq.Expressions;
 
-namespace CarRentalSystem.Domain.Dealerships.Specifications.CarAds
+namespace Forum.Domain.PublicUsers.Specifications.Posts
 {
     public class PostByCreatedOnSpecification : Specification<Post>
     {
