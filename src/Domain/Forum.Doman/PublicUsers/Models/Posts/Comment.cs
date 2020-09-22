@@ -6,15 +6,18 @@ namespace Forum.Doman.PublicUsers.Models.Posts
 {
     public class Comment : Entity<int>
     {
-        internal Comment(string description, string imageUrl)
+        internal Comment(string description, string imageUrl, string userId)
         {
             this.ValidateDescription(description);
             this.ValidateImageUrl(imageUrl);
 
             this.Description = description;
             this.ImageUrl = imageUrl;
+            this.UserId = userId;
             this.IsVisible = true;
         }
+
+        public string UserId { get; private set; }
 
         public string Description { get; private set; }
 
