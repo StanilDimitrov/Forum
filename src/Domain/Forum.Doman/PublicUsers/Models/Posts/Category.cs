@@ -5,7 +5,7 @@ using static Forum.Domain.PublicUsers.Models.ModelConstants.Common;
 
 namespace Forum.Doman.PublicUsers.Models.Posts
 {
-    public class Category
+    public class Category : Entity<int>
     {
         internal Category(string name, string description)
         {

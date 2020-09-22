@@ -4,7 +4,7 @@ using static Forum.Domain.PublicUsers.Models.ModelConstants.Comment;
 
 namespace Forum.Doman.PublicUsers.Models.Posts
 {
-    public class Comment
+    public class Comment : Entity<int>
     {
         internal Comment(string description, string imageUrl)
         {
