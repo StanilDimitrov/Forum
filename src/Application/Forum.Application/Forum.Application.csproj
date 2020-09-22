@@ -17,4 +17,9 @@
     <ProjectReference Include="..\..\Domain\Forum.Doman\Forum.Doman.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="PublicUsers\Posts\Commands\" />
+    <Folder Include="PublicUsers\Users\Commands\" />
+  </ItemGroup>
+
 </Project>
