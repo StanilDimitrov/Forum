@@ -40,13 +40,6 @@ namespace Forum.Doman.PublicUsers.Models.Users
             this.AddEvent(new PostAddedEvent());
         }
 
-        public void AddComment(Comment comment)
-        {
-            this.comments.Add(comment);
-
-            //this.AddEvent(new CarAdAddedEvent());
-        }
-
         public User UpdateEmail(string email)
         {
             this.ValidateEmail(email);
