@@ -1,4 +1,6 @@
 ﻿using Forum.Domain.Exceptions;
+using Forum.Domain.PublicUsers.Models;
+using System;
 
 namespace Forum.Domain.Common.Models
 {
