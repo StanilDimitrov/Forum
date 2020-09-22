@@ -13,7 +13,7 @@ namespace Forum.Application.PublicUsers.Users
 
         Task<int> GetUserId(string userId, CancellationToken cancellationToken = default);
 
-        Task<bool> HasCarAd(int dealerId, int carAdId, CancellationToken cancellationToken = default);
+        Task<bool> HasPost(int dealerId, int carAdId, CancellationToken cancellationToken = default);
 
         Task<UserDetailsOutputModel> GetDetails(int id, CancellationToken cancellationToken = default);
 
