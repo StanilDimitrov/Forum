@@ -13,16 +13,18 @@ namespace Forum.Doman.PublicUsers.Models.Users
     {
         private readonly HashSet<Post> posts;
         private readonly HashSet<Comment> comments;
+
         internal User(string userName, string email)
         {
             this.ValidateUserName(userName);
             this.ValidateEmail(email);
 
-            this.posts = new HashSet<Post>();
-            this.comments = new HashSet<Comment>();
             this.UserName = userName;
             this.Email = email;
+            this.comments = new HashSet<Comment>();
+            this.posts = new HashSet<Post>();
         }
+
         public string UserName { get; private set; }
 
         public string Email { get; private set; }

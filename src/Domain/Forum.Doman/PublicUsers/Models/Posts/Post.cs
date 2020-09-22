@@ -25,11 +25,23 @@ namespace Forum.Doman.PublicUsers.Models.Posts
             this.ValidateDescription(description);
             this.ValidateCategory(category);
 
-            this.comments = new HashSet<Comment>();
             this.Description = description;
             this.ImageUrl = imageUrl;
             this.Category = category;
             this.IsVisible = true;
+            this.comments = new HashSet<Comment>();
+        }
+
+        private Post(
+           string description,
+           string imageUrl)
+
+        {
+            this.Description = description;
+            this.ImageUrl = imageUrl;
+            this.Category = default!;
+            this.IsVisible = true;
+            this.comments = new HashSet<Comment>();
         }
 
         public string Description { get; private set; }
