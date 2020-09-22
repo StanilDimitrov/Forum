@@ -2,6 +2,7 @@
 using Forum.Domain.Common.Models;
 using Forum.Domain.PublicUsers.Models.Posts;
 using Forum.Doman.PublicUsers.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using static Forum.Domain.PublicUsers.Models.ModelConstants.Post;
@@ -38,6 +39,7 @@ namespace Forum.Doman.PublicUsers.Models.Posts
 
         {
             this.Description = description;
+            this.CreatedOn = DateTime.Now;
             this.ImageUrl = imageUrl;
             this.Category = default!;
             this.IsVisible = true;
@@ -45,6 +47,8 @@ namespace Forum.Doman.PublicUsers.Models.Posts
         }
 
         public string Description { get; private set; }
+
+        public DateTime CreatedOn { get; private set; }
 
         public Category Category { get; private set; }
 
