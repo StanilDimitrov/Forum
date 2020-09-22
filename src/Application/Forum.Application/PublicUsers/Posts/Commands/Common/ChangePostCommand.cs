@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Forum.Application.PublicUsers.Posts.Commands.Common
 {
-    internal static class ChangeCarAdCommandExtensions
+    internal static class ChangePostCommandExtensions
     {
         public static async Task<Result> UserHasPost(
             this ICurrentUser currentUser,

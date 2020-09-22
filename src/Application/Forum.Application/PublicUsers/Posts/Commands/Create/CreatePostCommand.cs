@@ -1,4 +1,5 @@
 ﻿using Forum.Application.Common.Contracts;
+using Forum.Application.PublicUsers.CarAds.Commands.Create;
 using Forum.Application.PublicUsers.Posts;
 using Forum.Application.PublicUsers.Posts.Commands.Common;
 using Forum.Application.PublicUsers.Users;

@@ -1,4 +1,4 @@
-﻿namespace CarRentalSystem.Application.Dealerships.CarAds.Commands.Create
+﻿namespace Forum.Application.PublicUsers.CarAds.Commands.Create
 {
     public class CreatePostOutputModel
     {
