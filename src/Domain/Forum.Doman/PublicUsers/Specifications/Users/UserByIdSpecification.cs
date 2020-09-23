@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Forum.Domain.PublicUsers.Specifications.Users
 {
-    public class UserByIdSpecification : Specification<User>
+    public class UserByIdSpecification : Specification<PublicUser>
     {
         private readonly int? id;
 
@@ -14,7 +14,7 @@ namespace Forum.Domain.PublicUsers.Specifications.Users
 
         protected override bool Include => this.id != null;
 
-        public override Expression<Func<User, bool>> ToExpression()
+        public override Expression<Func<PublicUser, bool>> ToExpression()
             => post => post.Id == this.id;
     }
 }

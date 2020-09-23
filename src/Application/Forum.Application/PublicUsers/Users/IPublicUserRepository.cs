@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Forum.Application.PublicUsers.Users
 {
-    public interface IUserRepository : IRepository<User>
+    public interface IPublicUserRepository : IRepository<PublicUser>
     {
-        Task<User> FindByCurrentUser(string userId, CancellationToken cancellationToken = default);
+        Task<PublicUser> FindByCurrentUser(string userId, CancellationToken cancellationToken = default);
 
         Task<int> GetUserId(string userId, CancellationToken cancellationToken = default);
 

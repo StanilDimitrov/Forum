@@ -9,12 +9,12 @@ using static Forum.Domain.PublicUsers.Models.ModelConstants.Common;
 
 namespace Forum.Doman.PublicUsers.Models.Users
 {
-    public class User : Entity<int>, IAggregateRoot
+    public class PublicUser : Entity<int>, IAggregateRoot
     {
         private readonly HashSet<Post> posts;
         private readonly HashSet<Comment> comments;
 
-        internal User(string userName, string email)
+        internal PublicUser(string userName, string email)
         {
             this.ValidateUserName(userName);
             this.ValidateEmail(email);
@@ -40,7 +40,7 @@ namespace Forum.Doman.PublicUsers.Models.Users
             this.AddEvent(new PostAddedEvent());
         }
 
-        public User UpdateEmail(string email)
+        public PublicUser UpdateEmail(string email)
         {
             this.ValidateEmail(email);
             this.Email = email;

@@ -15,11 +15,11 @@ namespace Forum.Application.PublicUsers.Users.Commands.Edit
         public class EditUserCommandHandler : IRequestHandler<EditUserCommand, Result>
         {
             private readonly ICurrentUser currentUser;
-            private readonly IUserRepository userRepository;
+            private readonly IPublicUserRepository userRepository;
 
             public EditUserCommandHandler(
                 ICurrentUser currentUser,
-                IUserRepository userRepository)
+                IPublicUserRepository userRepository)
             {
                 this.currentUser = currentUser;
                 this.userRepository = userRepository;

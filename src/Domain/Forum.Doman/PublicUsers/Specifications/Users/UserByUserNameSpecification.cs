@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Forum.Domain.PublicUsers.Specifications.Users
 {
-    public class UserByUserNameSpecification : Specification<User>
+    public class UserByUserNameSpecification : Specification<PublicUser>
     {
         private readonly string? userName;
 
@@ -14,7 +14,7 @@ namespace Forum.Domain.PublicUsers.Specifications.Users
 
         protected override bool Include => this.userName != null;
 
-        public override Expression<Func<User, bool>> ToExpression()
+        public override Expression<Func<PublicUser, bool>> ToExpression()
             => user => user.UserName.ToLower().Contains(this.userName!.ToLower());
     }
 }

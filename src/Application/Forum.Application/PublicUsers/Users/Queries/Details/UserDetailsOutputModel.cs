@@ -10,8 +10,8 @@ namespace CarRentalSystem.Application.Dealerships.Dealers.Queries.Details
 
         public override void Mapping(Profile mapper)
             => mapper
-                .CreateMap<User, UserDetailsOutputModel>()
-                .IncludeBase<User, UserOutputModel>()
+                .CreateMap<PublicUser, UserDetailsOutputModel>()
+                .IncludeBase<PublicUser, UserOutputModel>()
                 .ForMember(d => d.TotalPosts, cfg => cfg
                     .MapFrom(d => d.Posts.Count));
     }
