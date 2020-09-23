@@ -17,7 +17,6 @@ namespace Forum.Doman.PublicUsers.Models.Posts
             this.ImageUrl = imageUrl;
             this.UserId = userId;
             this.CreatedOn = DateTime.Now;
-            this.IsVisible = true;
         }
 
         public string UserId { get; private set; }
@@ -27,8 +26,6 @@ namespace Forum.Doman.PublicUsers.Models.Posts
         public string ImageUrl { get; private set; }
 
         public DateTime CreatedOn { get; private set; }
-
-        public bool IsVisible { get; private set; }
 
         public Comment UpdateDescription(string description)
         {
@@ -42,13 +39,6 @@ namespace Forum.Doman.PublicUsers.Models.Posts
         {
             this.ValidateDescription(imageUrl);
             this.ImageUrl = imageUrl;
-
-            return this;
-        }
-
-        public Comment ChangeVisibility()
-        {
-            this.IsVisible = !this.IsVisible;
 
             return this;
         }

@@ -29,7 +29,6 @@ namespace Forum.Doman.PublicUsers.Models.Posts
             this.Description = description;
             this.ImageUrl = imageUrl;
             this.Category = category;
-            this.IsVisible = true;
             this.comments = new HashSet<Comment>();
         }
 
@@ -42,7 +41,6 @@ namespace Forum.Doman.PublicUsers.Models.Posts
             this.CreatedOn = DateTime.Now;
             this.ImageUrl = imageUrl;
             this.Category = default!;
-            this.IsVisible = true;
             this.comments = new HashSet<Comment>();
         }
 
@@ -53,8 +51,6 @@ namespace Forum.Doman.PublicUsers.Models.Posts
         public Category Category { get; private set; }
 
         public string ImageUrl { get; private set; }
-
-        public bool IsVisible { get; private set; }
 
         public IReadOnlyCollection<Comment> Comments => this.comments.ToList().AsReadOnly();
 
@@ -102,13 +98,6 @@ namespace Forum.Doman.PublicUsers.Models.Posts
         {
             this.ValidateCategory(category);
             this.Category = category;
-
-            return this;
-        }
-
-        public Post ChangeVisibility()
-        {
-            this.IsVisible = !this.IsVisible;
 
             return this;
         }
