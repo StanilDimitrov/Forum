@@ -10,7 +10,7 @@ namespace Forum.Application.PublicUsers.Posts.Commands.Common
     {
         public static async Task<Result> UserHasComment(
             this ICurrentUser currentUser,
-            IUserRepository userRepository,
+            IPublicUserRepository userRepository,
             int commentId,
             CancellationToken cancellationToken)
         {

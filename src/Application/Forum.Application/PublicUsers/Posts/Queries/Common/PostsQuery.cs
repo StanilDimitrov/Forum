@@ -1,5 +1,4 @@
-﻿using Forum.Application.PublicUsers.Posts;
-using Forum.Domain.PublicUsers.Specifications.Posts;
+﻿using Forum.Domain.PublicUsers.Specifications.Posts;
 using Forum.Domain.PublicUsers.Specifications.Users;
 using Forum.Doman.Common;
 using Forum.Doman.PublicUsers.Models.Posts;
@@ -84,10 +83,8 @@ namespace Forum.Application.PublicUsers.Posts.Queries.Common
 
             private Specification<Post> GetPostSpecification(PostsQuery request, bool onlyVisible)
                 => new PostByCategorySpecification(request.Category)
-                    .And(new PostByCreatedOnSpecification(request.StartDate, request.EndDate))
-                    .And(new PostOnlyVisibleSpecification(onlyVisible));
-
-            private Specification<User> GetUserSpecification(PostsQuery request, int? userId)
+                    .And(new PostByCreatedOnSpecification(request.StartDate, request.EndDate));
+            private Specification<PublicUser> GetUserSpecification(PostsQuery request, int? userId)
                 => new UserByIdSpecification(userId)
                     .And(new UserByUserNameSpecification(request.User));
         }

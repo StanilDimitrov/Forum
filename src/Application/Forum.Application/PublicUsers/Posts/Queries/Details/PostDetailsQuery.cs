@@ -12,11 +12,11 @@ namespace Forum.Application.PublicUsers.Users.Queries.Common
         public class CarAdDetailsQueryHandler : IRequestHandler<PostDetailsQuery, PostDetailsOutputModel>
         {
             private readonly IPostRepository postRepository;
-            private readonly IUserRepository userRepository;
+            private readonly IPublicUserRepository userRepository;
 
             public CarAdDetailsQueryHandler(
                 IPostRepository postRepository,
-                IUserRepository userRepository)
+                IPublicUserRepository userRepository)
             {
                 this.postRepository = postRepository;
                 this.userRepository = userRepository;

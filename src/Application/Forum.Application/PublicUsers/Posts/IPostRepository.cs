@@ -28,7 +28,7 @@ namespace Forum.Application.PublicUsers.Posts
 
         Task<IEnumerable<TOutputModel>> GetPostListings<TOutputModel>(
            Specification<Post> postSpecification,
-           Specification<User> userSpecification,
+           Specification<PublicUser> userSpecification,
            PostsSortOrder postsSortOrder,
            int skip = 0,
            int take = int.MaxValue,
@@ -36,7 +36,7 @@ namespace Forum.Application.PublicUsers.Posts
 
         Task<int> Total(
            Specification<Post> carAdSpecification,
-           Specification<User> userSpecification,
+           Specification<PublicUser> userSpecification,
            CancellationToken cancellationToken = default);
     }
 }

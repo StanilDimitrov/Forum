@@ -15,13 +15,13 @@ namespace CarRentalSystem.Application.Dealerships.CarAds.Commands.Create
         public class CreateCarAdCommandHandler : IRequestHandler<CreatePostCommand, CreatePostOutputModel>
         {
             private readonly ICurrentUser currentUser;
-            private readonly IUserRepository userRepository;
+            private readonly IPublicUserRepository userRepository;
             private readonly IPostRepository postRepository;
             private readonly IPostFactory postFactory;
 
             public CreateCarAdCommandHandler(
                 ICurrentUser currentUser, 
-                IUserRepository userRepository,
+                IPublicUserRepository userRepository,
                 IPostRepository postRepository,
                 IPostFactory postFactory)
             {

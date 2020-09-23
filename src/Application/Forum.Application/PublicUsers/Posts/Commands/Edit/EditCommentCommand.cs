@@ -14,12 +14,12 @@ namespace Forum.Application.PublicUsers.Posts.Commands.Edit
         {
             private readonly ICurrentUser currentUser;
             private readonly IPostRepository postRepository;
-            private readonly IUserRepository userRepository;
+            private readonly IPublicUserRepository userRepository;
 
             public EditCommentCommandHandler(
                 ICurrentUser currentUser,
                 IPostRepository postRepository,
-                IUserRepository userRepository)
+                IPublicUserRepository userRepository)
             {
                 this.currentUser = currentUser;
                 this.postRepository = postRepository;
