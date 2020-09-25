@@ -1,12 +1,12 @@
-﻿using Forum.Application.Common.Contracts;
-using Forum.Domain.Common;
+﻿using Forum.Domain.Common;
+using Forum.Doman.Common;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Forum.Infrastructure.Common.Persistence
-{ 
-    internal abstract class DataRepository<TDbContext, TEntity> : IRepository<TEntity>
+{
+    internal abstract class DataRepository<TDbContext, TEntity> : IDomainRepository<TEntity>
         where TDbContext : IDbContext
         where TEntity : class, IAggregateRoot
     {

@@ -11,13 +11,13 @@ namespace Forum.Application.PublicUsers.Users
     {
         Task<PublicUser> FindByCurrentUser(string userId, CancellationToken cancellationToken = default);
 
-        Task<int> GetUserId(string userId, CancellationToken cancellationToken = default);
+        Task<int> GetPublicUserId(string userId, CancellationToken cancellationToken = default);
 
-        Task<bool> HasPost(int userId, int postId, CancellationToken cancellationToken = default);
+        Task<bool> HasPost(int publicUserId, int postId, CancellationToken cancellationToken = default);
 
-        Task<bool> HasComment(int userId, int commentId, CancellationToken cancellationToken = default);
+        Task<bool> HasComment(int publicUserId, int commentId, CancellationToken cancellationToken = default);
 
-        Task<UserDetailsOutputModel> GetDetails(int id, CancellationToken cancellationToken = default);
+        Task<PublicUserDetailsOutputModel> GetDetails(int id, CancellationToken cancellationToken = default);
 
         Task<UserOutputModel> GetDetailsByPostId(int postId, CancellationToken cancellationToken = default);
     }

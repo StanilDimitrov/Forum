@@ -9,7 +9,9 @@ namespace Forum.Infrastructure.Identity
     {
         internal User(string email)
             : base(email)
-            => this.Email = email;
+        {
+            this.Email = email;
+        }
 
         public PublicUser? PublicUser { get; private set; }
 
@@ -17,7 +19,7 @@ namespace Forum.Infrastructure.Identity
         {
             if (this.PublicUser != null)
             {
-                throw new InvalidUserException($"User '{this.UserName}' is already a public user.");
+                throw new InvalidPublicUserException($"User '{this.UserName}' is already a public user.");
             }
 
             this.PublicUser = publicUser;

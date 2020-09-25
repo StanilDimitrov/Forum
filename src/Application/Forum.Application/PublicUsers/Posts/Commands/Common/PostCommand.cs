@@ -13,7 +13,5 @@ namespace Forum.Application.PublicUsers.Posts.Commands.Common
         public string ImageUrl { get; set; } = default!;
 
         public DateTime CreatedOn { get; set; }
-
-        public bool isVisible { get; set; }
     }
 }

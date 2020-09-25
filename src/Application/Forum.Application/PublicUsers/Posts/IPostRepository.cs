@@ -21,6 +21,10 @@ namespace Forum.Application.PublicUsers.Posts
             int categoryId,
             CancellationToken cancellationToken = default);
 
+        Task<Comment> GetComment(
+           int commentId,
+           CancellationToken cancellationToken = default);
+
         Task<PostDetailsOutputModel> GetDetails(int id, CancellationToken cancellationToken = default);
 
         Task<IEnumerable<GetPostCategoryOutputModel>> GetPostCategories(
@@ -35,8 +39,8 @@ namespace Forum.Application.PublicUsers.Posts
            CancellationToken cancellationToken = default);
 
         Task<int> Total(
-           Specification<Post> carAdSpecification,
-           Specification<PublicUser> userSpecification,
+           Specification<Post> postSpecification,
+           Specification<PublicUser> publicUserSpecification,
            CancellationToken cancellationToken = default);
     }
 }

@@ -34,7 +34,7 @@ namespace Forum.Application.Identity.Commands.LoginUser
 
                 var user = result.Data;
 
-                var userId = await this.publicUserRepository.GetUserId(user.UserId, cancellationToken);
+                var userId = await this.publicUserRepository.GetPublicUserId(user.UserId, cancellationToken);
 
                 return new LoginOutputModel(user.Token, userId);
             }

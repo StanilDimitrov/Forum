@@ -12,7 +12,6 @@ namespace Forum.Doman.PublicUsers.Models.Users
     public class PublicUser : Entity<int>, IAggregateRoot
     {
         private readonly HashSet<Post> posts;
-        private readonly HashSet<Comment> comments;
 
         internal PublicUser(string userName, string email)
         {
@@ -21,15 +20,12 @@ namespace Forum.Doman.PublicUsers.Models.Users
 
             this.UserName = userName;
             this.Email = email;
-            this.comments = new HashSet<Comment>();
             this.posts = new HashSet<Post>();
         }
 
         public string UserName { get; private set; }
 
         public string Email { get; private set; }
-
-        public IReadOnlyCollection<Comment> Comments => this.comments.ToList().AsReadOnly();
 
         public IReadOnlyCollection<Post> Posts => this.posts.ToList().AsReadOnly();
 
@@ -50,7 +46,7 @@ namespace Forum.Doman.PublicUsers.Models.Users
 
         private void ValidateUserName(string userName)
         {
-            Guard.ForStringLength<InvalidUserException>(
+            Guard.ForStringLength<InvalidPublicUserException>(
                 userName,
                 MinNameLength,
                 MaxNameLength,
@@ -59,7 +55,7 @@ namespace Forum.Doman.PublicUsers.Models.Users
 
         private void ValidateEmail(string email)
         {
-            Guard.ForStringLength<InvalidUserException>(
+            Guard.ForStringLength<InvalidPublicUserException>(
                 email,
                 MinEmailLength,
                 MaxEmailLength,

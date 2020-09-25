@@ -41,7 +41,8 @@ namespace Forum.Application.PublicUsers.Posts.Commands.Delete
                     return userHasComment;
                 }
 
-                post.DeleteComment(request.Id);
+                var comment = await this.postRepository.GetComment(request.Id);
+                post.DeleteComment(comment);
 
                 await this.postRepository.Save(post, cancellationToken);
                 return Result.Success;

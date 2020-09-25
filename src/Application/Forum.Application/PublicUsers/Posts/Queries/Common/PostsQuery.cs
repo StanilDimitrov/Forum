@@ -42,11 +42,10 @@ namespace Forum.Application.PublicUsers.Posts.Queries.Common
 
             protected async Task<IEnumerable<TOutputModel>> GetPostListings<TOutputModel>(
                 PostsQuery request,
-                bool onlyVisible = true,
                 int? userId = default,
                 CancellationToken cancellationToken = default)
             {
-                var postSpecification = this.GetPostSpecification(request, onlyVisible);
+                var postSpecification = this.GetPostSpecification(request);
 
                 var userSpecification = this.GetUserSpecification(request, userId);
 
@@ -65,11 +64,10 @@ namespace Forum.Application.PublicUsers.Posts.Queries.Common
 
             protected async Task<int> GetTotalPages(
                 PostsQuery request,
-                bool onlyVisible = true,
                 int? userId = default,
                 CancellationToken cancellationToken = default)
             {
-                var postSpecification = this.GetPostSpecification(request, onlyVisible);
+                var postSpecification = this.GetPostSpecification(request);
 
                 var userSpecification = this.GetUserSpecification(request, userId);
 
@@ -81,7 +79,7 @@ namespace Forum.Application.PublicUsers.Posts.Queries.Common
                 return (int)Math.Ceiling((double)totalPosts/PostsPerPage);
             }
 
-            private Specification<Post> GetPostSpecification(PostsQuery request, bool onlyVisible)
+            private Specification<Post> GetPostSpecification(PostsQuery request)
                 => new PostByCategorySpecification(request.Category)
                     .And(new PostByCreatedOnSpecification(request.StartDate, request.EndDate));
             private Specification<PublicUser> GetUserSpecification(PostsQuery request, int? userId)

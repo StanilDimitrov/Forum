@@ -28,13 +28,6 @@ namespace Forum.Infrastructure.PublicUsers.Configurations
                 .Metadata
                 .PrincipalToDependent
                 .SetField("posts");
-
-            builder
-               .HasMany(pu => pu.Comments)
-               .WithOne()
-               .Metadata
-               .PrincipalToDependent
-               .SetField("comments");
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Forum.Doman.PublicUsers.Models.Posts
             this.CreatedOn = DateTime.Now;
         }
 
-        public string UserId { get; private set; }
+        public string? UserId { get; private set; }
 
         public string Description { get; private set; }
 

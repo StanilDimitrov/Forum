@@ -14,7 +14,7 @@ namespace Forum.Application.PublicUsers.Posts.Commands.Common
             int commentId,
             CancellationToken cancellationToken)
         {
-            var userId = await userRepository.GetUserId(
+            var userId = await userRepository.GetPublicUserId(
                 currentUser.UserId,
                 cancellationToken);
 

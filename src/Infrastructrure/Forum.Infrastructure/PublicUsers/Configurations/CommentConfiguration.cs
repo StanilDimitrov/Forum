@@ -1,4 +1,5 @@
 ﻿using Forum.Doman.PublicUsers.Models.Posts;
+using Forum.Infrastructure.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using static Forum.Domain.PublicUsers.Models.ModelConstants.Comment;
@@ -27,6 +28,12 @@ namespace Forum.Infrastructure.PublicUsers.Configurations
                 .Property(p => p.CreatedOn)
                 .IsRequired()
                 .HasColumnType("datetime");
+
+            builder
+              .HasOne<User>()
+              .WithMany()
+              .HasForeignKey(c => c.UserId)
+              .OnDelete(DeleteBehavior.Restrict);
 
         }
     }

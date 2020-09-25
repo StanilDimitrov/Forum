@@ -68,9 +68,8 @@ namespace Forum.Doman.PublicUsers.Models.Posts
             return this;
         }
 
-        public Comment DeleteComment(int commentId)
+        public Comment DeleteComment(Comment comment)
         {
-            var comment = FindComment(commentId);
             this.comments.Remove(comment);
             return comment;
         }
