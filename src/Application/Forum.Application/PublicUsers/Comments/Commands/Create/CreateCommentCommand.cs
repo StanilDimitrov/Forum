@@ -1,10 +1,12 @@
 ﻿using Forum.Application.Common.Contracts;
-using Forum.Application.PublicUsers.Posts.Commands.Common;
+using Forum.Application.PublicUsers.Comments.Commands.Common;
+using Forum.Application.PublicUsers.Posts;
 using MediatR;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Forum.Application.PublicUsers.Posts.Commands.Create.Comment
+namespace Forum.Application.PublicUsers.Comments.Commands.Create.Comment
 {
     public class CreateCommentCommand : CommentCommand<CreateCommentCommand>, IRequest<CreateCommentOutputModel>
     {
@@ -32,8 +34,7 @@ namespace Forum.Application.PublicUsers.Posts.Commands.Create.Comment
                 post.AddComment(request.Description, request.ImageUrl, currentUser.UserId);
 
                 await this.postRepository.Save(post, cancellationToken);
-
-                return new CreateCommentOutputModel(post.Id);
+                return new CreateCommentOutputModel(post.Comments.Last().Id);
             }
         }
     }

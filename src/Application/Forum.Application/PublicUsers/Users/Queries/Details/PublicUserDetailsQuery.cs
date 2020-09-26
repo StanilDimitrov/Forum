@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace Forum.Application.PublicUsers.Users.Queries.Details
 {
-    public class UserDetailsQuery : IRequest<PublicUserDetailsOutputModel>
+    public class PublicUserDetailsQuery : IRequest<PublicUserDetailsOutputModel>
     {
         public int Id { get; set; }
 
-        public class UserDetailsQueryHandler : IRequestHandler<UserDetailsQuery, PublicUserDetailsOutputModel>
+        public class UserDetailsQueryHandler : IRequestHandler<PublicUserDetailsQuery, PublicUserDetailsOutputModel>
         {
             private readonly IPublicUserRepository userRepository;
 
@@ -17,7 +17,7 @@ namespace Forum.Application.PublicUsers.Users.Queries.Details
                 => this.userRepository = userRepository;
 
             public async Task<PublicUserDetailsOutputModel> Handle(
-                UserDetailsQuery request,
+                PublicUserDetailsQuery request,
                 CancellationToken cancellationToken)
                 => await this.userRepository.GetDetails(request.Id, cancellationToken);
         }

@@ -31,7 +31,7 @@ namespace Forum.StartUp
             }
 
             app
-                //.UseValidationExceptionHandler()
+                .UseValidationExceptionHandler()
                 .UseHttpsRedirection()
                 .UseRouting()
                 .UseCors(options => options

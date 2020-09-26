@@ -11,6 +11,7 @@ using Forum.Infrastructure.Common.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -45,11 +46,19 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
                 .All()
                 .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
 
+        public async Task<IEnumerable<Comment>> GetAllPostComments(int id, CancellationToken cancellationToken = default)
+        {
+            var post = await this
+                .All()
+                .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
+            return post.Comments;
+        }
+
         public async Task<Category> GetCategory(int categoryId, CancellationToken cancellationToken = default)
        => await this
                 .Data
                 .Categories
-                .FirstOrDefaultAsync(p => p.Id == categoryId, cancellationToken);
+                .FirstOrDefaultAsync(c => c.Id == categoryId, cancellationToken);
 
         public async Task<Comment> GetComment(
            int commentId,
@@ -57,7 +66,7 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
            => await this
                .Data
                .Comments
-               .FirstOrDefaultAsync(p => p.Id == commentId, cancellationToken);
+               .FirstOrDefaultAsync(c => c.Id == commentId, cancellationToken);
 
         public async Task<PostDetailsOutputModel> GetDetails(int id, CancellationToken cancellationToken = default)
          => await this.mapper

@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Forum.Application.PublicUsers.Users.Commands.Edit
 {
-    public class EditUserCommand : EntityCommand<int>, IRequest<Result>
+    public class EditPublicUserCommand : EntityCommand<int>, IRequest<Result>
     {
         public string User { get; set; } = default!;
 
         public string Email { get; set; } = default!;
 
-        public class EditUserCommandHandler : IRequestHandler<EditUserCommand, Result>
+        public class EditUserCommandHandler : IRequestHandler<EditPublicUserCommand, Result>
         {
             private readonly ICurrentUser currentUser;
             private readonly IPublicUserRepository userRepository;
@@ -26,7 +26,7 @@ namespace Forum.Application.PublicUsers.Users.Commands.Edit
             }
 
             public async Task<Result> Handle(
-                EditUserCommand request, 
+                EditPublicUserCommand request, 
                 CancellationToken cancellationToken)
             {
                 var user = await this.userRepository.FindByCurrentUser(
@@ -35,11 +35,10 @@ namespace Forum.Application.PublicUsers.Users.Commands.Edit
 
                 if (request.Id != user.Id)
                 {
-                    return "You cannot edit this user.";
+                    return "You cannot edit this public user.";
                 }
 
-                user
-                    .UpdateEmail(request.Email);
+                user.UpdateEmail(request.Email);
 
                 await this.userRepository.Save(user, cancellationToken);
 

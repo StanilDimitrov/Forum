@@ -7,7 +7,7 @@ namespace Forum.Application.PublicUsers.Posts.Queries.Details
 {
     public class PostDetailsOutputModel : PostOutputModel
     {
-        public UserOutputModel User { get; set; } = default!;
+        public PublicUserOutputModel User { get; set; } = default!;
 
         public override void Mapping(Profile mapper) 
             => mapper

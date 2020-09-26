@@ -1,12 +1,12 @@
 ﻿using Forum.Application.Common;
 using Forum.Application.Common.Contracts;
-using Forum.Application.PublicUsers.Posts.Commands.Common;
-using Forum.Application.PublicUsers.Users;
+using Forum.Application.PublicUsers.Comments.Commands.Common;
+using Forum.Application.PublicUsers.Posts;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Forum.Application.PublicUsers.Posts.Commands.Delete
+namespace Forum.Application.PublicUsers.Comments.Commands.Delete
 {
     public class DeleteCommentCommand : CommentCommand<DeleteCommentCommand>, IRequest<Result>
     {
@@ -14,16 +14,13 @@ namespace Forum.Application.PublicUsers.Posts.Commands.Delete
         {
             private readonly ICurrentUser currentUser;
             private readonly IPostRepository postRepository;
-            private readonly IPublicUserRepository userRepository;
 
             public DeleteCommentCommandHandler(
                 ICurrentUser currentUser,
-                IPostRepository postRepository,
-                IPublicUserRepository userRepository)
+                IPostRepository postRepository)
             {
                 this.currentUser = currentUser;
                 this.postRepository = postRepository;
-                this.userRepository = userRepository;
             }
 
             public async Task<Result> Handle(
@@ -32,7 +29,7 @@ namespace Forum.Application.PublicUsers.Posts.Commands.Delete
             {
                 var post = await this.postRepository.Find(request.PostId, cancellationToken);
                 var userHasComment = await this.currentUser.UserHasComment(
-                    this.userRepository,
+                    this.postRepository,
                     request.Id,
                     cancellationToken);
 

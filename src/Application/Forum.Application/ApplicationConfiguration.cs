@@ -20,7 +20,8 @@ namespace Forum.Application
                 .AddAutoMapper(Assembly.GetExecutingAssembly())
                 .AddMediatR(Assembly.GetExecutingAssembly())
                 .AddEventHandlers()
-                .AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+                .AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>))
+            .AddEventHandlers();
 
         private static IServiceCollection AddEventHandlers(this IServiceCollection services)
             => services

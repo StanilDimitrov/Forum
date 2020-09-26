@@ -1,11 +1,12 @@
 ﻿using FluentValidation;
 using Forum.Application.Common;
+using Forum.Application.PublicUsers.Posts.Commands.Common;
 using System;
 using static Forum.Domain.PublicUsers.Models.ModelConstants.Comment;
 
-namespace Forum.Application.PublicUsers.Posts.Commands.Common
+namespace Forum.Application.PublicUsers.Comments.Commands.Common
 {
-    public class CommentCommandValidator<TCommand> : AbstractValidator<PostCommand<TCommand>>
+    public class CommentCommandValidator<TCommand> : AbstractValidator<CommentCommand<TCommand>>
         where TCommand : EntityCommand<int>
     {
         public CommentCommandValidator()

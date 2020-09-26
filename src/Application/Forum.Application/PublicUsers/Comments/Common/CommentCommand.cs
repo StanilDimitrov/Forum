@@ -1,7 +1,7 @@
 ﻿using Forum.Application.Common;
 using System;
 
-namespace Forum.Application.PublicUsers.Posts.Commands.Common
+namespace Forum.Application.PublicUsers.Comments.Commands.Common
 {
     public abstract class CommentCommand<TCommand> : EntityCommand<int>
        where TCommand : EntityCommand<int>

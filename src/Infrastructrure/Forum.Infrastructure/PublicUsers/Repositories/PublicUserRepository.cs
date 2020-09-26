@@ -33,7 +33,7 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
                     .Where(pu => pu.Id == id))
                 .FirstOrDefaultAsync(cancellationToken);
 
-        public async Task<UserOutputModel> GetDetailsByPostId(int postId, CancellationToken cancellationToken = default)
+        public async Task<PublicUserOutputModel> GetDetailsByPostId(int postId, CancellationToken cancellationToken = default)
          => await this.mapper
                 .ProjectTo<PublicUserDetailsOutputModel>(this
                     .All()
@@ -43,10 +43,6 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
         public Task<int> GetPublicUserId(string userId, CancellationToken cancellationToken = default)
          => this.FindByUser(userId, user => user.PublicUser!.Id, cancellationToken);
 
-        public Task<bool> HasComment(int publicUserId, int commentId, CancellationToken cancellationToken = default)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<bool> HasPost(int publicUserId, int postId, CancellationToken cancellationToken = default)
            => await this

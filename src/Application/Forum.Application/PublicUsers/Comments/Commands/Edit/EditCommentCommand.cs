@@ -1,7 +1,6 @@
 ﻿using Forum.Application.Common;
 using Forum.Application.Common.Contracts;
-using Forum.Application.PublicUsers.Posts.Commands.Common;
-using Forum.Application.PublicUsers.Users;
+using Forum.Application.PublicUsers.Comments.Commands.Common;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,16 +13,13 @@ namespace Forum.Application.PublicUsers.Posts.Commands.Edit
         {
             private readonly ICurrentUser currentUser;
             private readonly IPostRepository postRepository;
-            private readonly IPublicUserRepository userRepository;
 
             public EditCommentCommandHandler(
                 ICurrentUser currentUser,
-                IPostRepository postRepository,
-                IPublicUserRepository userRepository)
+                IPostRepository postRepository)
             {
                 this.currentUser = currentUser;
                 this.postRepository = postRepository;
-                this.userRepository = userRepository;
             }
 
             public async Task<Result> Handle(
@@ -31,7 +27,7 @@ namespace Forum.Application.PublicUsers.Posts.Commands.Edit
                 CancellationToken cancellationToken)
             {
                 var userHasComment = await this.currentUser.UserHasComment(
-                    this.userRepository,
+                    postRepository,
                     request.Id,
                     cancellationToken);
 

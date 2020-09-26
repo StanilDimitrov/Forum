@@ -15,6 +15,7 @@ namespace Forum.Infrastructure.Identity
 
         public PublicUser? PublicUser { get; private set; }
 
+
         public void BecomePublicUser(PublicUser publicUser)
         {
             if (this.PublicUser != null)

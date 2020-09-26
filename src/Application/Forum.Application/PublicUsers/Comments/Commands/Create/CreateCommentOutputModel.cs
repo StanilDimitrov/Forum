@@ -1,4 +1,4 @@
-﻿namespace Forum.Application.PublicUsers.Posts.Commands.Create
+﻿namespace Forum.Application.PublicUsers.Comments.Commands.Create
 {
     public class CreateCommentOutputModel
     {

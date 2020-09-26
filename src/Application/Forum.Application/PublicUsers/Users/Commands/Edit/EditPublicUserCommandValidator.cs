@@ -4,9 +4,9 @@ using static Forum.Domain.PublicUsers.Models.ModelConstants.Common;
 
 namespace CarRentalSystem.Application.Dealerships.Dealers.Commands.Edit
 {
-    public class EditUserCommandValidator : AbstractValidator<EditUserCommand>
+    public class EditPublicUserCommandValidator : AbstractValidator<EditPublicUserCommand>
     {
-        public EditUserCommandValidator()
+        public EditPublicUserCommandValidator()
         {
             this.RuleFor(u => u.Email)
                 .MinimumLength(MinEmailLength)

@@ -4,7 +4,7 @@ using Forum.Doman.PublicUsers.Models.Users;
 
 namespace Forum.Application.PublicUsers.Users.Queries.Common
 {
-    public class UserOutputModel : IMapFrom<PublicUser>
+    public class PublicUserOutputModel : IMapFrom<PublicUser>
     {
         public int Id { get; private set; }
 
@@ -14,6 +14,6 @@ namespace Forum.Application.PublicUsers.Users.Queries.Common
 
         public virtual void Mapping(Profile mapper)
             => mapper
-                .CreateMap<PublicUser, UserOutputModel>();
+                .CreateMap<PublicUser, PublicUserOutputModel>();
     }
 }

@@ -25,6 +25,10 @@ namespace Forum.Application.PublicUsers.Posts
            int commentId,
            CancellationToken cancellationToken = default);
 
+        Task<IEnumerable<Comment>> GetAllPostComments(
+           int postId, 
+           CancellationToken cancellationToken = default);
+
         Task<PostDetailsOutputModel> GetDetails(int id, CancellationToken cancellationToken = default);
 
         Task<IEnumerable<GetPostCategoryOutputModel>> GetPostCategories(
