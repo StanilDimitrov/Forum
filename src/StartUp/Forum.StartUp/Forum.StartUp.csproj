@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Infrastructrure\Forum.Infrastructure\Forum.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Web\Forum.Web\Forum.Web.csproj" />
   </ItemGroup>
 
 </Project>

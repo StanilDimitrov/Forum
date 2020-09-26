@@ -6,6 +6,7 @@ using Forum.Infrastructure.Common.Events;
 using Forum.Infrastructure.Common.Persistence;
 using Forum.Infrastructure.Identity;
 using Forum.Infrastructure.PublicUsers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

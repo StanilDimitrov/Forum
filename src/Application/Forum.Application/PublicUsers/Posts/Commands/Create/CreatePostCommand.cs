@@ -8,7 +8,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CarRentalSystem.Application.Dealerships.CarAds.Commands.Create
+namespace Forum.Application.Dealerships.CarAds.Commands.Create
 {
     public class CreatePostCommand : PostCommand<CreatePostCommand>, IRequest<CreatePostOutputModel>
     {

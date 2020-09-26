@@ -1,6 +1,7 @@
 using Forum.Application;
 using Forum.Domain;
 using Forum.Infrastructure;
+using Forum.Web;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -19,9 +20,8 @@ namespace Forum.StartUp
             => services
                 .AddDomain()
                 .AddApplication(this.Configuration)
-                .AddInfrastructure(this.Configuration);
-
-                //.AddWebComponents();
+                .AddInfrastructure(this.Configuration)
+                .AddWebComponents();
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

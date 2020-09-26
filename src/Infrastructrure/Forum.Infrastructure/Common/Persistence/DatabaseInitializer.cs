@@ -1,5 +1,4 @@
 ﻿using Forum.Domain.Common;
-using Forum.Infrastructure.Common.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

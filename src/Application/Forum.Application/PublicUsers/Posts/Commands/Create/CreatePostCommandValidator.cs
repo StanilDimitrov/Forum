@@ -1,4 +1,4 @@
-﻿using CarRentalSystem.Application.Dealerships.CarAds.Commands.Create;
+﻿using Forum.Application.Dealerships.CarAds.Commands.Create;
 using FluentValidation;
 using Forum.Application.PublicUsers.Posts.Commands.Common;
 
