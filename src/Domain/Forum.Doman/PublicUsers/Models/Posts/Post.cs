@@ -12,6 +12,7 @@ namespace Forum.Doman.PublicUsers.Models.Posts
     public class Post : Entity<int>, IAggregateRoot
     {
         private readonly HashSet<Comment> comments;
+        private readonly HashSet<Like> likes;
 
         private static readonly IEnumerable<Category> AllowedCategories
          = new CategoryData().GetData().Cast<Category>();
@@ -30,6 +31,7 @@ namespace Forum.Doman.PublicUsers.Models.Posts
             this.ImageUrl = imageUrl;
             this.Category = category;
             this.comments = new HashSet<Comment>();
+            this.likes = new HashSet<Like>();
         }
 
         private Post(
@@ -53,11 +55,18 @@ namespace Forum.Doman.PublicUsers.Models.Posts
         public string ImageUrl { get; private set; }
 
         public IReadOnlyCollection<Comment> Comments => this.comments.ToList().AsReadOnly();
+        public IReadOnlyCollection<Like> Likes => this.likes.ToList().AsReadOnly();
 
         public void AddComment(string description, string imageUrl, string userId)
         {
             var comment = new Comment(description, imageUrl, userId);
             this.comments.Add(comment);
+        }
+
+        public void AddLike(bool isLiked, string userId)
+        {
+            var like = new Like(userId, isLiked);
+            this.likes.Add(like);
         }
 
         public Post UpdateImageUrl(string imageUrl)

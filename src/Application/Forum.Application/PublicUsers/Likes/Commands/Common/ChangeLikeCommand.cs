@@ -1,14 +1,13 @@
 ﻿using Forum.Application.Common;
 using Forum.Application.Common.Contracts;
 using Forum.Application.PublicUsers.Posts;
-using Forum.Application.PublicUsers.Users;
 using Forum.Doman.PublicUsers.Models.Posts;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Forum.Application.PublicUsers.Comments.Commands.Common
+namespace Forum.Application.PublicUsers.Likes.Commands.Common
 {
-    internal static class ChangeCommentCommandExtensions
+    internal static class ChangeLikeCommandExtensions
     {
         public static async Task<Result> UserHasComment(
             this ICurrentUser currentUser,

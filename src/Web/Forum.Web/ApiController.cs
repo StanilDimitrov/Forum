@@ -8,7 +8,7 @@ using Forum.Web.Common;
 namespace Forum.Web
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]/[action]")]
     public abstract class ApiController : ControllerBase
     {
         public const string PathSeparator = "/";

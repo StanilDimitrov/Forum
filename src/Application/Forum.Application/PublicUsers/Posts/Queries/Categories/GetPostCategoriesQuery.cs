@@ -1,20 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using MediatR;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Forum.Application.PublicUsers.Posts;
-using MediatR;
 
-namespace CarRentalSystem.Application.Dealerships.CarAds.Queries.Categories
+namespace Forum.Application.PublicUsers.Posts.Queries.Categories
 {
     public class GetPostCategoriesQuery : IRequest<IEnumerable<GetPostCategoryOutputModel>>
     {
-        public class GetCarAdCategoriesQueryHandler : IRequestHandler<
+        public class GetPostCategoriesQueryHandler : IRequestHandler<
             GetPostCategoriesQuery, 
             IEnumerable<GetPostCategoryOutputModel>>
         {
             private readonly IPostRepository postRepository;
 
-            public GetCarAdCategoriesQueryHandler(IPostRepository carAdRepository) 
+            public GetPostCategoriesQueryHandler(IPostRepository carAdRepository) 
                 => this.postRepository = carAdRepository;
 
             public async Task<IEnumerable<GetPostCategoryOutputModel>> Handle(

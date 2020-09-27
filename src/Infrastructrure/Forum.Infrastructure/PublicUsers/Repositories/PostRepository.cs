@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
-using CarRentalSystem.Application.Dealerships.CarAds.Queries.Categories;
+using Forum.Application.PublicUsers.Comments.Queries.Details;
 using Forum.Application.PublicUsers.Posts;
+using Forum.Application.PublicUsers.Posts.Queries.Categories;
 using Forum.Application.PublicUsers.Posts.Queries.Common;
 using Forum.Application.PublicUsers.Posts.Queries.Details;
 using Forum.Doman.Common;
@@ -11,7 +12,6 @@ using Forum.Infrastructure.Common.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -46,12 +46,13 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
                 .All()
                 .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
 
-        public async Task<IEnumerable<Comment>> GetAllPostComments(int id, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<GetPostCommentOutputModel>> GetPostComments(int id, CancellationToken cancellationToken = default)
         {
             var post = await this
                 .All()
                 .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
-            return post.Comments;
+            return this.mapper
+                .Map<IEnumerable<GetPostCommentOutputModel>>(post.Comments);
         }
 
         public async Task<Category> GetCategory(int categoryId, CancellationToken cancellationToken = default)
@@ -67,6 +68,26 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
                .Data
                .Comments
                .FirstOrDefaultAsync(c => c.Id == commentId, cancellationToken);
+
+        public async Task<CommentDetailsOutputModel> GetCommentDetails(
+          int commentId,
+          CancellationToken cancellationToken = default)
+          => await this.mapper
+                .ProjectTo<CommentDetailsOutputModel>(this.Data.Comments)
+              .FirstOrDefaultAsync(c => c.Id == commentId, cancellationToken);
+
+        public async Task<PostOutputModel> GetDetailsByCommentId(int commentId, CancellationToken cancellationToken = default)
+        => await this.mapper
+               .ProjectTo<PostDetailsOutputModel>(this
+                   .All()
+                   .Where(p => p.Comments.Any(c => c.Id == commentId)))
+               .SingleOrDefaultAsync(cancellationToken);
+
+        public async Task<Post> GetPostByCommentId(int commentId, CancellationToken cancellationToken = default)
+        => await this
+               .All()
+               .SingleOrDefaultAsync(p => p.Comments.Any(c => c.Id == commentId),
+            cancellationToken);
 
         public async Task<PostDetailsOutputModel> GetDetails(int id, CancellationToken cancellationToken = default)
          => await this.mapper

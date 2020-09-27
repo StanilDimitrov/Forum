@@ -2,7 +2,9 @@
 using Forum.Application.Common;
 using Forum.Application.PublicUsers.Users.Commands.Edit;
 using Forum.Application.PublicUsers.Users.Queries.Details;
+using Forum.Application.PublicUsers.Users.Queries.Posts;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Forum.Web.Features
@@ -14,6 +16,12 @@ namespace Forum.Web.Features
         public async Task<ActionResult<PublicUserDetailsOutputModel>> Details(
             [FromRoute] PublicUserDetailsQuery query)
             => await this.Send(query);
+
+        [HttpGet]
+        [Route(Id)]
+        public async Task<ActionResult<IEnumerable<GetPublicUserPostOutputModel>>> GetPublicUserPosts(
+          [FromRoute] GetPublicUserPostsQuery query)
+          => await this.Send(query);
 
         [HttpPut]
         [Route(Id)]

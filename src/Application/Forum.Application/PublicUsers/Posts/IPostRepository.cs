@@ -1,5 +1,6 @@
-﻿using CarRentalSystem.Application.Dealerships.CarAds.Queries.Categories;
-using Forum.Application.Common.Contracts;
+﻿using Forum.Application.Common.Contracts;
+using Forum.Application.PublicUsers.Comments.Queries.Details;
+using Forum.Application.PublicUsers.Posts.Queries.Categories;
 using Forum.Application.PublicUsers.Posts.Queries.Common;
 using Forum.Application.PublicUsers.Posts.Queries.Details;
 using Forum.Doman.Common;
@@ -25,9 +26,21 @@ namespace Forum.Application.PublicUsers.Posts
            int commentId,
            CancellationToken cancellationToken = default);
 
-        Task<IEnumerable<Comment>> GetAllPostComments(
-           int postId, 
+        Task<IEnumerable<GetPostCommentOutputModel>> GetPostComments(
+           int id, 
            CancellationToken cancellationToken = default);
+
+        Task<CommentDetailsOutputModel> GetCommentDetails(
+          int commentId,
+          CancellationToken cancellationToken = default);
+
+        Task<PostOutputModel> GetDetailsByCommentId(
+            int commentId,
+            CancellationToken cancellationToken = default);
+
+        Task<Post> GetPostByCommentId(
+            int commentId,
+            CancellationToken cancellationToken = default);
 
         Task<PostDetailsOutputModel> GetDetails(int id, CancellationToken cancellationToken = default);
 

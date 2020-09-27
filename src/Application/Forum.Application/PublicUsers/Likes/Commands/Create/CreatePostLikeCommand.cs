@@ -1,23 +1,23 @@
-﻿using Forum.Application.Common.Contracts;
-using Forum.Application.PublicUsers.Comments.Commands.Common;
+﻿using Forum.Application.Common;
+using Forum.Application.Common.Contracts;
+using Forum.Application.PublicUsers.Likes.Commands.Common;
 using Forum.Application.PublicUsers.Posts;
 using MediatR;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Forum.Application.PublicUsers.Comments.Commands.Create.Comment
+namespace Forum.Application.PublicUsers.Likes.Commands.Create.Comment
 {
-    public class CreateCommentCommand : CommentCommand<CreateCommentCommand>, IRequest<CreateCommentOutputModel>
+    public class CreatePostLikeCommand : LikeCommand<CreatePostLikeCommand>, IRequest<Result>
     {
         public int PostId { get; set; }
 
-        public class CreateCarAdCommandHandler : IRequestHandler<CreateCommentCommand, CreateCommentOutputModel>
+        public class CreatePostLikeCommandHandler : IRequestHandler<CreatePostLikeCommand, Result>
         {
             private readonly ICurrentUser currentUser;
             private readonly IPostRepository postRepository;
 
-            public CreateCarAdCommandHandler(
+            public CreatePostLikeCommandHandler(
                 ICurrentUser currentUser,
                 IPostRepository postRepository)
             {
@@ -25,18 +25,18 @@ namespace Forum.Application.PublicUsers.Comments.Commands.Create.Comment
                 this.postRepository = postRepository;
             }
 
-            public async Task<CreateCommentOutputModel> Handle(
-                CreateCommentCommand request,
+            public async Task<Result> Handle(
+                CreatePostLikeCommand request,
                 CancellationToken cancellationToken)
             {
                 var post = await this.postRepository.Find(
                     request.PostId,
                     cancellationToken);
 
-                post.AddComment(request.Description, request.ImageUrl, currentUser.UserId);
+                post.AddLike(request.IsLiked, currentUser.UserId);
 
                 await this.postRepository.Save(post, cancellationToken);
-                return new CreateCommentOutputModel(post.Comments.Last().Id);
+                return Result.Success;
             }
         }
     }

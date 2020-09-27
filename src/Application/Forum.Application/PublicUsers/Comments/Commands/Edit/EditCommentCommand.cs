@@ -37,7 +37,7 @@ namespace Forum.Application.PublicUsers.Posts.Commands.Edit
                 }
 
                 var post = await this.postRepository
-                    .Find(request.PostId, cancellationToken);
+                    .GetPostByCommentId(request.Id, cancellationToken);
 
                 post.UpdateComment(
                     request.Id,

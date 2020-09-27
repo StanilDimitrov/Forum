@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Forum.Application.PublicUsers.Comments.Commands.Delete
 {
-    public class DeleteCommentCommand : CommentCommand<DeleteCommentCommand>, IRequest<Result>
+    public class DeleteCommentCommand : EntityCommand<int>, IRequest<Result>
     {
         public class DeleteCommentCommandHandler : IRequestHandler<DeleteCommentCommand, Result>
         {
@@ -27,7 +27,7 @@ namespace Forum.Application.PublicUsers.Comments.Commands.Delete
                 DeleteCommentCommand request,
                 CancellationToken cancellationToken)
             {
-                var post = await this.postRepository.Find(request.PostId, cancellationToken);
+                var post = await this.postRepository.GetPostByCommentId(request.Id, cancellationToken);
                 var userHasComment = await this.currentUser.UserHasComment(
                     this.postRepository,
                     request.Id,

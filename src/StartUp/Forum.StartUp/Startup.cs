@@ -40,8 +40,10 @@ namespace Forum.StartUp
                     .AllowAnyMethod())
                 .UseAuthentication()
                 .UseAuthorization()
-                .UseEndpoints(endpoints => endpoints
-                    .MapControllers())
+               .UseEndpoints(endpoints => {
+                   endpoints.MapControllers();
+                   endpoints.MapHealthChecks("/health");
+               })
                 .Initialize();
         }
     }

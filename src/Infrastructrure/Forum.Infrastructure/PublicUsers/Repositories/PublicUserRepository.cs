@@ -1,13 +1,17 @@
 ﻿using AutoMapper;
 using CarRentalSystem.Application.Dealerships.Dealers.Queries.Details;
+using Forum.Application.PublicUsers.Posts.Queries.Common;
+using Forum.Application.PublicUsers.Posts.Queries.Details;
 using Forum.Application.PublicUsers.Users;
 using Forum.Application.PublicUsers.Users.Queries.Common;
+using Forum.Application.PublicUsers.Users.Queries.Posts;
 using Forum.Doman.PublicUsers.Exceptions;
 using Forum.Doman.PublicUsers.Models.Users;
 using Forum.Infrastructure.Common.Persistence;
 using Forum.Infrastructure.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
@@ -40,6 +44,15 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
                     .Where(pu => pu.Posts.Any(c => c.Id == postId)))
                 .SingleOrDefaultAsync(cancellationToken);
 
+        public async Task<IEnumerable<GetPublicUserPostOutputModel>> GetPublicUserPosts(int id, CancellationToken cancellationToken = default)
+        {
+            var publicUser = await this
+                .All()
+                .FirstOrDefaultAsync(pu => pu.Id == id, cancellationToken);
+            return this.mapper
+                .Map<IEnumerable<GetPublicUserPostOutputModel>>(publicUser.Posts);
+        }
+
         public Task<int> GetPublicUserId(string userId, CancellationToken cancellationToken = default)
          => this.FindByUser(userId, user => user.PublicUser!.Id, cancellationToken);
 
@@ -50,6 +63,15 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
                 .Where(pu => pu.Id == publicUserId)
                 .AnyAsync(pu => pu.Posts
                     .Any(pu => pu.Id == postId), cancellationToken);
+
+        public async Task<IEnumerable<GetPublicUserPostOutputModel>> IPublicUserRepository.GetPublicUserPosts(int id, CancellationToken cancellationToken)
+        {
+            var publicUser = await this
+               .All()
+               .FirstOrDefaultAsync(pu => pu.Id == id, cancellationToken);
+            return this.mapper
+                .Map<IEnumerable<GetPublicUserPostOutputModel>>(publicUser.Posts);
+        }
 
 
         private async Task<T> FindByUser<T>(

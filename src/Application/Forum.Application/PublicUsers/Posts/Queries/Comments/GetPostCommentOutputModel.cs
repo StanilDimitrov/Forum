@@ -1,9 +1,10 @@
 ﻿using Forum.Application.Common.Mapping;
 using Forum.Doman.PublicUsers.Models.Posts;
+using System;
 
 namespace Forum.Application.PublicUsers.Posts.Queries.Categories
 {
-    public class GetPostCategoryOutputModel : IMapFrom<Category>
+    public class GetPostCommentOutputModel : IMapFrom<Comment>
     {
         public int Id { get; private set; }
 
@@ -11,6 +12,7 @@ namespace Forum.Application.PublicUsers.Posts.Queries.Categories
 
         public string Description { get; private set; } = default!;
 
-        public int TotalPosts { get; set; }
+        public DateTime CreatedOn { get; private set; } = default!;
+
     }
 }
