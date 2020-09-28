@@ -1,5 +1,4 @@
-﻿using CarRentalSystem.Application.Common.Exceptions;
-using Forum.Application.Common.Exceptions;
+﻿using Forum.Application.Common.Exceptions;
 using Forum.Domain.Exceptions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;

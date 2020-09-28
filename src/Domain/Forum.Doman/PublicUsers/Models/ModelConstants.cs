@@ -31,5 +31,11 @@
             public const int MinDescriptionLength = 2;
             public const int MaxDescriptionLength = 1000;
         }
+
+        public class Message
+        {
+            public const int MinTextLenght = 2;
+            public const int MaxTextLength = 1000;
+        }
     }
 }

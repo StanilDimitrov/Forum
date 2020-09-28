@@ -40,6 +40,13 @@ namespace Forum.Infrastructure.PublicUsers.Configurations
                 .Metadata
                 .PrincipalToDependent
                 .SetField("comments");
+
+            builder
+                .HasMany(p => p.Likes)
+                .WithOne()
+                .Metadata
+                .PrincipalToDependent
+                .SetField("likes");
         }
     }
 }

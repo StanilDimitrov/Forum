@@ -9,28 +9,21 @@ namespace Forum.Application.PublicUsers.Likes.Commands.Common
 {
     internal static class ChangeLikeCommandExtensions
     {
-        public static async Task<Result> UserHasComment(
+        public static Result UserHasLike(
             this ICurrentUser currentUser,
-            IPostRepository postRepository,
-            int commentId,
-            CancellationToken cancellationToken)
+            Like like)
         {
             var userId = currentUser.UserId;
+            var userHasLike = UserHasLike(userId, like);
 
-            var comment = await postRepository.GetComment(
-                commentId,
-                cancellationToken);
-
-            var userHasComment = UserHasComment(userId, comment);
-
-            return userHasComment
+            return userHasLike
                 ? Result.Success
-                : "You cannot edit this comment.";
+                : "You cannot edit this like.";
         }
 
-        private static bool UserHasComment(string userId, Comment comment)
+        private static bool UserHasLike(string userId, Like like)
         {
-            return comment.UserId == userId;
+            return like.UserId == userId;
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Forum.Doman.PublicUsers.Models.Posts
             string description,
             string imageUrl,
             Category category)
-            
+
         {
             this.ValidateImageUrl(imageUrl);
             this.ValidateDescription(description);
@@ -63,10 +63,15 @@ namespace Forum.Doman.PublicUsers.Models.Posts
             this.comments.Add(comment);
         }
 
-        public void AddLike(bool isLiked, string userId)
+        public void AddLike(bool isLike, string userId)
         {
-            var like = new Like(userId, isLiked);
+            var like = new Like(isLike, userId);
             this.likes.Add(like);
+        }
+
+        public Like ChangeLike(Like like)
+        {
+            return like.ChangeLike();
         }
 
         public Post UpdateImageUrl(string imageUrl)
@@ -84,15 +89,16 @@ namespace Forum.Doman.PublicUsers.Models.Posts
         }
 
         public Comment UpdateComment(
-            int commentId,
+            Comment comment,
             string description,
             string imageUrl)
         {
-            var comment = FindComment(commentId);
-                comment.UpdateDescription(description);
-                comment.UpdateImageUrl(imageUrl);
+            comment.UpdateDescription(description);
+            comment.UpdateImageUrl(imageUrl);
             return comment;
         }
+
+
 
         public Post UpdateDescription(string description)
         {
@@ -135,8 +141,5 @@ namespace Forum.Doman.PublicUsers.Models.Posts
 
             throw new InvalidPostException($"'{categoryName}' is not a valid category. Allowed values are: {allowedCategoryNames}.");
         }
-
-        private Comment FindComment(int commentId) =>
-            this.comments.FirstOrDefault(c => c.Id == commentId);
     }
 }

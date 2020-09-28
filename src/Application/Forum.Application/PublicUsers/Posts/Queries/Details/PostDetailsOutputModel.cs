@@ -9,6 +9,10 @@ namespace Forum.Application.PublicUsers.Posts.Queries.Details
     {
         public PublicUserOutputModel User { get; set; } = default!;
 
+        public int TotalLikes { get; set; }
+
+        public int TotalDislikes { get; set; }
+
         public override void Mapping(Profile mapper) 
             => mapper
                 .CreateMap<Post, PostDetailsOutputModel>()

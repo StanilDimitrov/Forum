@@ -2,7 +2,7 @@
 
 namespace Forum.Application.PublicUsers.Likes.Commands.Common
 {
-    public abstract class LikeCommand<TCommand> : EntityCommand<int>
+    public abstract class PostLikeCommand<TCommand> : EntityCommand<int>
        where TCommand : EntityCommand<int>
     {
         public bool IsLiked { get; set; } = default!;

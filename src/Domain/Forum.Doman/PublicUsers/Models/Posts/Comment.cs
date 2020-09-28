@@ -1,7 +1,6 @@
 ﻿using Forum.Domain.Common.Models;
 using Forum.Doman.PublicUsers.Exceptions;
 using System;
-using System.Runtime.CompilerServices;
 using static Forum.Domain.PublicUsers.Models.ModelConstants.Comment;
 
 namespace Forum.Doman.PublicUsers.Models.Posts

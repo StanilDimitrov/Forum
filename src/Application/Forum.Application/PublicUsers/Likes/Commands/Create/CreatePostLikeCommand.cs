@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace Forum.Application.PublicUsers.Likes.Commands.Create.Comment
 {
-    public class CreatePostLikeCommand : LikeCommand<CreatePostLikeCommand>, IRequest<Result>
+    public class CreatePostLikeCommand : PostLikeCommand<CreatePostLikeCommand>, IRequest<Result>
     {
         public int PostId { get; set; }
-
         public class CreatePostLikeCommandHandler : IRequestHandler<CreatePostLikeCommand, Result>
         {
             private readonly ICurrentUser currentUser;
@@ -33,9 +32,15 @@ namespace Forum.Application.PublicUsers.Likes.Commands.Create.Comment
                     request.PostId,
                     cancellationToken);
 
-                post.AddLike(request.IsLiked, currentUser.UserId);
+                var isPostLikedByUser = await this.postRepository.CheckIsPostLikedByUser(
+                    request.PostId, currentUser.UserId);
 
-                await this.postRepository.Save(post, cancellationToken);
+                if (!isPostLikedByUser)
+                {
+                    post.AddLike(request.IsLiked, currentUser.UserId);
+                    await this.postRepository.Save(post, cancellationToken);
+                }
+               
                 return Result.Success;
             }
         }

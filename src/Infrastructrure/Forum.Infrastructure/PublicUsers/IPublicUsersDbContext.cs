@@ -12,7 +12,9 @@ namespace Forum.Infrastructure.PublicUsers
 
         DbSet<Category> Categories { get; } 
 
-        DbSet<Comment> Comments { get;  } 
+        DbSet<Comment> Comments { get;  }
+
+        DbSet<Like> Likes { get; }
 
         DbSet<PublicUser> PublicUsers { get; }
 

@@ -35,6 +35,8 @@ namespace Forum.Infrastructure.Common.Persistence
 
         public DbSet<Comment> Comments { get; set; } = default!;
 
+        public DbSet<Like> Likes { get; set; } = default!;
+
         public DbSet<PublicUser> PublicUsers { get; set; } = default!;
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())

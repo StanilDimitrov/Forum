@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Forum.Application.Common.Exceptions;
 using Forum.Application.PublicUsers.Comments.Queries.Details;
 using Forum.Application.PublicUsers.Posts;
 using Forum.Application.PublicUsers.Posts.Queries.Categories;
@@ -51,8 +52,28 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
             var post = await this
                 .All()
                 .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
+            if (post == null)
+            {
+                throw new NotFoundException(nameof(Post), id);
+            }
             return this.mapper
                 .Map<IEnumerable<GetPostCommentOutputModel>>(post.Comments);
+        }
+
+        public async Task<bool> CheckIsPostLikedByUser(
+            int id,
+            string userId,
+            CancellationToken cancellationToken = default)
+        {
+            var post = await this.Data.Posts.FindAsync(id);
+
+            if (post == null)
+            {
+                return false;
+            }
+
+            var isPostLikedByUser = post.Likes.Any(l => l.UserId == userId);
+            return isPostLikedByUser;
         }
 
         public async Task<Category> GetCategory(int categoryId, CancellationToken cancellationToken = default)
@@ -68,6 +89,14 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
                .Data
                .Comments
                .FirstOrDefaultAsync(c => c.Id == commentId, cancellationToken);
+
+        public async Task<Like> GetLike(
+           int likeId,
+           CancellationToken cancellationToken = default)
+           => await this
+               .Data
+               .Likes
+               .FirstOrDefaultAsync(l => l.Id == likeId, cancellationToken);
 
         public async Task<CommentDetailsOutputModel> GetCommentDetails(
           int commentId,
@@ -89,10 +118,29 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
                .SingleOrDefaultAsync(p => p.Comments.Any(c => c.Id == commentId),
             cancellationToken);
 
+        public async Task<Post> GetPostByLikeId(int likeId, CancellationToken cancellationToken = default)
+        => await this
+            .All()
+            .SingleOrDefaultAsync(p => p.Likes.Any(c => c.Id == likeId),
+         cancellationToken);
+
         public async Task<PostDetailsOutputModel> GetDetails(int id, CancellationToken cancellationToken = default)
-         => await this.mapper
-                .ProjectTo<PostDetailsOutputModel>(this.Data.Posts)
-                .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
+        {
+            var post = await this.Data.Posts.FindAsync(id);
+            if (post == null)
+            {
+                throw new NotFoundException(nameof(Post), id);
+            }
+
+            var postDetailsOutputModel = this.mapper
+                .Map<PostDetailsOutputModel>(post);
+            var totalLikes = post.Likes.Where(l => l.IsLike).Count();
+            var totalDislikes = post.Likes.Count - totalLikes;
+
+            postDetailsOutputModel.TotalLikes = totalLikes;
+            postDetailsOutputModel.TotalDislikes = totalDislikes;
+            return postDetailsOutputModel;
+        }
 
         public async Task<IEnumerable<GetPostCategoryOutputModel>> GetPostCategories(CancellationToken cancellationToken = default)
         {

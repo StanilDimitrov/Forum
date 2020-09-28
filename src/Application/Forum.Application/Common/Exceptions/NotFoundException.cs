@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CarRentalSystem.Application.Common.Exceptions
+namespace Forum.Application.Common.Exceptions
 {
     public class NotFoundException : Exception
     {
