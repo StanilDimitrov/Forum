@@ -11,15 +11,14 @@ namespace Forum.Web.Features
         [HttpPost("{postId}")]
         [Authorize]
         public async Task<ActionResult> Create(
-           CreatePostLikeCommand command)
-           => await this.Send(command);
+            [FromRoute] CreatePostLikeCommand command)
+            => await this.Send(command);
 
         [HttpPut]
         [Authorize]
         [Route(Id)]
         public async Task<ActionResult> Edit(
-           EditPostLikeCommand command)
-           => await this.Send(command);
-
+            [FromRoute] EditPostLikeCommand command)
+            => await this.Send(command);
     }
 }

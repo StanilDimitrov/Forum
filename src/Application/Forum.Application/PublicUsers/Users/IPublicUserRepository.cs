@@ -11,15 +11,39 @@ namespace Forum.Application.PublicUsers.Users
 {
     public interface IPublicUserRepository : IRepository<PublicUser>
     {
-        Task<PublicUser> FindByCurrentUser(string userId, CancellationToken cancellationToken = default);
+        Task<PublicUser> Find(
+            int id, 
+            CancellationToken cancellationToken = default);
 
-        Task<int> GetPublicUserId(string userId, CancellationToken cancellationToken = default);
+        Task<PublicUser> FindByCurrentUser(
+            string userId,
+            CancellationToken cancellationToken = default);
 
-        Task<bool> HasPost(int publicUserId, int postId, CancellationToken cancellationToken = default);
+        Task<int> GetPublicUserId(
+            string userId,
+            CancellationToken cancellationToken = default);
 
-        Task<PublicUserDetailsOutputModel> GetDetails(int id, CancellationToken cancellationToken = default);
+        Task<bool> HasPost(
+            int publicUserId,
+            int postId,
+            CancellationToken cancellationToken = default);
 
-        Task<PublicUserOutputModel> GetDetailsByPostId(int postId, CancellationToken cancellationToken = default);
+        Task<bool> HasMessage(
+            int publicUserId,
+            int messageId,
+            CancellationToken cancellationToken = default);
+
+        Task<PublicUserDetailsOutputModel> GetDetails(
+            int id,
+            CancellationToken cancellationToken = default);
+
+        Task<Message> GetMessage(
+            int messageId,
+            CancellationToken cancellationToken = default);
+
+        Task<PublicUserOutputModel> GetDetailsByPostId(
+            int postId,
+            CancellationToken cancellationToken = default);
 
         Task<IEnumerable<GetPublicUserPostOutputModel>> GetPublicUserPosts(
           int id,

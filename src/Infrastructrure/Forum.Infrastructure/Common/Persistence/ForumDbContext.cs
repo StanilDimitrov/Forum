@@ -39,6 +39,8 @@ namespace Forum.Infrastructure.Common.Persistence
 
         public DbSet<PublicUser> PublicUsers { get; set; } = default!;
 
+        public DbSet<Message> Messages { get; set; } = default!;
+
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             var entriesModified = 0;

@@ -9,7 +9,7 @@ namespace Forum.Infrastructure.PublicUsers.Configurations
         public void Configure(EntityTypeBuilder<Like> builder)
         {
             builder
-                     .HasKey(c => c.Id);
+                 .HasKey(c => c.Id);
 
             builder
                 .Property(p => p.IsLike)

@@ -28,6 +28,27 @@ namespace Forum.Infrastructure.PublicUsers.Configurations
                 .Metadata
                 .PrincipalToDependent
                 .SetField("posts");
+
+            builder
+               .HasMany(pu => pu.SentMessages)
+               .WithOne()
+               .Metadata
+               .PrincipalToDependent
+               .SetField("sentMessages");
+
+            builder
+               .HasMany(pu => pu.UnreadMessages)
+               .WithOne()
+               .Metadata
+               .PrincipalToDependent
+               .SetField("unreadMessages");
+
+            builder
+               .HasMany(pu => pu.ReadMessages)
+               .WithOne()
+               .Metadata
+               .PrincipalToDependent
+               .SetField("readMessages");
         }
     }
 }

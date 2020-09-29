@@ -18,6 +18,8 @@ namespace Forum.Infrastructure.PublicUsers
 
         DbSet<PublicUser> PublicUsers { get; }
 
+        DbSet<Message> Messages { get; }
+
         DbSet<User> Users { get; } 
     }
 }

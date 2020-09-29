@@ -20,8 +20,8 @@ namespace Forum.Web.Features
         [HttpGet]
         [Route(Id)]
         public async Task<ActionResult<IEnumerable<GetPublicUserPostOutputModel>>> GetPublicUserPosts(
-          [FromRoute] GetPublicUserPostsQuery query)
-          => await this.Send(query);
+            [FromRoute] GetPublicUserPostsQuery query)
+            => await this.Send(query);
 
         [HttpPut]
         [Route(Id)]

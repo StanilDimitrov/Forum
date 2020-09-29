@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Forum.Application.Common.Mapping;
 using Forum.Doman.PublicUsers.Models.Posts;
+using System;
 
 namespace Forum.Application.PublicUsers.Posts.Queries.Common
 {
@@ -14,7 +15,7 @@ namespace Forum.Application.PublicUsers.Posts.Queries.Common
 
         public string Category { get; private set; } = default!;
 
-        public string CreatedOn { get; set; } = default!;
+        public DateTime CreatedOn { get; set; } = default!;
 
         public virtual void Mapping(Profile mapper) 
             => mapper

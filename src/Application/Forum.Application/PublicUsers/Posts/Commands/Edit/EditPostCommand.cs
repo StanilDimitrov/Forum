@@ -30,7 +30,7 @@ namespace Forum.Application.PublicUsers.Posts.Commands.Edit
                 EditPostCommand request, 
                 CancellationToken cancellationToken)
             {
-                var userHasPost = await this.currentUser.UserHasPost(
+                var userHasPost = await this.currentUser.UserHasMessage(
                     this.userRepository,
                     request.Id,
                     cancellationToken);

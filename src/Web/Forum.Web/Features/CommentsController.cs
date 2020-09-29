@@ -13,21 +13,21 @@ namespace Forum.Web.Features
         [HttpPost("{postId}")]
         [Authorize]
         public async Task<ActionResult<CreateCommentOutputModel>> Create(
-           CreateCommentCommand command)
-           => await this.Send(command);
+             [FromRoute] CreateCommentCommand command)
+             => await this.Send(command);
 
         [HttpPut]
         [Authorize]
         [Route(Id)]
         public async Task<ActionResult> Edit(
-           EditCommentCommand command)
-           => await this.Send(command);
+            [FromRoute] EditCommentCommand command)
+             => await this.Send(command);
 
         [HttpDelete]
         [Authorize]
         [Route(Id)]
         public async Task<ActionResult> Delete(
-           DeleteCommentCommand command)
-           => await this.Send(command);
+            [FromRoute] DeleteCommentCommand command)
+            => await this.Send(command);
     }
 }

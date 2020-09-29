@@ -39,8 +39,11 @@ namespace Forum.Application.PublicUsers.Posts.Commands.Edit
                 var post = await this.postRepository
                     .GetPostByCommentId(request.Id, cancellationToken);
 
+                var comment = await this.postRepository
+                    .GetComment(request.Id, cancellationToken);
+
                 post.UpdateComment(
-                    request.Id,
+                    comment,
                     request.Description,
                     request.ImageUrl);
 

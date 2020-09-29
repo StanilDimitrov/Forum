@@ -1,6 +1,4 @@
-﻿using Forum.Application.Common;
-using Forum.Application.Dealerships.CarAds.Commands.Create;
-using Forum.Application.PublicUsers.CarAds.Commands.Create;
+﻿using Forum.Application.PublicUsers.Posts.Commands.Create;
 using Forum.Application.PublicUsers.Posts.Commands.Delete;
 using Forum.Application.PublicUsers.Posts.Commands.Edit;
 using Forum.Application.PublicUsers.Posts.Queries.Categories;
@@ -18,33 +16,33 @@ namespace Forum.Web.Features
         [HttpGet]
         [Route(Id)]
         public async Task<ActionResult<PostDetailsOutputModel>> Details(
-           [FromRoute] PostDetailsQuery query)
-           => await this.Send(query);
+            [FromRoute] PostDetailsQuery query)
+            => await this.Send(query);
 
         [HttpGet]
         [Route(Id)]
         public async Task<ActionResult<IEnumerable<GetPostCommentOutputModel>>> GetPostComments(
-          [FromRoute] GetPostCommentsQuery query)
-          => await this.Send(query);
+            [FromRoute] GetPostCommentsQuery query)
+            => await this.Send(query);
 
         [HttpGet]
         [Route(Id)]
         public async Task<ActionResult<IEnumerable<GetPostCategoryOutputModel>>> GetPostCategories(
-         [FromRoute] GetPostCategoriesQuery query)
-         => await this.Send(query);
+            [FromRoute] GetPostCategoriesQuery query)
+            => await this.Send(query);
 
         [HttpPost]
         [Authorize]
         public async Task<ActionResult<CreatePostOutputModel>> Create(
-           CreatePostCommand command)
-           => await this.Send(command);
+            CreatePostCommand command)
+            => await this.Send(command);
 
         [HttpPut]
         [Authorize]
         [Route(Id)]
         public async Task<ActionResult> Edit(
-           EditPostCommand command)
-           => await this.Send(command);
+            [FromRoute] EditPostCommand command)
+            => await this.Send(command);
 
         [HttpDelete]
         [Authorize]

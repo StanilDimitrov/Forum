@@ -9,12 +9,12 @@ namespace Forum.Application.PublicUsers.Users.Queries.Common
 {
     public class PostDetailsQuery : EntityCommand<int>, IRequest<PostDetailsOutputModel>
     {
-        public class CarAdDetailsQueryHandler : IRequestHandler<PostDetailsQuery, PostDetailsOutputModel>
+        public class PostDetailsQueryHandler : IRequestHandler<PostDetailsQuery, PostDetailsOutputModel>
         {
             private readonly IPostRepository postRepository;
             private readonly IPublicUserRepository userRepository;
 
-            public CarAdDetailsQueryHandler(
+            public PostDetailsQueryHandler(
                 IPostRepository postRepository,
                 IPublicUserRepository userRepository)
             {

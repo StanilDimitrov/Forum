@@ -26,8 +26,14 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
         : base(dbContext)
         => this.mapper = mapper;
 
+        public async Task<PublicUser> Find(int id, CancellationToken cancellationToken = default)
+       => await this
+               .All()
+               .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
+
         public async Task<PublicUser> FindByCurrentUser(string userId, CancellationToken cancellationToken = default)
         => await this.FindByUser(userId, user => user.PublicUser!, cancellationToken);
+
 
         public async Task<PublicUserDetailsOutputModel> GetDetails(int id, CancellationToken cancellationToken = default)
           => await this.mapper
@@ -46,13 +52,31 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
         public Task<int> GetPublicUserId(string userId, CancellationToken cancellationToken = default)
          => this.FindByUser(userId, user => user.PublicUser!.Id, cancellationToken);
 
+        public async Task<Message> GetMessage(int messageId, CancellationToken cancellationToken = default)
+      => await this
+               .Data
+               .Messages
+               .FirstOrDefaultAsync(c => c.Id == messageId, cancellationToken);
 
-        public async Task<bool> HasPost(int publicUserId, int postId, CancellationToken cancellationToken = default)
+        public async Task<bool> HasPost(
+            int publicUserId,
+            int postId,
+            CancellationToken cancellationToken = default)
            => await this
                 .All()
                 .Where(pu => pu.Id == publicUserId)
                 .AnyAsync(pu => pu.Posts
                     .Any(pu => pu.Id == postId), cancellationToken);
+
+        public async Task<bool> HasMessage(
+            int publicUserId,
+            int messageId,
+            CancellationToken cancellationToken = default)
+          => await this
+               .All()
+               .Where(pu => pu.Id == publicUserId)
+               .AnyAsync(pu => pu.ReadMessages
+                   .Any(pu => pu.Id == messageId), cancellationToken);
 
         public async Task<IEnumerable<GetPublicUserPostOutputModel>> GetPublicUserPosts(int id, CancellationToken cancellationToken)
         {

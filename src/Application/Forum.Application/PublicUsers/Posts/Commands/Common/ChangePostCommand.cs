@@ -8,7 +8,7 @@ namespace Forum.Application.PublicUsers.Posts.Commands.Common
 {
     internal static class ChangePostCommandExtensions
     {
-        public static async Task<Result> UserHasPost(
+        public static async Task<Result> UserHasMessage(
             this ICurrentUser currentUser,
             IPublicUserRepository userRepository,
             int postId,
@@ -18,12 +18,12 @@ namespace Forum.Application.PublicUsers.Posts.Commands.Common
                 currentUser.UserId,
                 cancellationToken);
 
-            var userHasPost = await userRepository.HasPost(
+            var userHasMessage = await userRepository.HasPost(
                 userId,
                 postId,
                 cancellationToken);
 
-            return userHasPost
+            return userHasMessage
                 ? Result.Success
                 : "You cannot edit this post.";
         }
