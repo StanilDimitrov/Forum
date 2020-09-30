@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Forum.Infrastructure.Common.Events
 {
-    public interface IEventDispatcher
+    internal interface IEventDispatcher
     {
         Task Dispatch(IDomainEvent domainEvent);
     }

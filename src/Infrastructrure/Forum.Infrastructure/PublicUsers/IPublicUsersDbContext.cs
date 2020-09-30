@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Forum.Infrastructure.PublicUsers
 {
-    public interface IPublicUsersDbContext : IDbContext
+    internal interface IPublicUsersDbContext : IDbContext
     {
         DbSet<Post> Posts { get;  } 
 

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Forum.Infrastructure.Common.Persistence
 {
-    public interface IDbContext
+    internal interface IDbContext
     {
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
 

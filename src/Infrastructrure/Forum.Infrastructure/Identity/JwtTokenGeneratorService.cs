@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Forum.Infrastructure.Identity
 {
-    public class JwtTokenGeneratorService : IJwtTokenGenerator
+    internal class JwtTokenGeneratorService : IJwtTokenGenerator
     {
         private readonly ApplicationSettings applicationSettings;
 

@@ -1,6 +1,6 @@
 ﻿namespace Forum.Infrastructure.Identity
 {
-    public interface IJwtTokenGenerator
+    internal interface IJwtTokenGenerator
     {
         string GenerateToken(User user);
     }
