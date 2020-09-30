@@ -8,8 +8,13 @@ namespace Forum.Infrastructure.PublicUsers.Configurations
     {
         public void Configure(EntityTypeBuilder<Like> builder)
         {
+            const string id = "Id";
+
             builder
-                 .HasKey(c => c.Id);
+                .Property<int>(id);
+
+            builder
+                .HasKey(id);
 
             builder
                 .Property(p => p.IsLike)

@@ -1,4 +1,5 @@
-﻿using Forum.Application.Common.Mapping;
+﻿using AutoMapper;
+using Forum.Application.Common.Mapping;
 using Forum.Doman.PublicUsers.Models.Posts;
 using System;
 
@@ -14,5 +15,8 @@ namespace Forum.Application.PublicUsers.Posts.Queries.Categories
 
         public DateTime CreatedOn { get; private set; } = default!;
 
+        public virtual void Mapping(Profile mapper)
+          => mapper
+              .CreateMap<Comment, GetPostCommentOutputModel>();
     }
 }

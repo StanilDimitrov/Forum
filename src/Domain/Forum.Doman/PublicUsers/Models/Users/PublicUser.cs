@@ -80,6 +80,11 @@ namespace Forum.Doman.PublicUsers.Models.Users
              .OrderByDescending(x => x.CreatedOn)
              .ToList();
 
+        public IReadOnlyList<Post> GetAllPosts()
+        => this.posts
+            .OrderByDescending(x => x.CreatedOn)
+            .ToList();
+
         public IReadOnlyList<Message> GetAllSentMessages()
        => this.sentMessages
            .OrderByDescending(x => x.CreatedOn)

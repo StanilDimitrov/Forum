@@ -1,16 +1,13 @@
 ﻿using AutoMapper;
-using CarRentalSystem.Application.Dealerships.Dealers.Queries.Details;
-using Forum.Application.Common.Exceptions;
 using Forum.Application.PublicUsers.Users;
 using Forum.Application.PublicUsers.Users.Queries.Common;
-using Forum.Application.PublicUsers.Users.Queries.Posts;
+using Forum.Application.PublicUsers.Users.Queries.Details;
 using Forum.Doman.PublicUsers.Exceptions;
 using Forum.Doman.PublicUsers.Models.Users;
 using Forum.Infrastructure.Common.Persistence;
 using Forum.Infrastructure.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
@@ -77,19 +74,6 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
                .Where(pu => pu.Id == publicUserId)
                .AnyAsync(pu => pu.ReadMessages
                    .Any(pu => pu.Id == messageId), cancellationToken);
-
-        public async Task<IEnumerable<GetPublicUserPostOutputModel>> GetPublicUserPosts(int id, CancellationToken cancellationToken)
-        {
-            var publicUser = await this
-               .All()
-               .FirstOrDefaultAsync(pu => pu.Id == id, cancellationToken);
-            if (publicUser == null)
-            {
-                throw new NotFoundException(nameof(PublicUser), id);
-            }
-            return this.mapper
-                .Map<IEnumerable<GetPublicUserPostOutputModel>>(publicUser.Posts);
-        }
 
         private async Task<T> FindByUser<T>(
            string userId,

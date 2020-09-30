@@ -26,14 +26,6 @@ namespace Forum.Application.PublicUsers.Posts
            int commentId,
            CancellationToken cancellationToken = default);
 
-        Task<Like> GetLike(
-           int likeId,
-           CancellationToken cancellationToken = default);
-
-        Task<IEnumerable<GetPostCommentOutputModel>> GetPostComments(
-           int id, 
-           CancellationToken cancellationToken = default);
-
         Task<CommentDetailsOutputModel> GetCommentDetails(
           int commentId,
           CancellationToken cancellationToken = default);
@@ -44,10 +36,6 @@ namespace Forum.Application.PublicUsers.Posts
 
         Task<Post> GetPostByCommentId(
             int commentId,
-            CancellationToken cancellationToken = default);
-
-        Task<Post> GetPostByLikeId(
-            int likeId,
             CancellationToken cancellationToken = default);
 
         Task<bool> CheckIsPostLikedByUser(

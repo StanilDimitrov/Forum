@@ -1,14 +1,12 @@
-﻿using CarRentalSystem.Application.Dealerships.Dealers.Queries.Details;
+﻿using Forum.Application.Common;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Forum.Application.PublicUsers.Users.Queries.Details
 {
-    public class PublicUserDetailsQuery : IRequest<PublicUserDetailsOutputModel>
+    public class PublicUserDetailsQuery : EntityCommand<int>, IRequest<PublicUserDetailsOutputModel>
     {
-        public int Id { get; set; }
-
         public class UserDetailsQueryHandler : IRequestHandler<PublicUserDetailsQuery, PublicUserDetailsOutputModel>
         {
             private readonly IPublicUserRepository userRepository;

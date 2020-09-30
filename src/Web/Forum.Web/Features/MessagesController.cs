@@ -36,19 +36,19 @@ namespace Forum.Web.Features
         [HttpGet]
         [Authorize]
         public async Task<ActionResult<IEnumerable<MessageOutputModel>>> GetSentMessages(
-            [FromRoute] GetPublicUserSentMessagesQuery query)
+             GetPublicUserSentMessagesQuery query)
             => await this.Send(query);
 
         [HttpGet]
         [Authorize]
         public async Task<ActionResult<IEnumerable<MessageOutputModel>>> GetOldMessages(
-             [FromRoute] GetPublicUserOldMessagesQuery query)
+              GetPublicUserOldMessagesQuery query)
              => await this.Send(query);
 
         [HttpGet]
         [Authorize]
         public async Task<ActionResult<IEnumerable<MessageOutputModel>>> GetNewMessages(
-            [FromRoute] GetPublicUserNewMessagesQuery query)
+             GetPublicUserNewMessagesQuery query)
             => await this.Send(query);
 
         [HttpDelete]

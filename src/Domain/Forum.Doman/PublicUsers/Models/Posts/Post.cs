@@ -63,6 +63,17 @@ namespace Forum.Doman.PublicUsers.Models.Posts
             this.comments.Add(comment);
         }
 
+        public Like GetLike(string userId)
+        {
+            var like = likes.SingleOrDefault(L => L.UserId == userId);
+            return like;
+        }
+
+        public IReadOnlyCollection<Comment> GetComments()
+         => this.comments
+             .OrderByDescending(x => x.CreatedOn)
+             .ToList();
+
         public void AddLike(bool isLike, string userId)
         {
             var like = new Like(isLike, userId);

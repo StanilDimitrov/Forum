@@ -1,5 +1,4 @@
-﻿using CarRentalSystem.Application.Dealerships.Dealers.Queries.Details;
-using Forum.Application.Common;
+﻿using Forum.Application.Common;
 using Forum.Application.PublicUsers.Users.Commands.Edit;
 using Forum.Application.PublicUsers.Users.Queries.Details;
 using Forum.Application.PublicUsers.Users.Queries.Posts;
@@ -20,7 +19,7 @@ namespace Forum.Web.Features
         [HttpGet]
         [Route(Id)]
         public async Task<ActionResult<IEnumerable<GetPublicUserPostOutputModel>>> GetPublicUserPosts(
-            [FromRoute] GetPublicUserPostsQuery query)
+            GetPublicUserPostsQuery query)
             => await this.Send(query);
 
         [HttpPut]

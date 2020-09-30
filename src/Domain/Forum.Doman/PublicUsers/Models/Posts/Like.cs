@@ -2,7 +2,7 @@
 
 namespace Forum.Doman.PublicUsers.Models.Posts
 {
-    public class Like : Entity<int>
+    public class Like
     {
         internal Like( bool isLiked, string userId)
         {

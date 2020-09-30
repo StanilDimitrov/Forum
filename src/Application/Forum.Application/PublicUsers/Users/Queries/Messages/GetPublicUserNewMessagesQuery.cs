@@ -43,9 +43,7 @@ namespace Forum.Application.PublicUsers.Users.Queries.Messages
                     .Skip(skip)
                     .Take(MessagesPerPage); 
 
-                var messagesOutputModel = mapper.Map<IEnumerable<MessageOutputModel>>(paginatedMessages);
-
-                return messagesOutputModel;
+                return this.mapper.Map<IEnumerable<MessageOutputModel>>(paginatedMessages);
             }
         }
     }

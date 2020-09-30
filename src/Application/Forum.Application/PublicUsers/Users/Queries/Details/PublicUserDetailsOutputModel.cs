@@ -2,7 +2,7 @@
 using Forum.Application.PublicUsers.Users.Queries.Common;
 using Forum.Doman.PublicUsers.Models.Users;
 
-namespace CarRentalSystem.Application.Dealerships.Dealers.Queries.Details
+namespace Forum.Application.PublicUsers.Users.Queries.Details
 {
     public class PublicUserDetailsOutputModel : PublicUserOutputModel
     {

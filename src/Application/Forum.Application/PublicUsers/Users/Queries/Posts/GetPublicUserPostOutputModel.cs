@@ -1,4 +1,5 @@
-﻿using Forum.Application.Common.Mapping;
+﻿using AutoMapper;
+using Forum.Application.Common.Mapping;
 using Forum.Doman.PublicUsers.Models.Posts;
 using System;
 
@@ -13,5 +14,9 @@ namespace Forum.Application.PublicUsers.Users.Queries.Posts
         public string Description { get; private set; } = default!;
 
         public DateTime CreatedOn { get; set; }
+
+        public virtual void Mapping(Profile mapper)
+           => mapper
+               .CreateMap<Post, GetPublicUserPostOutputModel>();
     }
 }

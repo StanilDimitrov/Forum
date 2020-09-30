@@ -47,19 +47,6 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
                 .All()
                 .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
 
-        public async Task<IEnumerable<GetPostCommentOutputModel>> GetPostComments(int id, CancellationToken cancellationToken = default)
-        {
-            var post = await this
-                .All()
-                .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
-            if (post == null)
-            {
-                throw new NotFoundException(nameof(Post), id);
-            }
-            return this.mapper
-                .Map<IEnumerable<GetPostCommentOutputModel>>(post.Comments);
-        }
-
         public async Task<bool> CheckIsPostLikedByUser(
             int id,
             string userId,
@@ -90,14 +77,6 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
                .Comments
                .FirstOrDefaultAsync(c => c.Id == commentId, cancellationToken);
 
-        public async Task<Like> GetLike(
-           int likeId,
-           CancellationToken cancellationToken = default)
-           => await this
-               .Data
-               .Likes
-               .FirstOrDefaultAsync(l => l.Id == likeId, cancellationToken);
-
         public async Task<CommentDetailsOutputModel> GetCommentDetails(
           int commentId,
           CancellationToken cancellationToken = default)
@@ -117,12 +96,6 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
                .All()
                .SingleOrDefaultAsync(p => p.Comments.Any(c => c.Id == commentId),
             cancellationToken);
-
-        public async Task<Post> GetPostByLikeId(int likeId, CancellationToken cancellationToken = default)
-        => await this
-            .All()
-            .SingleOrDefaultAsync(p => p.Likes.Any(c => c.Id == likeId),
-         cancellationToken);
 
         public async Task<PostDetailsOutputModel> GetDetails(int id, CancellationToken cancellationToken = default)
         {

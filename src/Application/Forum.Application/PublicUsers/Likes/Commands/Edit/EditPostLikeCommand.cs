@@ -28,19 +28,18 @@ namespace Forum.Application.PublicUsers.Likes.Commands.Edit
                 CancellationToken cancellationToken)
 
             {
-                var like = await postRepository.GetLike(
-                request.Id,
-                cancellationToken);
+                
+                var post = await this.postRepository
+                    .Find(request.PostId, cancellationToken);
+
+                var like = post.GetLike(currentUser.UserId);
 
                 var userHasLike = this.currentUser.UserHasLike(like);
-                
+
                 if (!userHasLike)
                 {
                     return userHasLike;
                 }
-
-                var post = await this.postRepository
-                    .GetPostByLikeId(request.Id, cancellationToken);
 
                 post.ChangeLike(like);
 

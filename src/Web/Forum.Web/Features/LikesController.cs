@@ -14,9 +14,8 @@ namespace Forum.Web.Features
             [FromRoute] CreatePostLikeCommand command)
             => await this.Send(command);
 
-        [HttpPut]
+        [HttpPut("{postId}")]
         [Authorize]
-        [Route(Id)]
         public async Task<ActionResult> Edit(
             [FromRoute] EditPostLikeCommand command)
             => await this.Send(command);
