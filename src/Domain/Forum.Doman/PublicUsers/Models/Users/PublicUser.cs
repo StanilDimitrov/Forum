@@ -1,6 +1,7 @@
 ﻿using Forum.Domain.Common;
 using Forum.Domain.Common.Models;
 using Forum.Doman.PublicUsers.Events;
+using Forum.Doman.PublicUsers.Events.PublicUsers;
 using Forum.Doman.PublicUsers.Exceptions;
 using Forum.Doman.PublicUsers.Models.Posts;
 using System.Collections.Generic;
@@ -44,8 +45,6 @@ namespace Forum.Doman.PublicUsers.Models.Users
         public void AddPost(Post post)
         {
             this.posts.Add(post);
-
-            this.AddEvent(new PostAddedEvent());
         }
 
         public PublicUser UpdateEmail(string email)
@@ -98,6 +97,9 @@ namespace Forum.Doman.PublicUsers.Models.Users
         private void RecieveMessage(Message message)
         {
             this.unreadMessages.Add(message);
+            //Fire event to new bounded context for notifications
+            //TODO Implement notifications bounded context
+            this.RaiseEvent(new MessageReceivedEvent());
         }
 
         private void ValidateUserName(string userName)

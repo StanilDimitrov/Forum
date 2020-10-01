@@ -1,6 +1,7 @@
 ﻿using Forum.Domain.Common;
 using Forum.Domain.Common.Models;
 using Forum.Domain.PublicUsers.Models.Posts;
+using Forum.Doman.PublicUsers.Events.Posts;
 using Forum.Doman.PublicUsers.Exceptions;
 using System;
 using System.Collections.Generic;
@@ -61,6 +62,9 @@ namespace Forum.Doman.PublicUsers.Models.Posts
         {
             var comment = new Comment(description, imageUrl, userId);
             this.comments.Add(comment);
+            //Fire event to new bounded context for notifications
+            //TODO Implement notifications bounded context
+            this.RaiseEvent(new CommentAddedEvent());
         }
 
         public Like GetLike(string userId)
@@ -78,6 +82,9 @@ namespace Forum.Doman.PublicUsers.Models.Posts
         {
             var like = new Like(isLike, userId);
             this.likes.Add(like);
+            //Fire event to new bounded context for notifications
+            //TODO Implement notifications bounded context
+            this.RaiseEvent(new LikeAddedEvent());
         }
 
         public Like ChangeLike(Like like)

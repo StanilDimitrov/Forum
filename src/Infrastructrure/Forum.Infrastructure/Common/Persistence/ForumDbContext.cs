@@ -6,6 +6,7 @@ using Forum.Infrastructure.Identity;
 using Forum.Infrastructure.PublicUsers;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
@@ -17,7 +18,7 @@ namespace Forum.Infrastructure.Common.Persistence
         IPublicUsersDbContext
     {
         private readonly IEventDispatcher eventDispatcher;
-        private bool eventsDispatched;
+        private readonly Stack<object> savesChangesTracker;
 
         public ForumDbContext(
             DbContextOptions<ForumDbContext> options,
@@ -25,8 +26,7 @@ namespace Forum.Infrastructure.Common.Persistence
             : base(options)
         {
             this.eventDispatcher = eventDispatcher;
-
-            this.eventsDispatched = false;
+            this.savesChangesTracker = new Stack<object>();
         }
 
         public DbSet<Post> Posts { get; set; } = default!;
@@ -43,34 +43,34 @@ namespace Forum.Infrastructure.Common.Persistence
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            var entriesModified = 0;
+            this.savesChangesTracker.Push(new object());
 
-            if (!this.eventsDispatched)
+            var entities = this.ChangeTracker
+                .Entries<IEntity>()
+                .Select(e => e.Entity)
+                .Where(e => e.Events.Any())
+                .ToArray();
+
+            foreach (var entity in entities)
             {
-                var entities = this.ChangeTracker
-                    .Entries<IEntity>()
-                    .Select(e => e.Entity)
-                    .Where(e => e.Events.Any())
-                    .ToArray();
+                var events = entity.Events.ToArray();
 
-                foreach (var entity in entities)
+                entity.ClearEvents();
+
+                foreach (var domainEvent in events)
                 {
-                    var events = entity.Events.ToArray();
-
-                    entity.ClearEvents();
-
-                    foreach (var domainEvent in events)
-                    {
-                        await this.eventDispatcher.Dispatch(domainEvent);
-                    }
+                    await this.eventDispatcher.Dispatch(domainEvent);
                 }
-
-                this.eventsDispatched = true;
-
-                entriesModified = await base.SaveChangesAsync(cancellationToken);
             }
 
-            return entriesModified;
+            this.savesChangesTracker.Pop();
+
+            if (!this.savesChangesTracker.Any())
+            {
+                return await base.SaveChangesAsync(cancellationToken);
+            }
+
+            return 0;
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
