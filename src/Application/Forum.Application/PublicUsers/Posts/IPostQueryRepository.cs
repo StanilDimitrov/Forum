@@ -12,20 +12,8 @@ using System.Threading.Tasks;
 
 namespace Forum.Application.PublicUsers.Posts
 {
-    public interface IPostRepository : IRepository<Post>
+    public interface IPostQueryRepository : IQueryRepository<Post>
     {
-        Task<Post> Find(int id, CancellationToken cancellationToken = default);
-
-        Task<bool> Delete(int id, CancellationToken cancellationToken = default);
-
-        Task<Category> GetCategory(
-            int categoryId,
-            CancellationToken cancellationToken = default);
-
-        Task<Comment> GetComment(
-           int commentId,
-           CancellationToken cancellationToken = default);
-
         Task<CommentDetailsOutputModel> GetCommentDetails(
           int commentId,
           CancellationToken cancellationToken = default);
@@ -34,23 +22,16 @@ namespace Forum.Application.PublicUsers.Posts
             int commentId,
             CancellationToken cancellationToken = default);
 
-        Task<Post> GetPostByCommentId(
-            int commentId,
-            CancellationToken cancellationToken = default);
-
-        Task<bool> CheckIsPostLikedByUser(
-            int id,
-            string userId,
-            CancellationToken cancellationToken = default);
-
         Task<PostDetailsOutputModel> GetDetails(int id, CancellationToken cancellationToken = default);
 
         Task<IEnumerable<GetPostCategoryOutputModel>> GetPostCategories(
             CancellationToken cancellationToken = default);
 
-        Task<IEnumerable<GetPostCommentOutputModel>> GetAllPostComments(
-          int id,
-          CancellationToken cancellationToken = default);
+        Task<IEnumerable<GetPostCommentOutputModel>> GetPostComments(
+            int id,
+            int skip,
+            int take,
+            CancellationToken cancellationToken = default);
 
         Task<IEnumerable<TOutputModel>> GetPostListings<TOutputModel>(
            Specification<Post> postSpecification,

@@ -1,6 +1,7 @@
 ﻿using Forum.Application.Common.Contracts;
 using Forum.Application.PublicUsers.Comments.Commands.Common;
 using Forum.Application.PublicUsers.Posts;
+using Forum.Doman.PublicUsers.Repositories;
 using MediatR;
 using System.Linq;
 using System.Threading;
@@ -15,11 +16,11 @@ namespace Forum.Application.PublicUsers.Comments.Commands.Create.Comment
         public class CreateCarAdCommandHandler : IRequestHandler<CreateCommentCommand, CreateCommentOutputModel>
         {
             private readonly ICurrentUser currentUser;
-            private readonly IPostRepository postRepository;
+            private readonly IPostDomainRepository postRepository;
 
             public CreateCarAdCommandHandler(
                 ICurrentUser currentUser,
-                IPostRepository postRepository)
+                IPostDomainRepository postRepository)
             {
                 this.currentUser = currentUser;
                 this.postRepository = postRepository;

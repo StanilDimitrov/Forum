@@ -9,9 +9,9 @@ namespace Forum.Application.PublicUsers.Users.Queries.Details
     {
         public class UserDetailsQueryHandler : IRequestHandler<PublicUserDetailsQuery, PublicUserDetailsOutputModel>
         {
-            private readonly IPublicUserRepository userRepository;
+            private readonly IPublicUserQueryRepository userRepository;
 
-            public UserDetailsQueryHandler(IPublicUserRepository userRepository) 
+            public UserDetailsQueryHandler(IPublicUserQueryRepository userRepository) 
                 => this.userRepository = userRepository;
 
             public async Task<PublicUserDetailsOutputModel> Handle(

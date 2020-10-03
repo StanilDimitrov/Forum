@@ -1,9 +1,7 @@
-﻿using AutoMapper;
-using Forum.Application.Common;
+﻿using Forum.Application.Common;
 using Forum.Application.PublicUsers.Messages.Queries.Common;
 using MediatR;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -20,33 +18,23 @@ namespace Forum.Application.PublicUsers.Users.Queries.Messages
             IEnumerable<MessageOutputModel>>
 
         {
-            private readonly IPublicUserRepository publicUserRepository;
-            private readonly IMapper mapper;
+            private readonly IPublicUserQueryRepository publicUserRepository;
 
-            public GetPublicUserInboxMessagesHandler(
-                IPublicUserRepository publicUserRepository,
-                IMapper mapper)
-            {
-                this.publicUserRepository = publicUserRepository;
-                this.mapper = mapper;
-            }
+            public GetPublicUserInboxMessagesHandler(IPublicUserQueryRepository publicUserRepository)
+               => this.publicUserRepository = publicUserRepository;
+            
 
             public async Task<IEnumerable<MessageOutputModel>> Handle(
                 GetPublicUserInboxMessagesQuery request,
                 CancellationToken cancellationToken)
             {
-                var user = await this.publicUserRepository.Find(request.Id);
-
                 var skip = (request.Page - 1) * MessagesPerPage;
 
-                var paginatedMessages = user
-                    .GetAllInboxMessages()
-                    .Skip(skip)
-                    .Take(MessagesPerPage);
-
-                var messagesOutputModel = mapper.Map<IEnumerable<MessageOutputModel>>(paginatedMessages);
-
-                return messagesOutputModel;
+                return await this.publicUserRepository.GetInboxMessages(
+                    request.Id, 
+                    skip,
+                    MessagesPerPage,
+                    cancellationToken);
             }
         }
     }

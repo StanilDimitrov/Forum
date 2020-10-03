@@ -74,11 +74,6 @@ namespace Forum.Doman.PublicUsers.Models.Posts
             return like;
         }
 
-        public IReadOnlyCollection<Comment> GetComments()
-         => this.comments
-             .OrderByDescending(x => x.CreatedOn)
-             .ToList();
-
         public void AddLike(bool isLike, string userId)
         {
             var like = new Like(isLike, userId);

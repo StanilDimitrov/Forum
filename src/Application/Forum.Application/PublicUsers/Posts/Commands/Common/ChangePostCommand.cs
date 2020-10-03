@@ -1,6 +1,6 @@
 ﻿using Forum.Application.Common;
 using Forum.Application.Common.Contracts;
-using Forum.Application.PublicUsers.Users;
+using Forum.Doman.PublicUsers.Repositories;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,7 +10,7 @@ namespace Forum.Application.PublicUsers.Posts.Commands.Common
     {
         public static async Task<Result> UserHasMessage(
             this ICurrentUser currentUser,
-            IPublicUserRepository userRepository,
+            IPublicUserDomainRepository userRepository,
             int postId,
             CancellationToken cancellationToken)
         {

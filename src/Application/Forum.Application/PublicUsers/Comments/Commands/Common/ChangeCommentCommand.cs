@@ -1,7 +1,7 @@
 ﻿using Forum.Application.Common;
 using Forum.Application.Common.Contracts;
-using Forum.Application.PublicUsers.Posts;
 using Forum.Doman.PublicUsers.Models.Posts;
+using Forum.Doman.PublicUsers.Repositories;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,7 +11,7 @@ namespace Forum.Application.PublicUsers.Comments.Commands.Common
     {
         public static async Task<Result> UserHasComment(
             this ICurrentUser currentUser,
-            IPostRepository postRepository,
+            IPostDomainRepository postRepository,
             int commentId,
             CancellationToken cancellationToken)
         {

@@ -1,7 +1,7 @@
 ﻿using Forum.Application.Common;
 using Forum.Application.Common.Contracts;
 using Forum.Application.PublicUsers.Messages.Commands.Common;
-using Forum.Application.PublicUsers.Users;
+using Forum.Doman.PublicUsers.Repositories;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,11 +15,11 @@ namespace Forum.Application.PublicUsers.Messages.Commands.Create
         public class CreateMessageCommandHandler : IRequestHandler<CreateMessageCommand, Result>
         {
             private readonly ICurrentUser currentUser;
-            private readonly IPublicUserRepository userRepository;
+            private readonly IPublicUserDomainRepository userRepository;
 
             public CreateMessageCommandHandler(
                 ICurrentUser currentUser, 
-                IPublicUserRepository userRepository)
+                IPublicUserDomainRepository userRepository)
             {
                 this.currentUser = currentUser;
                 this.userRepository = userRepository;

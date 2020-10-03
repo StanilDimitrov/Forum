@@ -15,33 +15,25 @@ namespace Forum.Application.PublicUsers.Posts.Queries.Categories
         public int Page { get; set; } = 1;
 
         public class GetPostCommnentsQueryHandler : IRequestHandler<
-            GetPostCommentsQuery, 
+            GetPostCommentsQuery,
             IEnumerable<GetPostCommentOutputModel>>
         {
-            private readonly IPostRepository postRepository;
-            private readonly IMapper mapper;
+            private readonly IPostQueryRepository postRepository;
 
-            public GetPostCommnentsQueryHandler(
-                IPostRepository postRepository,
-                IMapper mapper)
-            {
-                this.postRepository = postRepository;
-                this.mapper = mapper;
-            }
+            public GetPostCommnentsQueryHandler(IPostQueryRepository postRepository)
+                => this.postRepository = postRepository;
 
             public async Task<IEnumerable<GetPostCommentOutputModel>> Handle(
                 GetPostCommentsQuery request,
                 CancellationToken cancellationToken)
             {
-                var post = await this.postRepository.Find(request.Id, cancellationToken);
-
                 var skip = (request.Page - 1) * CommentsPerPage;
-                var comments = 
-                    post.GetComments()
-                    .Skip(skip)
-                    .Take(CommentsPerPage);
 
-                return this.mapper.Map<IEnumerable<GetPostCommentOutputModel>>(comments);
+                return await this.postRepository.GetPostComments(
+                    request.Id,
+                    skip,
+                    CommentsPerPage,
+                    cancellationToken);
             }
         }
     }

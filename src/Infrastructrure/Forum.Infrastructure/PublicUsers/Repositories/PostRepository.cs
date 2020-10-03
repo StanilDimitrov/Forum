@@ -8,6 +8,7 @@ using Forum.Application.PublicUsers.Posts.Queries.Details;
 using Forum.Doman.Common;
 using Forum.Doman.PublicUsers.Models.Posts;
 using Forum.Doman.PublicUsers.Models.Users;
+using Forum.Doman.PublicUsers.Repositories;
 using Forum.Infrastructure.Common;
 using Forum.Infrastructure.Common.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +19,9 @@ using System.Threading.Tasks;
 
 namespace Forum.Infrastructure.PublicUsers.Repositories
 {
-    internal class PostRepository : DataRepository<IPublicUsersDbContext, Post>, IPostRepository
+    internal class PostRepository : DataRepository<IPublicUsersDbContext, Post>, 
+        IPostDomainRepository,
+        IPostQueryRepository
     {
         private readonly IMapper mapper;
 
@@ -52,7 +55,7 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
             string userId,
             CancellationToken cancellationToken = default)
         {
-            var post = await this.Data.Posts.FindAsync(id);
+            var post = await Find(id, cancellationToken);
 
             if (post == null)
             {
@@ -84,14 +87,23 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
                 .ProjectTo<CommentDetailsOutputModel>(this.Data.Comments)
               .FirstOrDefaultAsync(c => c.Id == commentId, cancellationToken);
 
-        public async Task<IEnumerable<GetPostCommentOutputModel>> GetAllPostComments(
+        public async Task<IEnumerable<GetPostCommentOutputModel>> GetPostComments(
           int id,
+          int skip,
+          int take,
           CancellationToken cancellationToken = default)
         {
             var post = await Find(id, cancellationToken);
+            if (post == null)
+            {
+                throw new NotFoundException(nameof(Post), id);
+            }
 
-            var comments = post.Comments.OrderByDescending(x => x.CreatedOn)
-             .ToList();
+            var comments = post.Comments
+                .Skip(skip)
+                .Take(take)
+                .OrderByDescending(x => x.CreatedOn)
+             .ToList().AsReadOnly();
             return this.mapper.Map<IEnumerable<GetPostCommentOutputModel>>(comments);
         }
 

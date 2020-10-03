@@ -11,12 +11,12 @@ namespace Forum.Application.PublicUsers.Users.Queries.Common
     {
         public class PostDetailsQueryHandler : IRequestHandler<PostDetailsQuery, PostDetailsOutputModel>
         {
-            private readonly IPostRepository postRepository;
-            private readonly IPublicUserRepository userRepository;
+            private readonly IPostQueryRepository postRepository;
+            private readonly IPublicUserQueryRepository userRepository;
 
             public PostDetailsQueryHandler(
-                IPostRepository postRepository,
-                IPublicUserRepository userRepository)
+                IPostQueryRepository postRepository,
+                IPublicUserQueryRepository userRepository)
             {
                 this.postRepository = postRepository;
                 this.userRepository = userRepository;

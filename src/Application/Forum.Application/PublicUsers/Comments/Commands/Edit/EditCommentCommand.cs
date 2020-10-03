@@ -1,6 +1,7 @@
 ﻿using Forum.Application.Common;
 using Forum.Application.Common.Contracts;
 using Forum.Application.PublicUsers.Comments.Commands.Common;
+using Forum.Doman.PublicUsers.Repositories;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,11 +13,11 @@ namespace Forum.Application.PublicUsers.Posts.Commands.Edit
         public class EditCommentCommandHandler : IRequestHandler<EditCommentCommand, Result>
         {
             private readonly ICurrentUser currentUser;
-            private readonly IPostRepository postRepository;
+            private readonly IPostDomainRepository postRepository;
 
             public EditCommentCommandHandler(
                 ICurrentUser currentUser,
-                IPostRepository postRepository)
+                IPostDomainRepository postRepository)
             {
                 this.currentUser = currentUser;
                 this.postRepository = postRepository;

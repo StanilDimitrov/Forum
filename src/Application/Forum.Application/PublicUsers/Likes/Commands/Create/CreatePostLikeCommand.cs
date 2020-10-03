@@ -2,6 +2,7 @@
 using Forum.Application.Common.Contracts;
 using Forum.Application.PublicUsers.Likes.Commands.Common;
 using Forum.Application.PublicUsers.Posts;
+using Forum.Doman.PublicUsers.Repositories;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,11 +14,11 @@ namespace Forum.Application.PublicUsers.Likes.Commands.Create.Comment
         public class CreatePostLikeCommandHandler : IRequestHandler<CreatePostLikeCommand, Result>
         {
             private readonly ICurrentUser currentUser;
-            private readonly IPostRepository postRepository;
+            private readonly IPostDomainRepository postRepository;
 
             public CreatePostLikeCommandHandler(
                 ICurrentUser currentUser,
-                IPostRepository postRepository)
+                IPostDomainRepository postRepository)
             {
                 this.currentUser = currentUser;
                 this.postRepository = postRepository;

@@ -1,7 +1,7 @@
 ﻿using Forum.Application.Common;
 using Forum.Application.Common.Contracts;
 using Forum.Application.PublicUsers.Posts.Commands.Common;
-using Forum.Application.PublicUsers.Users;
+using Forum.Doman.PublicUsers.Repositories;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,13 +13,13 @@ namespace Forum.Application.PublicUsers.Posts.Commands.Delete
         public class DeletePostCommandHandler : IRequestHandler<DeletePostCommand, Result>
         {
             private readonly ICurrentUser currentUser;
-            private readonly IPostRepository postRepository;
-            private readonly IPublicUserRepository userRepository;
+            private readonly IPostDomainRepository postRepository;
+            private readonly IPublicUserDomainRepository userRepository;
 
             public DeletePostCommandHandler(
-                ICurrentUser currentUser, 
-                IPostRepository postRepository, 
-                IPublicUserRepository userRepository)
+                ICurrentUser currentUser,
+                IPostDomainRepository postRepository, 
+                IPublicUserDomainRepository userRepository)
             {
                 this.currentUser = currentUser;
                 this.postRepository = postRepository;

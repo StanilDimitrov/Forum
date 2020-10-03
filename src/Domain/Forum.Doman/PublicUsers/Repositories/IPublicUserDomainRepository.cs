@@ -1,16 +1,14 @@
-﻿using Forum.Application.Common.Contracts;
-using Forum.Application.PublicUsers.Users.Queries.Common;
-using Forum.Application.PublicUsers.Users.Queries.Details;
+﻿using Forum.Doman.Common;
 using Forum.Doman.PublicUsers.Models.Users;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Forum.Application.PublicUsers.Users
+namespace Forum.Doman.PublicUsers.Repositories
 {
-    public interface IPublicUserRepository : IRepository<PublicUser>
+    public interface IPublicUserDomainRepository : IDomainRepository<PublicUser>
     {
         Task<PublicUser> Find(
-            int id, 
+            int id,
             CancellationToken cancellationToken = default);
 
         Task<PublicUser> FindByCurrentUser(
@@ -31,16 +29,8 @@ namespace Forum.Application.PublicUsers.Users
             int messageId,
             CancellationToken cancellationToken = default);
 
-        Task<PublicUserDetailsOutputModel> GetDetails(
-            int id,
-            CancellationToken cancellationToken = default);
-
         Task<Message> GetMessage(
             int messageId,
-            CancellationToken cancellationToken = default);
-
-        Task<PublicUserOutputModel> GetDetailsByPostId(
-            int postId,
             CancellationToken cancellationToken = default);
     }
 }

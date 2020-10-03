@@ -14,6 +14,7 @@ namespace Forum.Doman.PublicUsers.Models.Users
         private readonly HashSet<Post> posts;
         private readonly HashSet<Message> inboxMessages;
 
+
         internal PublicUser(string userName, string email, string userId)
         {
             this.ValidateUserName(userName);
@@ -33,8 +34,6 @@ namespace Forum.Doman.PublicUsers.Models.Users
         public IReadOnlyCollection<Post> Posts => this.posts.ToList().AsReadOnly();
 
         public IReadOnlyCollection<Message> InboxMessages => this.inboxMessages.ToList().AsReadOnly();
-
-        public IReadOnlyCollection<Message> SendMessages => this.inboxMessages.ToList().AsReadOnly();
 
         public string UserId { get; private set; }
 
@@ -57,16 +56,6 @@ namespace Forum.Doman.PublicUsers.Models.Users
             reciever.RecieveMessage(message);
             return message;
         }
-
-        public IReadOnlyList<Message> GetAllInboxMessages()
-          => this.inboxMessages
-              .OrderByDescending(x => x.CreatedOn)
-              .ToList();
-
-        public IReadOnlyList<Post> GetAllPosts()
-        => this.posts
-            .OrderByDescending(x => x.CreatedOn)
-            .ToList();
 
         public void DeleteMessage(Message message)
         {

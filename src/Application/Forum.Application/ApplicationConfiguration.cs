@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Forum.Application.Common;
 using Forum.Application.Common.Behaviours;
+using Forum.Application.Identity.Commands.LoginUser;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,7 +22,7 @@ namespace Forum.Application
                 .AddMediatR(Assembly.GetExecutingAssembly())
                 .AddEventHandlers()
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>))
-            .AddEventHandlers();
+                 .AddEventHandlers();
 
         private static IServiceCollection AddEventHandlers(this IServiceCollection services)
             => services

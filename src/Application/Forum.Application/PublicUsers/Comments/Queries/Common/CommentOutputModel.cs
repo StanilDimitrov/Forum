@@ -16,6 +16,7 @@ namespace Forum.Application.PublicUsers.Comments.Queries.Common
 
         public virtual void Mapping(Profile mapper)
            => mapper
-               .CreateMap<Post, CommentOutputModel>();
+               .CreateMap<Comment, CommentOutputModel>();
+
     }
 }

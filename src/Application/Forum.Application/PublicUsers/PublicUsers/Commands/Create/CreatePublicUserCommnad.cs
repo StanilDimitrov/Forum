@@ -1,10 +1,7 @@
 ﻿using Forum.Application.Common.Contracts;
-using Forum.Application.PublicUsers.Users;
 using Forum.Domain.PublicUsers.Factories.Users;
+using Forum.Doman.PublicUsers.Repositories;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -20,12 +17,12 @@ namespace Forum.Application.PublicUsers.PublicUsers.Commands.Create
         {
             private readonly ICurrentUser currentUser;
             private readonly IPublicUserFactory publicUserFactory;
-            private readonly IPublicUserRepository publicUserRepository;
+            private readonly IPublicUserDomainRepository publicUserRepository;
 
             public CreatePublicUserCommnadHandler(
                 ICurrentUser currentUser,
                 IPublicUserFactory publicUserFactory,
-                IPublicUserRepository publicUserRepository)
+                IPublicUserDomainRepository publicUserRepository)
             {
                 this.currentUser = currentUser;
                 this.publicUserFactory = publicUserFactory;

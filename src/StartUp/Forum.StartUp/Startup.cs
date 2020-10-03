@@ -21,7 +21,8 @@ namespace Forum.StartUp
                 .AddDomain()
                 .AddApplication(this.Configuration)
                 .AddInfrastructure(this.Configuration)
-                .AddWebComponents();
+                .AddWebComponents()
+                .AddHealthChecks();
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

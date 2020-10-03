@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Forum.Application.Common;
 using Forum.Application.PublicUsers.Messages.Queries.Common;
-using Forum.Application.PublicUsers.Users;
+using Forum.Doman.PublicUsers.Repositories;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,11 +13,11 @@ namespace Forum.Application.PublicUsers.Messages.Queries.Details
     {
         public class ReadOldMessageQueryHandler : IRequestHandler<ReadOldMessageQuery, MessageOutputModel>
         {
-            private readonly IPublicUserRepository userRepository;
+            private readonly IPublicUserDomainRepository userRepository;
             private readonly IMapper mapper;
 
             public ReadOldMessageQueryHandler(
-                IPublicUserRepository userRepository,
+                IPublicUserDomainRepository userRepository,
                 IMapper mapper)
             {
                 this.userRepository = userRepository;

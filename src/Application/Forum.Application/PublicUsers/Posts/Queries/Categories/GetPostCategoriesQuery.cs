@@ -11,9 +11,9 @@ namespace Forum.Application.PublicUsers.Posts.Queries.Categories
             GetPostCategoriesQuery, 
             IEnumerable<GetPostCategoryOutputModel>>
         {
-            private readonly IPostRepository postRepository;
+            private readonly IPostQueryRepository postRepository;
 
-            public GetPostCategoriesQueryHandler(IPostRepository carAdRepository) 
+            public GetPostCategoriesQueryHandler(IPostQueryRepository carAdRepository) 
                 => this.postRepository = carAdRepository;
 
             public async Task<IEnumerable<GetPostCategoryOutputModel>> Handle(

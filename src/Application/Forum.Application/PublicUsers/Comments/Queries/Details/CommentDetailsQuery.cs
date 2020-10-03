@@ -13,12 +13,12 @@ namespace Forum.Application.PublicUsers.Comments.Queries.Details
 
         public class CarAdDetailsQueryHandler : IRequestHandler<CommentDetailsQuery, CommentDetailsOutputModel>
         {
-            private readonly IPostRepository postRepository;
-            private readonly IPublicUserRepository userRepository;
+            private readonly IPostQueryRepository postRepository;
+            private readonly IPublicUserQueryRepository userRepository;
 
             public CarAdDetailsQueryHandler(
-                IPostRepository postRepository,
-                IPublicUserRepository userRepository)
+                IPostQueryRepository postRepository,
+                IPublicUserQueryRepository userRepository)
             {
                 this.postRepository = postRepository;
                 this.userRepository = userRepository;

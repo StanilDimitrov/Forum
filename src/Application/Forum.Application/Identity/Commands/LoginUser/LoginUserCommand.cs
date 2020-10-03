@@ -1,5 +1,5 @@
 ﻿using Forum.Application.Common;
-using Forum.Application.PublicUsers.Users;
+using Forum.Doman.PublicUsers.Repositories;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,11 +11,11 @@ namespace Forum.Application.Identity.Commands.LoginUser
         public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, Result<LoginOutputModel>>
         {
             private readonly IIdentity identity;
-            private readonly IPublicUserRepository publicUserRepository;
+            private readonly IPublicUserDomainRepository publicUserRepository;
 
             public LoginUserCommandHandler(
                 IIdentity identity,
-                IPublicUserRepository publicUserRepository)
+                IPublicUserDomainRepository publicUserRepository)
             {
                 this.identity = identity;
                 this.publicUserRepository = publicUserRepository;

@@ -1,9 +1,6 @@
-﻿using AutoMapper;
-using Forum.Application.Common;
-using Forum.Application.Common.Contracts;
+﻿using Forum.Application.Common;
 using MediatR;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,36 +16,22 @@ namespace Forum.Application.PublicUsers.Users.Queries.Posts
             GetPublicUserPostsQuery,
             IEnumerable<GetPublicUserPostOutputModel>>
         {
-            private readonly IPublicUserRepository publicUserRepository;
-            private readonly ICurrentUser currentUser;
-            private readonly IMapper mapper;
+            private readonly IPublicUserQueryRepository publicUserRepository;
 
-            public GetPublicUserPostQueryHandler(
-                IPublicUserRepository publicUserRepository,
-                ICurrentUser currentUser,
-                IMapper mapper)
-            {
-                this.publicUserRepository = publicUserRepository;
-                this.currentUser = currentUser;
-                this.mapper = mapper;
-            }
+            public GetPublicUserPostQueryHandler(IPublicUserQueryRepository publicUserRepository)
+                 => this.publicUserRepository = publicUserRepository;
 
             public async Task<IEnumerable<GetPublicUserPostOutputModel>> Handle(
                 GetPublicUserPostsQuery request,
                 CancellationToken cancellationToken)
             {
-                var publicUser = await this.publicUserRepository.FindByCurrentUser(currentUser.UserId, cancellationToken);
-
                 var skip = (request.Page - 1) * PostsPerPage;
 
-                var posts =
-                    publicUser.GetAllPosts()
-                    .Skip(skip)
-                    .Take(PostsPerPage);
-
-                return this.mapper.Map<IEnumerable<GetPublicUserPostOutputModel>>(posts);
+                return await this.publicUserRepository.GetPosts(
+                    request.Id,
+                    skip, PostsPerPage,
+                    cancellationToken);
             }
-                
         }
     }
 }

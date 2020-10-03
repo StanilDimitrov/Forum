@@ -1,6 +1,6 @@
 ﻿using Forum.Application.Common;
 using Forum.Application.Common.Contracts;
-using Forum.Application.PublicUsers.Users;
+using Forum.Doman.PublicUsers.Repositories;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,11 +16,11 @@ namespace Forum.Application.PublicUsers.PublicUsers.Commands.Edit
         public class EditUserCommandHandler : IRequestHandler<EditPublicUserCommand, Result>
         {
             private readonly ICurrentUser currentUser;
-            private readonly IPublicUserRepository userRepository;
+            private readonly IPublicUserDomainRepository userRepository;
 
             public EditUserCommandHandler(
                 ICurrentUser currentUser,
-                IPublicUserRepository userRepository)
+                IPublicUserDomainRepository userRepository)
             {
                 this.currentUser = currentUser;
                 this.userRepository = userRepository;

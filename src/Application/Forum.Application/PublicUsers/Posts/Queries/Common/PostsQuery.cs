@@ -35,9 +35,9 @@ namespace Forum.Application.PublicUsers.Posts.Queries.Common
 
         public abstract class CarAdsQueryHandler
         {
-            private readonly IPostRepository postRepository;
+            private readonly IPostQueryRepository postRepository;
 
-            protected CarAdsQueryHandler(IPostRepository postRepository)
+            protected CarAdsQueryHandler(IPostQueryRepository postRepository)
                 => this.postRepository = postRepository;
 
             protected async Task<IEnumerable<TOutputModel>> GetPostListings<TOutputModel>(

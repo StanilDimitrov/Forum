@@ -1,4 +1,5 @@
 ﻿using Forum.Application.Common;
+using Forum.Application.Common.Contracts;
 using Forum.Application.Identity;
 using Forum.Doman.Common;
 using Forum.Infrastructure.Common;
@@ -40,13 +41,14 @@ namespace Forum.Infrastructure
                 .AddTransient<IInitializer, DatabaseInitializer>();
 
         internal static IServiceCollection AddRepositories(this IServiceCollection services)
-            => services
-                .Scan(scan => scan
-                    .FromCallingAssembly()
-                    .AddClasses(classes => classes
-                        .AssignableTo(typeof(IDomainRepository<>)))
-                    .AsMatchingInterface()
-                    .WithTransientLifetime());
+           => services
+               .Scan(scan => scan
+                   .FromCallingAssembly()
+                   .AddClasses(classes => classes
+                       .AssignableTo(typeof(IDomainRepository<>))
+                       .AssignableTo(typeof(IQueryRepository<>)))
+                   .AsImplementedInterfaces()
+                   .WithTransientLifetime());
 
         private static IServiceCollection AddIdentity(
             this IServiceCollection services,

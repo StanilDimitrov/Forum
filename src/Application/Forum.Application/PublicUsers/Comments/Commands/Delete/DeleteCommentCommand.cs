@@ -1,7 +1,7 @@
 ﻿using Forum.Application.Common;
 using Forum.Application.Common.Contracts;
 using Forum.Application.PublicUsers.Comments.Commands.Common;
-using Forum.Application.PublicUsers.Posts;
+using Forum.Doman.PublicUsers.Repositories;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,11 +13,11 @@ namespace Forum.Application.PublicUsers.Comments.Commands.Delete
         public class DeleteCommentCommandHandler : IRequestHandler<DeleteCommentCommand, Result>
         {
             private readonly ICurrentUser currentUser;
-            private readonly IPostRepository postRepository;
+            private readonly IPostDomainRepository postRepository;
 
             public DeleteCommentCommandHandler(
                 ICurrentUser currentUser,
-                IPostRepository postRepository)
+                IPostDomainRepository postRepository)
             {
                 this.currentUser = currentUser;
                 this.postRepository = postRepository;
