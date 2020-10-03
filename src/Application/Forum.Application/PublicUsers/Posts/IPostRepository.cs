@@ -48,6 +48,10 @@ namespace Forum.Application.PublicUsers.Posts
         Task<IEnumerable<GetPostCategoryOutputModel>> GetPostCategories(
             CancellationToken cancellationToken = default);
 
+        Task<IEnumerable<GetPostCommentOutputModel>> GetAllPostComments(
+          int id,
+          CancellationToken cancellationToken = default);
+
         Task<IEnumerable<TOutputModel>> GetPostListings<TOutputModel>(
            Specification<Post> postSpecification,
            Specification<PublicUser> userSpecification,

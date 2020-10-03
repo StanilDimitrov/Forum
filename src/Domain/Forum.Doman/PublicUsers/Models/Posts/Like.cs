@@ -4,9 +4,9 @@ namespace Forum.Doman.PublicUsers.Models.Posts
 {
     public class Like
     {
-        internal Like( bool isLiked, string userId)
+        internal Like(bool isLike, string userId)
         {
-            this.IsLike = isLiked;
+            this.IsLike = isLike;
             this.UserId = userId;
         }
 

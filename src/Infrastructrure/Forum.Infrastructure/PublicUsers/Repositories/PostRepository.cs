@@ -84,6 +84,17 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
                 .ProjectTo<CommentDetailsOutputModel>(this.Data.Comments)
               .FirstOrDefaultAsync(c => c.Id == commentId, cancellationToken);
 
+        public async Task<IEnumerable<GetPostCommentOutputModel>> GetAllPostComments(
+          int id,
+          CancellationToken cancellationToken = default)
+        {
+            var post = await Find(id, cancellationToken);
+
+            var comments = post.Comments.OrderByDescending(x => x.CreatedOn)
+             .ToList();
+            return this.mapper.Map<IEnumerable<GetPostCommentOutputModel>>(comments);
+        }
+
         public async Task<PostOutputModel> GetDetailsByCommentId(int commentId, CancellationToken cancellationToken = default)
         => await this.mapper
                .ProjectTo<PostDetailsOutputModel>(this

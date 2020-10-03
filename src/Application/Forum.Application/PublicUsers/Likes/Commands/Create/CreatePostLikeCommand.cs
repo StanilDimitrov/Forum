@@ -10,7 +10,6 @@ namespace Forum.Application.PublicUsers.Likes.Commands.Create.Comment
 {
     public class CreatePostLikeCommand : PostLikeCommand<CreatePostLikeCommand>, IRequest<Result>
     {
-        public int PostId { get; set; }
         public class CreatePostLikeCommandHandler : IRequestHandler<CreatePostLikeCommand, Result>
         {
             private readonly ICurrentUser currentUser;

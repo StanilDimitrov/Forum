@@ -45,6 +45,7 @@ namespace Forum.Doman.PublicUsers.Models.Posts
             this.ImageUrl = imageUrl;
             this.Category = default!;
             this.comments = new HashSet<Comment>();
+            this.likes = new HashSet<Like>();
         }
 
         public string Description { get; private set; }
@@ -115,8 +116,6 @@ namespace Forum.Doman.PublicUsers.Models.Posts
             comment.UpdateImageUrl(imageUrl);
             return comment;
         }
-
-
 
         public Post UpdateDescription(string description)
         {

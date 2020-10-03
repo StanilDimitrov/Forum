@@ -18,7 +18,8 @@ namespace Forum.Infrastructure.PublicUsers.Configurations
 
             builder
                 .Property(p => p.IsLike)
-                .IsRequired();
+                .IsRequired()
+                .HasColumnType("bit");
         }
     }
 }

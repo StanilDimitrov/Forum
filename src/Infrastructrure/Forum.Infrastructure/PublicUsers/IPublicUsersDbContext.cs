@@ -1,7 +1,6 @@
 ﻿using Forum.Doman.PublicUsers.Models.Posts;
 using Forum.Doman.PublicUsers.Models.Users;
 using Forum.Infrastructure.Common.Persistence;
-using Forum.Infrastructure.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Forum.Infrastructure.PublicUsers
@@ -19,7 +18,5 @@ namespace Forum.Infrastructure.PublicUsers
         DbSet<PublicUser> PublicUsers { get; }
 
         DbSet<Message> Messages { get; }
-
-        DbSet<User> Users { get; } 
     }
 }

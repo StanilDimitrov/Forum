@@ -9,20 +9,21 @@ using System.Threading.Tasks;
 
 namespace Forum.Application.PublicUsers.Users.Queries.Messages
 {
-    public class GetPublicUserSentMessagesQuery : EntityCommand<int>, IRequest<IEnumerable<MessageOutputModel>>
+    public class GetPublicUserInboxMessagesQuery : EntityCommand<int>, IRequest<IEnumerable<MessageOutputModel>>
     {
         private const int MessagesPerPage = 10;
 
         public int Page { get; set; } = 1;
 
-        public class GetPublicUserSentMessagesQueryHandler :
-            IRequestHandler<GetPublicUserSentMessagesQuery,
+        public class GetPublicUserInboxMessagesHandler :
+            IRequestHandler<GetPublicUserInboxMessagesQuery,
             IEnumerable<MessageOutputModel>>
+
         {
             private readonly IPublicUserRepository publicUserRepository;
             private readonly IMapper mapper;
 
-            public GetPublicUserSentMessagesQueryHandler(
+            public GetPublicUserInboxMessagesHandler(
                 IPublicUserRepository publicUserRepository,
                 IMapper mapper)
             {
@@ -31,7 +32,7 @@ namespace Forum.Application.PublicUsers.Users.Queries.Messages
             }
 
             public async Task<IEnumerable<MessageOutputModel>> Handle(
-                GetPublicUserSentMessagesQuery request,
+                GetPublicUserInboxMessagesQuery request,
                 CancellationToken cancellationToken)
             {
                 var user = await this.publicUserRepository.Find(request.Id);
@@ -39,7 +40,7 @@ namespace Forum.Application.PublicUsers.Users.Queries.Messages
                 var skip = (request.Page - 1) * MessagesPerPage;
 
                 var paginatedMessages = user
-                    .GetAllSentMessages()
+                    .GetAllInboxMessages()
                     .Skip(skip)
                     .Take(MessagesPerPage);
 

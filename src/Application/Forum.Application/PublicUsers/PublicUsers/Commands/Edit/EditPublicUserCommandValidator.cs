@@ -1,8 +1,7 @@
 ﻿using FluentValidation;
-using Forum.Application.PublicUsers.Users.Commands.Edit;
 using static Forum.Domain.PublicUsers.Models.ModelConstants.Common;
 
-namespace CarRentalSystem.Application.Dealerships.Dealers.Commands.Edit
+namespace Forum.Application.PublicUsers.PublicUsers.Commands.Edit
 {
     public class EditPublicUserCommandValidator : AbstractValidator<EditPublicUserCommand>
     {

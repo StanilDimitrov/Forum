@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Forum.Infrastructure.Common.Persistence.Migrations
+namespace Forum.Infrastructure.common.persistence.migrations
 {
     [DbContext(typeof(ForumDbContext))]
     partial class ForumDbContextModelSnapshot : ModelSnapshot
@@ -17,6 +17,7 @@ namespace Forum.Infrastructure.Common.Persistence.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("Relational:Sequence:.EntityFrameworkHiLoSequence", "'EntityFrameworkHiLoSequence', '', '1', '10', '', '', 'Int64', 'False'")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Forum.Doman.PublicUsers.Models.Posts.Category", b =>
@@ -46,7 +47,8 @@ namespace Forum.Infrastructure.Common.Persistence.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasAnnotation("SqlServer:HiLoSequenceName", "EntityFrameworkHiLoSequence")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime");
@@ -74,6 +76,29 @@ namespace Forum.Infrastructure.Common.Persistence.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("Forum.Doman.PublicUsers.Models.Posts.Like", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsLike")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("Forum.Doman.PublicUsers.Models.Posts.Post", b =>
@@ -111,6 +136,31 @@ namespace Forum.Infrastructure.Common.Persistence.Migrations
                     b.ToTable("Posts");
                 });
 
+            modelBuilder.Entity("Forum.Doman.PublicUsers.Models.Users.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime");
+
+                    b.Property<int?>("PublicUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1000)")
+                        .HasMaxLength(1000);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PublicUserId");
+
+                    b.ToTable("Messages");
+                });
+
             modelBuilder.Entity("Forum.Doman.PublicUsers.Models.Users.PublicUser", b =>
                 {
                     b.Property<int>("Id")
@@ -123,12 +173,19 @@ namespace Forum.Infrastructure.Common.Persistence.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("PublicUsers");
                 });
@@ -175,9 +232,6 @@ namespace Forum.Infrastructure.Common.Persistence.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("PublicUserId")
-                        .HasColumnType("int");
-
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -197,10 +251,6 @@ namespace Forum.Infrastructure.Common.Persistence.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.HasIndex("PublicUserId")
-                        .IsUnique()
-                        .HasFilter("[PublicUserId] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -348,6 +398,13 @@ namespace Forum.Infrastructure.Common.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
+            modelBuilder.Entity("Forum.Doman.PublicUsers.Models.Posts.Like", b =>
+                {
+                    b.HasOne("Forum.Doman.PublicUsers.Models.Posts.Post", null)
+                        .WithMany("Likes")
+                        .HasForeignKey("PostId");
+                });
+
             modelBuilder.Entity("Forum.Doman.PublicUsers.Models.Posts.Post", b =>
                 {
                     b.HasOne("Forum.Doman.PublicUsers.Models.Posts.Category", "Category")
@@ -361,12 +418,20 @@ namespace Forum.Infrastructure.Common.Persistence.Migrations
                         .HasForeignKey("PublicUserId");
                 });
 
-            modelBuilder.Entity("Forum.Infrastructure.Identity.User", b =>
+            modelBuilder.Entity("Forum.Doman.PublicUsers.Models.Users.Message", b =>
                 {
-                    b.HasOne("Forum.Doman.PublicUsers.Models.Users.PublicUser", "PublicUser")
+                    b.HasOne("Forum.Doman.PublicUsers.Models.Users.PublicUser", null)
+                        .WithMany("InboxMessages")
+                        .HasForeignKey("PublicUserId");
+                });
+
+            modelBuilder.Entity("Forum.Doman.PublicUsers.Models.Users.PublicUser", b =>
+                {
+                    b.HasOne("Forum.Infrastructure.Identity.User", null)
                         .WithOne()
-                        .HasForeignKey("Forum.Infrastructure.Identity.User", "PublicUserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("Forum.Doman.PublicUsers.Models.Users.PublicUser", "UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

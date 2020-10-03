@@ -1,7 +1,9 @@
 ﻿using Forum.Application.Common;
-using Forum.Application.PublicUsers.Users.Commands.Edit;
+using Forum.Application.PublicUsers.PublicUsers.Commands.Create;
+using Forum.Application.PublicUsers.PublicUsers.Commands.Edit;
 using Forum.Application.PublicUsers.Users.Queries.Details;
 using Forum.Application.PublicUsers.Users.Queries.Posts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,6 +12,18 @@ namespace Forum.Web.Features
 {
     public class PublicUsersController : ApiController
     {
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult<CreatePublicUserOutputModel>> Create(
+            CreatePublicUserCommnad command)
+            => await this.Send(command);
+
+        [HttpPut]
+        [Route(Id)]
+        public async Task<ActionResult> Edit(
+           int id, EditPublicUserCommand command)
+           => await this.Send(command.SetId(id));
+
         [HttpGet]
         [Route(Id)]
         public async Task<ActionResult<PublicUserDetailsOutputModel>> Details(
@@ -21,11 +35,5 @@ namespace Forum.Web.Features
         public async Task<ActionResult<IEnumerable<GetPublicUserPostOutputModel>>> GetPublicUserPosts(
             GetPublicUserPostsQuery query)
             => await this.Send(query);
-
-        [HttpPut]
-        [Route(Id)]
-        public async Task<ActionResult> Edit(
-            int id, EditPublicUserCommand command)
-            => await this.Send(command.SetId(id));
     }
 }

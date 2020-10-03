@@ -1,4 +1,5 @@
 ﻿using Forum.Doman.PublicUsers.Models.Users;
+using Forum.Infrastructure.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using static Forum.Domain.PublicUsers.Models.ModelConstants.Common;
@@ -30,25 +31,17 @@ namespace Forum.Infrastructure.PublicUsers.Configurations
                 .SetField("posts");
 
             builder
-               .HasMany(pu => pu.SentMessages)
+               .HasMany(pu => pu.InboxMessages)
                .WithOne()
                .Metadata
                .PrincipalToDependent
-               .SetField("sentMessages");
+               .SetField("inboxMessages");
 
             builder
-               .HasMany(pu => pu.UnreadMessages)
-               .WithOne()
-               .Metadata
-               .PrincipalToDependent
-               .SetField("unreadMessages");
-
-            builder
-               .HasMany(pu => pu.ReadMessages)
-               .WithOne()
-               .Metadata
-               .PrincipalToDependent
-               .SetField("readMessages");
+                .HasOne<User>()
+                .WithOne()
+                .HasForeignKey<PublicUser>(d => d.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

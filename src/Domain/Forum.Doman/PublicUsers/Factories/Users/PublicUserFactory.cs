@@ -6,6 +6,7 @@ namespace Forum.Domain.PublicUsers.Factories.Users
     {
         private string userName = default!;
         private string email = default!;
+        private string publicUserUserId = default!;
 
         public IPublicUserFactory WithUserName(string userName)
         {
@@ -19,12 +20,12 @@ namespace Forum.Domain.PublicUsers.Factories.Users
             return this;
         }
 
-        public PublicUser Build() => new PublicUser(this.userName, this.email);
+        public IPublicUserFactory FromUser(string userId)
+        {
+            this.publicUserUserId = userId;
+            return this;
+        }
 
-        public PublicUser Build(string userName, string email)
-            => this
-                .WithUserName(userName)
-                .WithEmail(email)
-                .Build();
+        public PublicUser Build() => new PublicUser(this.userName, this.email, this.publicUserUserId);
     }
 }

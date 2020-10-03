@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Common\Persistence\Migrations\20201003113648_SendMessages.cs" />
+    <Compile Remove="Common\Persistence\Migrations\20201003113648_SendMessages.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Application\Forum.Application\Forum.Application.csproj" />
   </ItemGroup>
 

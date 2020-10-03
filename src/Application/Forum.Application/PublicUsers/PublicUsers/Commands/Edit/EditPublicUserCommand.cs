@@ -1,10 +1,11 @@
 ﻿using Forum.Application.Common;
 using Forum.Application.Common.Contracts;
+using Forum.Application.PublicUsers.Users;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Forum.Application.PublicUsers.Users.Commands.Edit
+namespace Forum.Application.PublicUsers.PublicUsers.Commands.Edit
 {
     public class EditPublicUserCommand : EntityCommand<int>, IRequest<Result>
     {

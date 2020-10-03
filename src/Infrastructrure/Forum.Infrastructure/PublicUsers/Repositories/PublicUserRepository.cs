@@ -5,7 +5,6 @@ using Forum.Application.PublicUsers.Users.Queries.Details;
 using Forum.Doman.PublicUsers.Exceptions;
 using Forum.Doman.PublicUsers.Models.Users;
 using Forum.Infrastructure.Common.Persistence;
-using Forum.Infrastructure.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -27,11 +26,7 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
        => await this
                .All()
                .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
-
-        public async Task<PublicUser> FindByCurrentUser(string userId, CancellationToken cancellationToken = default)
-        => await this.FindByUser(userId, user => user.PublicUser!, cancellationToken);
-
-
+       
         public async Task<PublicUserDetailsOutputModel> GetDetails(int id, CancellationToken cancellationToken = default)
           => await this.mapper
                 .ProjectTo<PublicUserDetailsOutputModel>(this
@@ -45,9 +40,6 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
                     .All()
                     .Where(pu => pu.Posts.Any(c => c.Id == postId)))
                 .SingleOrDefaultAsync(cancellationToken);
-
-        public Task<int> GetPublicUserId(string userId, CancellationToken cancellationToken = default)
-         => this.FindByUser(userId, user => user.PublicUser!.Id, cancellationToken);
 
         public async Task<Message> GetMessage(int messageId, CancellationToken cancellationToken = default)
       => await this
@@ -72,20 +64,25 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
           => await this
                .All()
                .Where(pu => pu.Id == publicUserId)
-               .AnyAsync(pu => pu.ReadMessages
+               .AnyAsync(pu => pu.InboxMessages
                    .Any(pu => pu.Id == messageId), cancellationToken);
+
+        public async Task<PublicUser> FindByCurrentUser(string userId, CancellationToken cancellationToken = default)
+       => await this.FindByUser(userId, publicUser => publicUser, cancellationToken);
+
+        public async Task<int> GetPublicUserId(string userId, CancellationToken cancellationToken = default)
+        => await this.FindByUser(userId, publicUser => publicUser.Id, cancellationToken);
 
         private async Task<T> FindByUser<T>(
            string userId,
-           Expression<Func<User, T>> selector,
+           Expression<Func<PublicUser, T>> selector,
            CancellationToken cancellationToken = default)
         {
             var publicUser = await this
-                .Data
-                .Users
-                .Where(u => u.Id == userId)
+                .All()
+                .Where(pu => pu.UserId == userId)
                 .Select(selector)
-                .FirstOrDefaultAsync(cancellationToken);
+                .SingleOrDefaultAsync(cancellationToken);
 
             if (publicUser == null)
             {

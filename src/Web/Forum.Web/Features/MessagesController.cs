@@ -1,6 +1,5 @@
 ﻿using Forum.Application.PublicUsers.Messages.Commands.Create;
 using Forum.Application.PublicUsers.Messages.Commands.Delete;
-using Forum.Application.PublicUsers.Messages.Commands.Read;
 using Forum.Application.PublicUsers.Messages.Queries.Common;
 using Forum.Application.PublicUsers.Messages.Queries.Details;
 using Forum.Application.PublicUsers.Users.Queries.Messages;
@@ -19,13 +18,6 @@ namespace Forum.Web.Features
            CreateMessageCommand command)
            => await this.Send(command);
 
-        [HttpPost]
-        [Authorize]
-        [Route(Id)]
-        public async Task<ActionResult<ReadNewMessageOutputModel>> ReadNewMessage(
-           [FromRoute] ReadNewMessageCommand command)
-           => await this.Send(command);
-
         [HttpGet]
         [Authorize]
         [Route(Id)]
@@ -33,22 +25,17 @@ namespace Forum.Web.Features
             [FromRoute] ReadOldMessageQuery query)
             => await this.Send(query);
 
-        [HttpGet]
-        [Authorize]
-        public async Task<ActionResult<IEnumerable<MessageOutputModel>>> GetSentMessages(
-             GetPublicUserSentMessagesQuery query)
-            => await this.Send(query);
 
         [HttpGet]
         [Authorize]
         public async Task<ActionResult<IEnumerable<MessageOutputModel>>> GetOldMessages(
-              GetPublicUserOldMessagesQuery query)
+              GetPublicUserInboxMessagesQuery query)
              => await this.Send(query);
 
         [HttpGet]
         [Authorize]
         public async Task<ActionResult<IEnumerable<MessageOutputModel>>> GetNewMessages(
-             GetPublicUserNewMessagesQuery query)
+             GetPublicUserInboxMessagesQuery query)
             => await this.Send(query);
 
         [HttpDelete]

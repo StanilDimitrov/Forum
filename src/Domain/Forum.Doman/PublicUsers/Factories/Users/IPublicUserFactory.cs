@@ -8,5 +8,7 @@ namespace Forum.Domain.PublicUsers.Factories.Users
         IPublicUserFactory WithUserName(string userName);
 
         IPublicUserFactory WithEmail(string email);
+
+        IPublicUserFactory FromUser(string userId);
     }
 }

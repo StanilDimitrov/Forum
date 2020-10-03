@@ -14,6 +14,9 @@ namespace Forum.Infrastructure.PublicUsers.Configurations
             builder
              .HasKey(p => p.Id);
 
+            builder.Property(p => p.Id)
+                .UseHiLo();
+            
             builder
                 .Property(p => p.Description)
                 .IsRequired()
