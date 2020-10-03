@@ -10,7 +10,7 @@ namespace Forum.Application.PublicUsers.Posts.Commands.Common
 
         public int Category { get; set; }
 
-        public string ImageUrl { get; set; } = default!;
+        public string? ImageUrl { get; set; } = default!;
 
         public DateTime CreatedOn { get; set; }
     }

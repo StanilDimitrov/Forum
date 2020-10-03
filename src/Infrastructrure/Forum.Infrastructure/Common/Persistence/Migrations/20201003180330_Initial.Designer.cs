@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Forum.Infrastructure.common.persistence.migrations
 {
     [DbContext(typeof(ForumDbContext))]
-    [Migration("20201003114203_Initial")]
+    [Migration("20201003180330_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -122,7 +122,6 @@ namespace Forum.Infrastructure.common.persistence.migrations
                         .HasMaxLength(1000);
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(2048)")
                         .HasMaxLength(2048);
 

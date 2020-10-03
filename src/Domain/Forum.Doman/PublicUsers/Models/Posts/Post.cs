@@ -24,7 +24,6 @@ namespace Forum.Doman.PublicUsers.Models.Posts
             Category category)
 
         {
-            this.ValidateImageUrl(imageUrl);
             this.ValidateDescription(description);
             this.ValidateCategory(category);
 
@@ -54,7 +53,7 @@ namespace Forum.Doman.PublicUsers.Models.Posts
 
         public Category Category { get; private set; }
 
-        public string ImageUrl { get; private set; }
+        public string? ImageUrl { get; private set; }
 
         public IReadOnlyCollection<Comment> Comments => this.comments.ToList().AsReadOnly();
         public IReadOnlyCollection<Like> Likes => this.likes.ToList().AsReadOnly();
@@ -74,6 +73,11 @@ namespace Forum.Doman.PublicUsers.Models.Posts
             return like;
         }
 
+        public IReadOnlyCollection<Comment> GetComments()
+         => this.comments
+             .OrderByDescending(x => x.CreatedOn)
+             .ToList();
+
         public void AddLike(bool isLike, string userId)
         {
             var like = new Like(isLike, userId);
@@ -90,7 +94,6 @@ namespace Forum.Doman.PublicUsers.Models.Posts
 
         public Post UpdateImageUrl(string imageUrl)
         {
-            this.ValidateImageUrl(imageUrl);
             this.ImageUrl = imageUrl;
 
             return this;
@@ -112,6 +115,8 @@ namespace Forum.Doman.PublicUsers.Models.Posts
             return comment;
         }
 
+
+
         public Post UpdateDescription(string description)
         {
             this.ValidateDescription(description);
@@ -128,10 +133,6 @@ namespace Forum.Doman.PublicUsers.Models.Posts
             return this;
         }
 
-        private void ValidateImageUrl(string imageUrl)
-            => Guard.ForValidUrl<InvalidPostException>(
-                imageUrl,
-                nameof(this.ImageUrl));
 
         public void ValidateDescription(string description)
            => Guard.ForStringLength<InvalidPostException>(

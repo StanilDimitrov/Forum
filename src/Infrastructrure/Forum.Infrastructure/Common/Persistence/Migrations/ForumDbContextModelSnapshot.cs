@@ -120,7 +120,6 @@ namespace Forum.Infrastructure.common.persistence.migrations
                         .HasMaxLength(1000);
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(2048)")
                         .HasMaxLength(2048);
 

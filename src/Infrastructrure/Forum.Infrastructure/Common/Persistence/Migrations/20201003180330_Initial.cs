@@ -221,7 +221,7 @@ namespace Forum.Infrastructure.common.persistence.migrations
                     Description = table.Column<string>(maxLength: 1000, nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime", nullable: false),
                     CategoryId = table.Column<int>(nullable: false),
-                    ImageUrl = table.Column<string>(maxLength: 2048, nullable: false),
+                    ImageUrl = table.Column<string>(maxLength: 2048, nullable: true),
                     PublicUserId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>

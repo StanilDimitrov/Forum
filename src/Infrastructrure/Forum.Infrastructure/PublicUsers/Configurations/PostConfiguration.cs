@@ -20,7 +20,6 @@ namespace Forum.Infrastructure.PublicUsers.Configurations
 
             builder
                 .Property(p => p.ImageUrl)
-                .IsRequired()
                 .HasMaxLength(MaxUrlLength);
 
             builder
