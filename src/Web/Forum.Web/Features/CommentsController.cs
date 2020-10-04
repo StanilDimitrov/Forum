@@ -2,6 +2,7 @@
 using Forum.Application.PublicUsers.Comments.Commands.Create;
 using Forum.Application.PublicUsers.Comments.Commands.Create.Comment;
 using Forum.Application.PublicUsers.Comments.Commands.Delete;
+using Forum.Application.PublicUsers.Comments.Queries.Details;
 using Forum.Application.PublicUsers.Posts.Commands.Edit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +12,13 @@ namespace Forum.Web.Features
 {
     public class CommentsController : ApiController
     {
+        [HttpGet]
+        [Authorize]
+        [Route(Id)]
+        public async Task<ActionResult<CommentDetailsOutputModel>> Details(
+           [FromRoute] CommentDetailsQuery query)
+            => await this.Send(query);
+
         [HttpPost("{postId}")]
         [Authorize]
         public async Task<ActionResult<CreateCommentOutputModel>> Create(int postId,

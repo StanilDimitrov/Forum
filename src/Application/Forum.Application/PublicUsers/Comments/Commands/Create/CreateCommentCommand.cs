@@ -15,13 +15,16 @@ namespace Forum.Application.PublicUsers.Comments.Commands.Create.Comment
         {
             private readonly ICurrentUser currentUser;
             private readonly IPostDomainRepository postRepository;
+            private readonly IPublicUserDomainRepository publicUserRepository;
 
             public CreateCarAdCommandHandler(
                 ICurrentUser currentUser,
-                IPostDomainRepository postRepository)
+                IPostDomainRepository postRepository,
+                IPublicUserDomainRepository publicUserRepository)
             {
                 this.currentUser = currentUser;
                 this.postRepository = postRepository;
+                this.publicUserRepository = publicUserRepository;
             }
 
             public async Task<CreateCommentOutputModel> Handle(
@@ -32,7 +35,9 @@ namespace Forum.Application.PublicUsers.Comments.Commands.Create.Comment
                     request.Id,
                     cancellationToken);
 
-                post.AddComment(request.Description, currentUser.UserId);
+                var publicUser = await this.publicUserRepository.FindByCurrentUser(currentUser.UserId);
+
+                post.AddComment(request.Description, publicUser);
 
                 await this.postRepository.Save(post, cancellationToken);
                 return new CreateCommentOutputModel(post.Comments.Last().Id);

@@ -11,10 +11,14 @@ namespace Forum.Application.PublicUsers.Posts.Queries.Categories
 
         public string Description { get; private set; } = default!;
 
+        public string UserName { get; private set; } = default!;
+
         public DateTime CreatedOn { get; private set; } = default!;
 
         public virtual void Mapping(Profile mapper)
           => mapper
-              .CreateMap<Comment, GetPostCommentOutputModel>();
+              .CreateMap<Comment, GetPostCommentOutputModel>()
+               .ForMember(pu => pu.UserName, cfg => cfg
+                    .MapFrom(ad => ad.PublicUser.UserName));
     }
 }

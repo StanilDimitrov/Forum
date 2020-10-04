@@ -245,7 +245,7 @@ namespace Forum.Infrastructure.common.persistence.migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: true),
+                    PublicUserId = table.Column<int>(nullable: false),
                     Description = table.Column<string>(maxLength: 1000, nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime", nullable: false),
                     PostId = table.Column<int>(nullable: true)
@@ -260,9 +260,9 @@ namespace Forum.Infrastructure.common.persistence.migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Comments_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        name: "FK_Comments_PublicUsers_PublicUserId",
+                        column: x => x.PublicUserId,
+                        principalTable: "PublicUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -333,9 +333,9 @@ namespace Forum.Infrastructure.common.persistence.migrations
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comments_UserId",
+                name: "IX_Comments_PublicUserId",
                 table: "Comments",
-                column: "UserId");
+                column: "PublicUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Likes_PostId",

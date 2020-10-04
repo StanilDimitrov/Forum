@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 namespace Forum.Application.PublicUsers.Messages.Queries.Details
 
 {
-    public class ReadOldMessageQuery : EntityCommand<int>, IRequest<MessageOutputModel>
+    public class InboxMessageDetailsQuery : EntityCommand<int>, IRequest<MessageOutputModel>
     {
-        public class ReadOldMessageQueryHandler : IRequestHandler<ReadOldMessageQuery, MessageOutputModel>
+        public class InboxMessageDetailsQueryHandler : IRequestHandler<InboxMessageDetailsQuery, MessageOutputModel>
         {
             private readonly IPublicUserDomainRepository userRepository;
             private readonly IMapper mapper;
 
-            public ReadOldMessageQueryHandler(
+            public InboxMessageDetailsQueryHandler(
                 IPublicUserDomainRepository userRepository,
                 IMapper mapper)
             {
@@ -25,7 +25,7 @@ namespace Forum.Application.PublicUsers.Messages.Queries.Details
             }
 
             public async Task<MessageOutputModel> Handle(
-                ReadOldMessageQuery request,
+                InboxMessageDetailsQuery request,
                 CancellationToken cancellationToken)
             {
                 var message = await this.userRepository.GetMessage(

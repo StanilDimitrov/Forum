@@ -1,5 +1,6 @@
 ﻿using Forum.Domain.Common.Models;
 using Forum.Doman.PublicUsers.Exceptions;
+using Forum.Doman.PublicUsers.Models.Users;
 using System;
 using static Forum.Domain.PublicUsers.Models.ModelConstants.Comment;
 
@@ -7,16 +8,25 @@ namespace Forum.Doman.PublicUsers.Models.Posts
 {
     public class Comment : Entity<int>
     {
-        internal Comment(string description, string userId)
+        internal Comment(string description, PublicUser publicUser)
         {
             this.ValidateDescription(description);
 
             this.Description = description;
-            this.UserId = userId;
+            this.PublicUser = publicUser;
             this.CreatedOn = DateTime.Now;
         }
 
-        public string? UserId { get; private set; }
+        private Comment(string description)
+        {
+            this.ValidateDescription(description);
+
+            this.Description = description;
+            this.PublicUser = default!;
+            this.CreatedOn = DateTime.Now;
+        }
+
+        public PublicUser PublicUser { get; private set; }
 
         public string Description { get; private set; }
 
@@ -29,7 +39,6 @@ namespace Forum.Doman.PublicUsers.Models.Posts
 
             return this;
         }
-
 
         public void ValidateDescription(string description)
           => Guard.ForStringLength<InvalidPostException>(

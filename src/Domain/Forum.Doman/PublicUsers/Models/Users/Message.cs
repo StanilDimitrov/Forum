@@ -7,12 +7,12 @@ namespace Forum.Doman.PublicUsers.Models.Users
 {
     public class Message : Entity<int>
     {
-        internal Message(string text, PublicUser reciever)
+        internal Message(string text, PublicUser receiver)
         {
             this.ValidateText(text);
 
             this.Text = text;
-            this.PublicUser = reciever;
+            this.PublicUser = receiver;
             this.CreatedOn = DateTime.Now;
         }
 

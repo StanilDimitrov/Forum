@@ -52,9 +52,9 @@ namespace Forum.Doman.PublicUsers.Models.Posts
         public IReadOnlyCollection<Comment> Comments => this.comments.ToList().AsReadOnly();
         public IReadOnlyCollection<Like> Likes => this.likes.ToList().AsReadOnly();
 
-        public void AddComment(string description, string userId)
+        public void AddComment(string description, PublicUser publicUser)
         {
-            var comment = new Comment(description, userId);
+            var comment = new Comment(description, publicUser);
             this.comments.Add(comment);
             //Fire event to new bounded context for notifications
             //TODO Implement notifications bounded context

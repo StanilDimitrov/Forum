@@ -1,4 +1,5 @@
-﻿using Forum.Application.PublicUsers.Posts.Commands.Create;
+﻿using Forum.Application.Common;
+using Forum.Application.PublicUsers.Posts.Commands.Create;
 using Forum.Application.PublicUsers.Posts.Commands.Delete;
 using Forum.Application.PublicUsers.Posts.Commands.Edit;
 using Forum.Application.PublicUsers.Posts.Queries.Categories;
@@ -40,9 +41,9 @@ namespace Forum.Web.Features
         [HttpPut]
         [Authorize]
         [Route(Id)]
-        public async Task<ActionResult> Edit(
-            [FromRoute] EditPostCommand command)
-            => await this.Send(command);
+        public async Task<ActionResult> Edit(int id,
+            EditPostCommand command)
+            => await this.Send(command.SetId(id));
 
         [HttpDelete]
         [Authorize]

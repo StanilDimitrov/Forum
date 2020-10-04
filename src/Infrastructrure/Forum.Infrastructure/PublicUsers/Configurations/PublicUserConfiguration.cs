@@ -10,8 +10,8 @@ namespace Forum.Infrastructure.PublicUsers.Configurations
     {
         public void Configure(EntityTypeBuilder<PublicUser> builder)
         {
-             builder
-                .HasKey(pu => pu.Id);
+            builder
+               .HasKey(pu => pu.Id);
 
             builder
                 .Property(pu => pu.UserName)
@@ -19,9 +19,9 @@ namespace Forum.Infrastructure.PublicUsers.Configurations
                 .HasMaxLength(MaxNameLength);
 
             builder
-                  .Property(pu => pu.Email)
-                  .IsRequired()
-                  .HasMaxLength(MaxEmailLength);
+                 .Property(pu => pu.Email)
+                 .IsRequired()
+                 .HasMaxLength(MaxEmailLength);
 
             builder
                 .HasMany(pu => pu.Posts)

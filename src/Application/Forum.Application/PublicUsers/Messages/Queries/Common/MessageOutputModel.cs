@@ -10,8 +10,6 @@ namespace Forum.Application.PublicUsers.Messages.Queries.Common
     {
         public int Id { get; private set; }
 
-        public PublicUserOutputModel Sender { get; set; } = default!;
-
         public string Text { get; private set; } = default!;
 
         public DateTime CreatedOn { get; set; } = default!;

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Forum.Infrastructure.common.persistence.migrations
 {
     [DbContext(typeof(ForumDbContext))]
-    [Migration("20201004064933_Initial")]
+    [Migration("20201004125022_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,14 +63,14 @@ namespace Forum.Infrastructure.common.persistence.migrations
                     b.Property<int?>("PostId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("PublicUserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PostId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("PublicUserId");
 
                     b.ToTable("Comments");
                 });
@@ -384,10 +384,11 @@ namespace Forum.Infrastructure.common.persistence.migrations
                         .WithMany("Comments")
                         .HasForeignKey("PostId");
 
-                    b.HasOne("Forum.Infrastructure.Identity.User", null)
+                    b.HasOne("Forum.Doman.PublicUsers.Models.Users.PublicUser", "PublicUser")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("PublicUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Forum.Doman.PublicUsers.Models.Posts.Like", b =>

@@ -50,10 +50,10 @@ namespace Forum.Doman.PublicUsers.Models.Users
             return this;
         }
 
-        public Message SendMessage(string text, PublicUser reciever)
+        public Message SendMessage(string text, PublicUser receiver)
         {
-            var message = new Message(text, reciever);
-            reciever.RecieveMessage(message);
+            var message = new Message(text, receiver);
+            receiver.RecieveMessage(message);
             return message;
         }
 
@@ -67,6 +67,7 @@ namespace Forum.Doman.PublicUsers.Models.Users
             this.inboxMessages.Add(message);
             //Fire event to new bounded context for notifications
             //TODO Implement notifications bounded context
+            
             this.RaiseEvent(new MessageReceivedEvent());
         }
 

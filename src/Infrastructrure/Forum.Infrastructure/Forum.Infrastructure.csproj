@@ -9,6 +9,10 @@
   <ItemGroup>
     <Compile Remove="Common\Persistence\Migrations\20201003113648_SendMessages.cs" />
     <Compile Remove="Common\Persistence\Migrations\20201003113648_SendMessages.Designer.cs" />
+    <Compile Remove="Common\Persistence\Migrations\20201004123816_userMessage.cs" />
+    <Compile Remove="Common\Persistence\Migrations\20201004123816_userMessage.Designer.cs" />
+    <Compile Remove="Common\Persistence\Migrations\20201004124834_User.cs" />
+    <Compile Remove="Common\Persistence\Migrations\20201004124834_User.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

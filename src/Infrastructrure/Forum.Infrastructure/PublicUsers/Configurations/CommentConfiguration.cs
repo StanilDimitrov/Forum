@@ -1,9 +1,7 @@
 ﻿using Forum.Doman.PublicUsers.Models.Posts;
-using Forum.Infrastructure.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using static Forum.Domain.PublicUsers.Models.ModelConstants.Comment;
-using static Forum.Domain.PublicUsers.Models.ModelConstants.Common;
 
 namespace Forum.Infrastructure.PublicUsers.Configurations
 {
@@ -27,12 +25,12 @@ namespace Forum.Infrastructure.PublicUsers.Configurations
                 .IsRequired()
                 .HasColumnType("datetime");
 
-            builder
-              .HasOne<User>()
-              .WithMany()
-              .HasForeignKey(c => c.UserId)
-              .OnDelete(DeleteBehavior.Restrict);
 
+            builder
+                .HasOne(p => p.PublicUser)
+                .WithMany()
+                .HasForeignKey("PublicUserId")
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

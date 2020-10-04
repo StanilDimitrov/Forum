@@ -10,8 +10,6 @@ namespace Forum.Application.PublicUsers.Comments.Queries.Common
 
         public string Description { get; private set; } = default!;
 
-        public string ImageUrl { get; private set; } = default!;
-
         public string CreatedOn { get; set; } = default!;
 
         public virtual void Mapping(Profile mapper)

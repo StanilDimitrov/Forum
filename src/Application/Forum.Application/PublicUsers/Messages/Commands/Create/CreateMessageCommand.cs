@@ -10,8 +10,6 @@ namespace Forum.Application.PublicUsers.Messages.Commands.Create
 {
     public class CreateMessageCommand : MessageCommand<CreateMessageCommand>, IRequest<Result>
     {
-        public int ReceiverId { get; set; }
-
         public class CreateMessageCommandHandler : IRequestHandler<CreateMessageCommand, Result>
         {
             private readonly ICurrentUser currentUser;
@@ -33,14 +31,18 @@ namespace Forum.Application.PublicUsers.Messages.Commands.Create
                     this.currentUser.UserId, 
                     cancellationToken);
 
-                var reciever = await this.userRepository.Find(
-                   request.ReceiverId,
+                var receiver = await this.userRepository.Find(
+                   request.Id,
                    cancellationToken);
 
-                sender.SendMessage(request.Text, reciever);
+                if (sender == receiver)
+                {
+                    return false;
+                }
 
-                await this.userRepository.Save(sender, cancellationToken);
-                await this.userRepository.Save(reciever, cancellationToken);
+                sender.SendMessage(request.Text, receiver);
+
+                await this.userRepository.Save(receiver, cancellationToken);
 
                 return Result.Success; ;
             }

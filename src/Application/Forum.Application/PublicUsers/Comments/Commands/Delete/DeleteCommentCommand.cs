@@ -14,13 +14,16 @@ namespace Forum.Application.PublicUsers.Comments.Commands.Delete
         {
             private readonly ICurrentUser currentUser;
             private readonly IPostDomainRepository postRepository;
+            private readonly IPublicUserDomainRepository userRepository;
 
             public DeleteCommentCommandHandler(
                 ICurrentUser currentUser,
-                IPostDomainRepository postRepository)
+                IPostDomainRepository postRepository,
+                IPublicUserDomainRepository userRepository)
             {
                 this.currentUser = currentUser;
                 this.postRepository = postRepository;
+                this.userRepository = userRepository;
             }
 
             public async Task<Result> Handle(
@@ -28,17 +31,14 @@ namespace Forum.Application.PublicUsers.Comments.Commands.Delete
                 CancellationToken cancellationToken)
             {
                 var post = await this.postRepository.GetPostByCommentId(request.Id, cancellationToken);
-                var userHasComment = await this.currentUser.UserHasComment(
-                    this.postRepository,
-                    request.Id,
-                    cancellationToken);
+                var publicUser = await userRepository.FindByCurrentUser(currentUser.UserId);
+                var comment = await this.postRepository.GetComment(request.Id);
 
-                if (!userHasComment)
+                if (comment.PublicUser != publicUser)
                 {
-                    return userHasComment;
+                    return false;
                 }
 
-                var comment = await this.postRepository.GetComment(request.Id);
                 post.DeleteComment(comment);
 
                 await this.postRepository.Save(post, cancellationToken);

@@ -49,11 +49,17 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
                 .SingleOrDefaultAsync(cancellationToken);
 
         public async Task<Message> GetMessage(int messageId, CancellationToken cancellationToken = default)
-      => await this
+             => await this
                .Data
                .Messages
                .FirstOrDefaultAsync(c => c.Id == messageId, cancellationToken);
 
+        public async Task<MessageOutputModel> GetMessageDetails(int messageId, CancellationToken cancellationToken = default)
+            => await this.mapper.ProjectTo<MessageOutputModel>
+            (this.Data
+            .Messages
+            .Where(c => c.Id == messageId))
+            .FirstOrDefaultAsync(cancellationToken);
         public async Task<bool> HasPost(
             int publicUserId,
             int postId,
@@ -87,7 +93,7 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
                 .Skip(skip)
                 .Take(take))
                 .ToListAsync(cancellationToken);
-        
+
         public async Task<IEnumerable<GetPublicUserPostOutputModel>> GetPosts(
            int id,
            int skip = 0,
