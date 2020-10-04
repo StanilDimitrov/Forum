@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Forum.Application.Common.Mapping;
-using Forum.Application.PublicUsers.Users.Queries.Common;
 using Forum.Doman.PublicUsers.Models.Users;
 using System;
 
@@ -11,6 +10,8 @@ namespace Forum.Application.PublicUsers.Messages.Queries.Common
         public int Id { get; private set; }
 
         public string Text { get; private set; } = default!;
+
+        public string SenderUserName { get;  set; } = default!;
 
         public DateTime CreatedOn { get; set; } = default!;
 

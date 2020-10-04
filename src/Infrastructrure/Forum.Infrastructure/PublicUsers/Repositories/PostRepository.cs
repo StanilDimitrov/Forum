@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Forum.Application.Common.Exceptions;
 using Forum.Application.PublicUsers.Comments.Queries.Details;
 using Forum.Application.PublicUsers.Posts;
 using Forum.Application.PublicUsers.Posts.Queries.Categories;

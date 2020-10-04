@@ -139,6 +139,10 @@ namespace Forum.Infrastructure.common.persistence.migrations
                     b.Property<int>("PublicUserId")
                         .HasColumnType("int");
 
+                    b.Property<string>("SenderUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("nvarchar(1000)")
@@ -147,6 +151,8 @@ namespace Forum.Infrastructure.common.persistence.migrations
                     b.HasKey("Id");
 
                     b.HasIndex("PublicUserId");
+
+                    b.HasIndex("SenderUserId");
 
                     b.ToTable("Messages");
                 });
@@ -415,6 +421,12 @@ namespace Forum.Infrastructure.common.persistence.migrations
                         .WithMany("InboxMessages")
                         .HasForeignKey("PublicUserId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Forum.Infrastructure.Identity.User", null)
+                        .WithMany()
+                        .HasForeignKey("SenderUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 

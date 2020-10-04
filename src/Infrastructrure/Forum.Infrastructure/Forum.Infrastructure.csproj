@@ -13,6 +13,8 @@
     <Compile Remove="Common\Persistence\Migrations\20201004123816_userMessage.Designer.cs" />
     <Compile Remove="Common\Persistence\Migrations\20201004124834_User.cs" />
     <Compile Remove="Common\Persistence\Migrations\20201004124834_User.Designer.cs" />
+    <Compile Remove="Common\Persistence\Migrations\20201004171419_Message.cs" />
+    <Compile Remove="Common\Persistence\Migrations\20201004171419_Message.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

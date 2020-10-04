@@ -40,7 +40,7 @@ namespace Forum.Application.PublicUsers.Messages.Commands.Create
                     return false;
                 }
 
-                sender.SendMessage(request.Text, receiver);
+                sender.SendMessage(request.Text, receiver, currentUser.UserId);
 
                 await this.userRepository.Save(receiver, cancellationToken);
 

@@ -7,25 +7,29 @@ namespace Forum.Doman.PublicUsers.Models.Users
 {
     public class Message : Entity<int>
     {
-        internal Message(string text, PublicUser receiver)
+        internal Message(string text, PublicUser receiver, string senderUserId)
         {
             this.ValidateText(text);
 
             this.Text = text;
             this.PublicUser = receiver;
+            this.SenderUserId = senderUserId;
             this.CreatedOn = DateTime.Now;
         }
 
-        private Message(string text)
+        private Message(string text, string senderUserId)
         {
             this.ValidateText(text);
 
             this.Text = text;
+            this.SenderUserId = senderUserId;
             this.PublicUser = default!;
             this.CreatedOn = DateTime.Now;
         }
 
         public PublicUser PublicUser { get; private set; }
+
+        public string SenderUserId { get; private set; }
 
         public string Text { get; private set; }
 

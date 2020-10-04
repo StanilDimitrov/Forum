@@ -50,9 +50,9 @@ namespace Forum.Doman.PublicUsers.Models.Users
             return this;
         }
 
-        public Message SendMessage(string text, PublicUser receiver)
+        public Message SendMessage(string text, PublicUser receiver, string senderUserId)
         {
-            var message = new Message(text, receiver);
+            var message = new Message(text, receiver, senderUserId);
             receiver.RecieveMessage(message);
             return message;
         }

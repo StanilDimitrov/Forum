@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Forum.Infrastructure.common.persistence.migrations
 {
     [DbContext(typeof(ForumDbContext))]
-    [Migration("20201004125022_Initial")]
+    [Migration("20201004171547_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -141,6 +141,10 @@ namespace Forum.Infrastructure.common.persistence.migrations
                     b.Property<int>("PublicUserId")
                         .HasColumnType("int");
 
+                    b.Property<string>("SenderUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("nvarchar(1000)")
@@ -149,6 +153,8 @@ namespace Forum.Infrastructure.common.persistence.migrations
                     b.HasKey("Id");
 
                     b.HasIndex("PublicUserId");
+
+                    b.HasIndex("SenderUserId");
 
                     b.ToTable("Messages");
                 });
@@ -417,6 +423,12 @@ namespace Forum.Infrastructure.common.persistence.migrations
                         .WithMany("InboxMessages")
                         .HasForeignKey("PublicUserId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Forum.Infrastructure.Identity.User", null)
+                        .WithMany()
+                        .HasForeignKey("SenderUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 

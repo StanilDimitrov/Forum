@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Forum.Application.Common.Exceptions;
 using Forum.Application.PublicUsers.Messages.Queries.Common;
 using Forum.Application.PublicUsers.Users;
 using Forum.Application.PublicUsers.Users.Queries.Common;
@@ -55,11 +54,16 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
                .FirstOrDefaultAsync(c => c.Id == messageId, cancellationToken);
 
         public async Task<MessageOutputModel> GetMessageDetails(int messageId, CancellationToken cancellationToken = default)
-            => await this.mapper.ProjectTo<MessageOutputModel>
-            (this.Data
-            .Messages
-            .Where(c => c.Id == messageId))
-            .FirstOrDefaultAsync(cancellationToken);
+        {
+            var message = await GetMessage(messageId, cancellationToken);
+            var sender = await FindByCurrentUser(message.SenderUserId);
+
+            var messageOutputModel = this.mapper.Map<MessageOutputModel>(message);
+
+            messageOutputModel.SenderUserName = sender.UserName;
+            return messageOutputModel;
+        }
+
         public async Task<bool> HasPost(
             int publicUserId,
             int postId,

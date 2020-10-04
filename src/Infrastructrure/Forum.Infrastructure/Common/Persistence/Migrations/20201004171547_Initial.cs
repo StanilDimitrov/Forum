@@ -198,6 +198,7 @@ namespace Forum.Infrastructure.common.persistence.migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PublicUserId = table.Column<int>(nullable: false),
+                    SenderUserId = table.Column<string>(nullable: false),
                     Text = table.Column<string>(maxLength: 1000, nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
@@ -210,6 +211,12 @@ namespace Forum.Infrastructure.common.persistence.migrations
                         principalTable: "PublicUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Messages_AspNetUsers_SenderUserId",
+                        column: x => x.SenderUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -346,6 +353,11 @@ namespace Forum.Infrastructure.common.persistence.migrations
                 name: "IX_Messages_PublicUserId",
                 table: "Messages",
                 column: "PublicUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Messages_SenderUserId",
+                table: "Messages",
+                column: "SenderUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Posts_CategoryId",

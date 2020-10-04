@@ -20,6 +20,10 @@ namespace Forum.Application.PublicUsers.Users
             int postId,
             CancellationToken cancellationToken = default);
 
+        Task<MessageOutputModel> GetMessageDetails(
+            int messageId,
+            CancellationToken cancellationToken = default);
+
         Task<IEnumerable<MessageOutputModel>> GetInboxMessages(
             int id,
             int skip,
