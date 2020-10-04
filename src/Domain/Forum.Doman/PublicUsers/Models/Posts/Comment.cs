@@ -7,13 +7,11 @@ namespace Forum.Doman.PublicUsers.Models.Posts
 {
     public class Comment : Entity<int>
     {
-        internal Comment(string description, string imageUrl, string userId)
+        internal Comment(string description, string userId)
         {
             this.ValidateDescription(description);
-            this.ValidateImageUrl(imageUrl);
 
             this.Description = description;
-            this.ImageUrl = imageUrl;
             this.UserId = userId;
             this.CreatedOn = DateTime.Now;
         }
@@ -21,8 +19,6 @@ namespace Forum.Doman.PublicUsers.Models.Posts
         public string? UserId { get; private set; }
 
         public string Description { get; private set; }
-
-        public string ImageUrl { get; private set; }
 
         public DateTime CreatedOn { get; private set; }
 
@@ -34,13 +30,6 @@ namespace Forum.Doman.PublicUsers.Models.Posts
             return this;
         }
 
-        public Comment UpdateImageUrl(string imageUrl)
-        {
-            this.ValidateDescription(imageUrl);
-            this.ImageUrl = imageUrl;
-
-            return this;
-        }
 
         public void ValidateDescription(string description)
           => Guard.ForStringLength<InvalidPostException>(
@@ -48,10 +37,5 @@ namespace Forum.Doman.PublicUsers.Models.Posts
               MinDescriptionLength,
               MaxDescriptionLength,
               nameof(this.Description));
-
-        private void ValidateImageUrl(string imageUrl)
-            => Guard.ForValidUrl<InvalidPostException>(
-                imageUrl,
-                nameof(this.ImageUrl));
     }
 }

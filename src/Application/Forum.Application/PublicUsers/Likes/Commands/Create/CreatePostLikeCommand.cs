@@ -29,15 +29,15 @@ namespace Forum.Application.PublicUsers.Likes.Commands.Create.Comment
                 CancellationToken cancellationToken)
             {
                 var post = await this.postRepository.Find(
-                    request.PostId,
+                    request.Id,
                     cancellationToken);
 
                 var isPostLikedByUser = await this.postRepository.CheckIsPostLikedByUser(
-                    request.PostId, currentUser.UserId);
+                    request.Id, currentUser.UserId);
 
                 if (!isPostLikedByUser)
                 {
-                    post.AddLike(request.IsLiked, currentUser.UserId);
+                    post.AddLike(request.IsLike, currentUser.UserId);
                     await this.postRepository.Save(post, cancellationToken);
                 }
                

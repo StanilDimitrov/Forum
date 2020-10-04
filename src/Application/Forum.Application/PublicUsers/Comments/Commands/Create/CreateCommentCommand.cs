@@ -11,8 +11,6 @@ namespace Forum.Application.PublicUsers.Comments.Commands.Create.Comment
 {
     public class CreateCommentCommand : CommentCommand<CreateCommentCommand>, IRequest<CreateCommentOutputModel>
     {
-        public int PostId { get; set; }
-
         public class CreateCarAdCommandHandler : IRequestHandler<CreateCommentCommand, CreateCommentOutputModel>
         {
             private readonly ICurrentUser currentUser;
@@ -31,10 +29,10 @@ namespace Forum.Application.PublicUsers.Comments.Commands.Create.Comment
                 CancellationToken cancellationToken)
             {
                 var post = await this.postRepository.Find(
-                    request.PostId,
+                    request.Id,
                     cancellationToken);
 
-                post.AddComment(request.Description, request.ImageUrl, currentUser.UserId);
+                post.AddComment(request.Description, currentUser.UserId);
 
                 await this.postRepository.Save(post, cancellationToken);
                 return new CreateCommentOutputModel(post.Comments.Last().Id);

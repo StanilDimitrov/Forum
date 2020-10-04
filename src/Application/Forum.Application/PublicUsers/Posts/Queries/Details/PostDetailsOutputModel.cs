@@ -7,7 +7,7 @@ namespace Forum.Application.PublicUsers.Posts.Queries.Details
 {
     public class PostDetailsOutputModel : PostOutputModel
     {
-        public PublicUserOutputModel User { get; set; } = default!;
+        public string UserName { get; set; } = default!;
 
         public int TotalLikes { get; set; }
 
@@ -16,7 +16,9 @@ namespace Forum.Application.PublicUsers.Posts.Queries.Details
         public override void Mapping(Profile mapper) 
             => mapper
                 .CreateMap<Post, PostDetailsOutputModel>()
-                .IncludeBase<Post, PostOutputModel>();
-                
+                .IncludeBase<Post, PostOutputModel>()
+             .ForMember(p => p.Category, cfg => cfg
+                    .MapFrom(ad => ad.Category.Name));
+
     }
 }

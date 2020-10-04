@@ -21,9 +21,6 @@ namespace Forum.Infrastructure.PublicUsers.Configurations
                .Property(p => p.CreatedOn)
                .IsRequired()
                .HasColumnType("datetime");
-
-            builder
-             .Ignore(p => p.Receiver);
         }
     }
 }

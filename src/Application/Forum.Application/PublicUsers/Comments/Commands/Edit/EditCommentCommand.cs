@@ -45,8 +45,7 @@ namespace Forum.Application.PublicUsers.Posts.Commands.Edit
 
                 post.UpdateComment(
                     comment,
-                    request.Description,
-                    request.ImageUrl);
+                    request.Description);
 
                 await this.postRepository.Save(post, cancellationToken);
                 return Result.Success;

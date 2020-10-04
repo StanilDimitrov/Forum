@@ -197,9 +197,9 @@ namespace Forum.Infrastructure.common.persistence.migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    PublicUserId = table.Column<int>(nullable: false),
                     Text = table.Column<string>(maxLength: 1000, nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime", nullable: false),
-                    PublicUserId = table.Column<int>(nullable: true)
+                    CreatedOn = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -209,7 +209,7 @@ namespace Forum.Infrastructure.common.persistence.migrations
                         column: x => x.PublicUserId,
                         principalTable: "PublicUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -221,7 +221,6 @@ namespace Forum.Infrastructure.common.persistence.migrations
                     Description = table.Column<string>(maxLength: 1000, nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime", nullable: false),
                     CategoryId = table.Column<int>(nullable: false),
-                    ImageUrl = table.Column<string>(maxLength: 2048, nullable: true),
                     PublicUserId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -248,7 +247,6 @@ namespace Forum.Infrastructure.common.persistence.migrations
                     Id = table.Column<int>(nullable: false),
                     UserId = table.Column<string>(nullable: true),
                     Description = table.Column<string>(maxLength: 1000, nullable: false),
-                    ImageUrl = table.Column<string>(maxLength: 2048, nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime", nullable: false),
                     PostId = table.Column<int>(nullable: true)
                 },

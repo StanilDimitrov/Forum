@@ -3,6 +3,7 @@ using Forum.Domain.Common.Models;
 using Forum.Domain.PublicUsers.Models.Posts;
 using Forum.Doman.PublicUsers.Events.Posts;
 using Forum.Doman.PublicUsers.Exceptions;
+using Forum.Doman.PublicUsers.Models.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,6 @@ namespace Forum.Doman.PublicUsers.Models.Posts
 
         internal Post(
             string description,
-            string imageUrl,
             Category category)
 
         {
@@ -28,20 +28,16 @@ namespace Forum.Doman.PublicUsers.Models.Posts
             this.ValidateCategory(category);
 
             this.Description = description;
-            this.ImageUrl = imageUrl;
             this.Category = category;
+            this.CreatedOn = DateTime.Now;
             this.comments = new HashSet<Comment>();
             this.likes = new HashSet<Like>();
         }
 
-        private Post(
-           string description,
-           string imageUrl)
-
+        private Post(string description)
         {
             this.Description = description;
             this.CreatedOn = DateTime.Now;
-            this.ImageUrl = imageUrl;
             this.Category = default!;
             this.comments = new HashSet<Comment>();
             this.likes = new HashSet<Like>();
@@ -53,14 +49,12 @@ namespace Forum.Doman.PublicUsers.Models.Posts
 
         public Category Category { get; private set; }
 
-        public string? ImageUrl { get; private set; }
-
         public IReadOnlyCollection<Comment> Comments => this.comments.ToList().AsReadOnly();
         public IReadOnlyCollection<Like> Likes => this.likes.ToList().AsReadOnly();
 
-        public void AddComment(string description, string imageUrl, string userId)
+        public void AddComment(string description, string userId)
         {
-            var comment = new Comment(description, imageUrl, userId);
+            var comment = new Comment(description, userId);
             this.comments.Add(comment);
             //Fire event to new bounded context for notifications
             //TODO Implement notifications bounded context
@@ -92,13 +86,6 @@ namespace Forum.Doman.PublicUsers.Models.Posts
             return like.ChangeLike();
         }
 
-        public Post UpdateImageUrl(string imageUrl)
-        {
-            this.ImageUrl = imageUrl;
-
-            return this;
-        }
-
         public Comment DeleteComment(Comment comment)
         {
             this.comments.Remove(comment);
@@ -107,15 +94,11 @@ namespace Forum.Doman.PublicUsers.Models.Posts
 
         public Comment UpdateComment(
             Comment comment,
-            string description,
-            string imageUrl)
+            string description)
         {
             comment.UpdateDescription(description);
-            comment.UpdateImageUrl(imageUrl);
             return comment;
         }
-
-
 
         public Post UpdateDescription(string description)
         {
@@ -132,7 +115,6 @@ namespace Forum.Doman.PublicUsers.Models.Posts
 
             return this;
         }
-
 
         public void ValidateDescription(string description)
            => Guard.ForStringLength<InvalidPostException>(

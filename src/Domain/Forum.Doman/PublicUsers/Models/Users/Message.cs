@@ -12,7 +12,7 @@ namespace Forum.Doman.PublicUsers.Models.Users
             this.ValidateText(text);
 
             this.Text = text;
-            this.Receiver = reciever;
+            this.PublicUser = reciever;
             this.CreatedOn = DateTime.Now;
         }
 
@@ -21,11 +21,11 @@ namespace Forum.Doman.PublicUsers.Models.Users
             this.ValidateText(text);
 
             this.Text = text;
-            this.Receiver = default!;
+            this.PublicUser = default!;
             this.CreatedOn = DateTime.Now;
         }
 
-        public PublicUser Receiver { get; private set; }
+        public PublicUser PublicUser { get; private set; }
 
         public string Text { get; private set; }
 

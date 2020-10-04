@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Forum.Infrastructure.common.persistence.migrations
 {
     [DbContext(typeof(ForumDbContext))]
-    [Migration("20201003180330_Initial")]
+    [Migration("20201004064933_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,11 +59,6 @@ namespace Forum.Infrastructure.common.persistence.migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(1000)")
                         .HasMaxLength(1000);
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(2048)")
-                        .HasMaxLength(2048);
 
                     b.Property<int?>("PostId")
                         .HasColumnType("int");
@@ -121,10 +116,6 @@ namespace Forum.Infrastructure.common.persistence.migrations
                         .HasColumnType("nvarchar(1000)")
                         .HasMaxLength(1000);
 
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(2048)")
-                        .HasMaxLength(2048);
-
                     b.Property<int?>("PublicUserId")
                         .HasColumnType("int");
 
@@ -147,7 +138,7 @@ namespace Forum.Infrastructure.common.persistence.migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime");
 
-                    b.Property<int?>("PublicUserId")
+                    b.Property<int>("PublicUserId")
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
@@ -421,9 +412,11 @@ namespace Forum.Infrastructure.common.persistence.migrations
 
             modelBuilder.Entity("Forum.Doman.PublicUsers.Models.Users.Message", b =>
                 {
-                    b.HasOne("Forum.Doman.PublicUsers.Models.Users.PublicUser", null)
+                    b.HasOne("Forum.Doman.PublicUsers.Models.Users.PublicUser", "PublicUser")
                         .WithMany("InboxMessages")
-                        .HasForeignKey("PublicUserId");
+                        .HasForeignKey("PublicUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Forum.Doman.PublicUsers.Models.Users.PublicUser", b =>

@@ -9,8 +9,6 @@ namespace Forum.Application.PublicUsers.Comments.Queries.Details
 {
     public class CommentDetailsQuery : EntityCommand<int>, IRequest<CommentDetailsOutputModel>
     {
-        public int PostId { get; set; }
-
         public class CarAdDetailsQueryHandler : IRequestHandler<CommentDetailsQuery, CommentDetailsOutputModel>
         {
             private readonly IPostQueryRepository postRepository;
@@ -32,9 +30,9 @@ namespace Forum.Application.PublicUsers.Comments.Queries.Details
                     request.Id,
                     cancellationToken);
 
-                commentDetails.User = await this.userRepository.GetDetailsByPostId(
+                commentDetails.UserName = (await this.userRepository.Get(
                     request.PostId,
-                    cancellationToken);
+                    cancellationToken)).UserName;
 
                 return commentDetails;
             }

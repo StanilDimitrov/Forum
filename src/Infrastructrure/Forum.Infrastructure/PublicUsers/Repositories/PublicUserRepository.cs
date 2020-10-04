@@ -33,7 +33,7 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
        => await this
                .All()
                .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
-       
+
         public async Task<PublicUserDetailsOutputModel> GetDetails(int id, CancellationToken cancellationToken = default)
           => await this.mapper
                 .ProjectTo<PublicUserDetailsOutputModel>(this
@@ -75,46 +75,32 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
                    .Any(m => m.Id == messageId), cancellationToken);
 
         public async Task<IEnumerable<MessageOutputModel>> GetInboxMessages(
-            int id, 
-            int skip,
-            int take, 
+            int id,
+            int skip = 0,
+            int take = int.MaxValue,
             CancellationToken cancellationToken = default)
-        {
-            var publicUser = await Find(id, cancellationToken);
-            if (publicUser == null)
-            {
-                throw new NotFoundException(nameof(PublicUser), id);
-            }
-
-            var messages = publicUser.InboxMessages
-                 .Skip(skip)
-                 .Take(take)
-                 .OrderByDescending(m => m.CreatedOn)
-                 .ToList();
-
-            var messagesOutputModel = mapper.Map<IEnumerable<MessageOutputModel>>(messages);
-            return messagesOutputModel;
-        }
-
+            => await this.mapper.ProjectTo<MessageOutputModel>
+                     (this.All()
+                    .Where(pu => pu.Id == id)
+                    .SelectMany(pu => pu.InboxMessages)
+                    .OrderByDescending(p => p.CreatedOn)
+                .Skip(skip)
+                .Take(take))
+                .ToListAsync(cancellationToken);
+        
         public async Task<IEnumerable<GetPublicUserPostOutputModel>> GetPosts(
            int id,
-           int skip,
-           int take,
+           int skip = 0,
+           int take = int.MaxValue,
            CancellationToken cancellationToken = default)
-        {
-            var publicUser = await Find(id, cancellationToken);
-            if (publicUser == null)
-            {
-                throw new NotFoundException(nameof(PublicUser), id);
-            }
-            var posts = publicUser.Posts
-                 .Skip(skip)
-                 .Take(take)
-                 .OrderByDescending(m => m.CreatedOn)
-                 .ToList();
-
-            return mapper.Map<IEnumerable<GetPublicUserPostOutputModel>>(posts);
-        }
+            => await this.mapper.ProjectTo<GetPublicUserPostOutputModel>
+                     (this.All()
+                    .Where(pu => pu.Id == id)
+                    .SelectMany(pu => pu.Posts)
+                    .OrderByDescending(p => p.CreatedOn)
+                .Skip(skip)
+                .Take(take))
+                .ToListAsync(cancellationToken);
 
         public async Task<PublicUser> FindByCurrentUser(string userId, CancellationToken cancellationToken = default)
        => await this.FindByUser(userId, publicUser => publicUser, cancellationToken);

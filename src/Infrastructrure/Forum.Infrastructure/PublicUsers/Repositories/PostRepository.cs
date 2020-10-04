@@ -89,23 +89,17 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
 
         public async Task<IEnumerable<GetPostCommentOutputModel>> GetPostComments(
           int id,
-          int skip,
-          int take,
+          int skip= 0,
+          int take = int.MaxValue,
           CancellationToken cancellationToken = default)
-        {
-            var post = await Find(id, cancellationToken);
-            if (post == null)
-            {
-                throw new NotFoundException(nameof(Post), id);
-            }
-
-            var comments = post.Comments
+        => await this.mapper.ProjectTo<GetPostCommentOutputModel>
+                     (this.All()
+                    .Where(p => p.Id == id)
+                    .SelectMany(p => p.Comments)
+                    .OrderByDescending(p => p.CreatedOn)
                 .Skip(skip)
-                .Take(take)
-                .OrderByDescending(x => x.CreatedOn)
-             .ToList().AsReadOnly();
-            return this.mapper.Map<IEnumerable<GetPostCommentOutputModel>>(comments);
-        }
+                .Take(take))
+                .ToListAsync(cancellationToken);
 
         public async Task<PostOutputModel> GetDetailsByCommentId(int commentId, CancellationToken cancellationToken = default)
         => await this.mapper
@@ -122,16 +116,19 @@ namespace Forum.Infrastructure.PublicUsers.Repositories
 
         public async Task<PostDetailsOutputModel> GetDetails(int id, CancellationToken cancellationToken = default)
         {
-            var post = await this.Data.Posts.FindAsync(id);
-            if (post == null)
-            {
-                throw new NotFoundException(nameof(Post), id);
-            }
+           var postDetailsOutputModel = await this.mapper
+                .ProjectTo<PostDetailsOutputModel>(this
+                .All()
+                .Where(c => c.Id == id))
+                .FirstOrDefaultAsync(cancellationToken);
+            var likes = await
+                    (this.All()
+                   .Where(p => p.Id == id)
+                   .SelectMany(p => p.Likes))
+               .ToListAsync(cancellationToken);
 
-            var postDetailsOutputModel = this.mapper
-                .Map<PostDetailsOutputModel>(post);
-            var totalLikes = post.Likes.Where(l => l.IsLike).Count();
-            var totalDislikes = post.Likes.Count - totalLikes;
+            var totalLikes = likes.Where(l => l.IsLike).Count();
+            var totalDislikes = likes.Count - totalLikes;
 
             postDetailsOutputModel.TotalLikes = totalLikes;
             postDetailsOutputModel.TotalDislikes = totalDislikes;

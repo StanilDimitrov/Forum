@@ -22,7 +22,7 @@ namespace Forum.Web.Features
         [HttpGet]
         [Route(Id)]
         public async Task<ActionResult<IEnumerable<GetPostCommentOutputModel>>> GetPostComments(
-             [FromQuery] GetPostCommentsQuery query)
+             [FromRoute] GetPostCommentsQuery query)
             => await this.Send(query);
 
         [HttpGet]

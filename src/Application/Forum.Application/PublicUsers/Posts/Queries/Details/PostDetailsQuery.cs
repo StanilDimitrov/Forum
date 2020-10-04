@@ -30,9 +30,9 @@ namespace Forum.Application.PublicUsers.Users.Queries.Common
                     request.Id,
                     cancellationToken);
 
-                postDetails.User = await this.userRepository.GetDetailsByPostId(
+                postDetails.UserName = (await this.userRepository.GetDetailsByPostId(
                     request.Id,
-                    cancellationToken);
+                    cancellationToken)).UserName;
 
                 return postDetails;
             }

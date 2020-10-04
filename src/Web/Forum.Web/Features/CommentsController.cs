@@ -1,4 +1,5 @@
-﻿using Forum.Application.PublicUsers.Comments.Commands.Create;
+﻿using Forum.Application.Common;
+using Forum.Application.PublicUsers.Comments.Commands.Create;
 using Forum.Application.PublicUsers.Comments.Commands.Create.Comment;
 using Forum.Application.PublicUsers.Comments.Commands.Delete;
 using Forum.Application.PublicUsers.Posts.Commands.Edit;
@@ -12,16 +13,16 @@ namespace Forum.Web.Features
     {
         [HttpPost("{postId}")]
         [Authorize]
-        public async Task<ActionResult<CreateCommentOutputModel>> Create(
-             [FromRoute] CreateCommentCommand command)
-             => await this.Send(command);
+        public async Task<ActionResult<CreateCommentOutputModel>> Create(int postId,
+             CreateCommentCommand command)
+             => await this.Send(command.SetId(postId));
 
         [HttpPut]
         [Authorize]
         [Route(Id)]
-        public async Task<ActionResult> Edit(
-            [FromRoute] EditCommentCommand command)
-             => await this.Send(command);
+        public async Task<ActionResult> Edit(int id,
+             EditCommentCommand command)
+             => await this.Send(command.SetId(id));
 
         [HttpDelete]
         [Authorize]

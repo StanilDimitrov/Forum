@@ -23,10 +23,6 @@ namespace Forum.Infrastructure.PublicUsers.Configurations
                 .HasMaxLength(MaxDescriptionLength);
 
             builder
-                .Property(p => p.ImageUrl)
-                .HasMaxLength(MaxUrlLength);
-
-            builder
                 .Property(p => p.CreatedOn)
                 .IsRequired()
                 .HasColumnType("datetime");

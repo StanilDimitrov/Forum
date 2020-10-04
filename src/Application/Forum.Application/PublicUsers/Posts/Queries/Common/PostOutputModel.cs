@@ -11,8 +11,6 @@ namespace Forum.Application.PublicUsers.Posts.Queries.Common
 
         public string Description { get; private set; } = default!;
 
-        public string ImageUrl { get; private set; } = default!;
-
         public string Category { get; private set; } = default!;
 
         public DateTime CreatedOn { get; set; } = default!;

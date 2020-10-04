@@ -14,11 +14,6 @@ namespace Forum.Application.PublicUsers.Comments.Commands.Common
                 .MinimumLength(MinDescriptionLength)
                 .MaximumLength(MaxDescriptionLength)
                 .NotEmpty();
-
-            this.RuleFor(c => c.ImageUrl)
-                .Must(url => Uri.IsWellFormedUriString(url, UriKind.Absolute))
-                .WithMessage("'{PropertyName}' must be a valid url.")
-                .NotEmpty();
         }
     }
 }

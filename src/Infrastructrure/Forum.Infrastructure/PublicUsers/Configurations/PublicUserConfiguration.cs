@@ -32,7 +32,7 @@ namespace Forum.Infrastructure.PublicUsers.Configurations
 
             builder
                .HasMany(pu => pu.InboxMessages)
-               .WithOne()
+               .WithOne(m => m.PublicUser)
                .Metadata
                .PrincipalToDependent
                .SetField("inboxMessages");

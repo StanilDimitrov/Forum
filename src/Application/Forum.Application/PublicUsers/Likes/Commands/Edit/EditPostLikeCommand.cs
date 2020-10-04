@@ -30,7 +30,7 @@ namespace Forum.Application.PublicUsers.Likes.Commands.Edit
             {
                 
                 var post = await this.postRepository
-                    .Find(request.PostId, cancellationToken);
+                    .Find(request.Id, cancellationToken);
 
                 var like = post.GetLike(currentUser.UserId);
 

@@ -9,8 +9,6 @@ namespace Forum.Application.PublicUsers.Posts.Queries.Categories
     {
         public int Id { get; private set; }
 
-        public string Name { get; private set; } = default!;
-
         public string Description { get; private set; } = default!;
 
         public DateTime CreatedOn { get; private set; } = default!;

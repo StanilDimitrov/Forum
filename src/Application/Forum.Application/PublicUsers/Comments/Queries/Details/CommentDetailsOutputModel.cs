@@ -7,7 +7,7 @@ namespace Forum.Application.PublicUsers.Comments.Queries.Details
 {
     public class CommentDetailsOutputModel : CommentOutputModel
     {
-        public PublicUserOutputModel User { get; set; } = default!;
+        public string UserName { get; set; } = default!;
 
         public override void Mapping(Profile mapper)
             => mapper

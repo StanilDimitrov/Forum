@@ -1,4 +1,5 @@
-﻿using Forum.Application.PublicUsers.Likes.Commands.Create.Comment;
+﻿using Forum.Application.Common;
+using Forum.Application.PublicUsers.Likes.Commands.Create.Comment;
 using Forum.Application.PublicUsers.Likes.Commands.Edit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,14 +11,14 @@ namespace Forum.Web.Features
     {
         [HttpPost("{postId}")]
         [Authorize]
-        public async Task<ActionResult> Create(
-            [FromRoute] CreatePostLikeCommand command)
-            => await this.Send(command);
+        public async Task<ActionResult> Create(int postId,
+             CreatePostLikeCommand command)
+            => await this.Send(command.SetId(postId));
 
         [HttpPut("{postId}")]
         [Authorize]
-        public async Task<ActionResult> Edit(
-            [FromRoute] EditPostLikeCommand command)
-            => await this.Send(command);
+        public async Task<ActionResult> Edit(int postId,
+            EditPostLikeCommand command)
+            => await this.Send(command.SetId(postId));
     }
 }

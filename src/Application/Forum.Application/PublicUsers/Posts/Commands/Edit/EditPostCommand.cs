@@ -48,8 +48,7 @@ namespace Forum.Application.PublicUsers.Posts.Commands.Edit
                     .Find(request.Id, cancellationToken);
 
                 post.UpdateDescription(request.Description)
-                    .UpdateCategory(category)
-                    .UpdateImageUrl(request.ImageUrl);
+                    .UpdateCategory(category);
 
                 await this.postRepository.Save(post, cancellationToken);
 

@@ -1,5 +1,6 @@
 ﻿using Forum.Doman.PublicUsers.Exceptions;
 using Forum.Doman.PublicUsers.Models.Posts;
+using Forum.Doman.PublicUsers.Models.Users;
 
 namespace Forum.Domain.PublicUsers.Factories.Posts
 {
@@ -8,7 +9,6 @@ namespace Forum.Domain.PublicUsers.Factories.Posts
     {
         private string postDescription = default!;
         private Category postCategory = default!;
-        private string postImageUrl = default!;
 
         private bool categorySet = false;
 
@@ -28,12 +28,6 @@ namespace Forum.Domain.PublicUsers.Factories.Posts
             return this;
         }
 
-        public IPostFactory WithImageUrl(string imageUrl)
-        {
-            this.postImageUrl = imageUrl;
-            return this;
-        }
-
         public Post Build()
         {
             if (!this.categorySet)
@@ -43,7 +37,6 @@ namespace Forum.Domain.PublicUsers.Factories.Posts
 
             return new Post(
                 this.postDescription,
-                this.postImageUrl,
                 this.postCategory);
         }
     }

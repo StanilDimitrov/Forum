@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using static Forum.Domain.PublicUsers.Models.ModelConstants.Post;
-using static Forum.Domain.PublicUsers.Models.ModelConstants.Common;
 
 namespace Forum.Infrastructure.PublicUsers.Configurations
 {
@@ -17,10 +16,6 @@ namespace Forum.Infrastructure.PublicUsers.Configurations
                 .Property(p => p.Description)
                 .IsRequired()
                 .HasMaxLength(MaxDescriptionLength);
-
-            builder
-                .Property(p => p.ImageUrl)
-                .HasMaxLength(MaxUrlLength);
 
             builder
                 .Property(p => p.CreatedOn)

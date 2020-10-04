@@ -33,7 +33,7 @@ namespace Forum.Application.PublicUsers.Posts.Commands.Create
                 CreatePostCommand request, 
                 CancellationToken cancellationToken)
             {
-                var user = await this.userRepository.FindByCurrentUser(
+                var publicUser = await this.userRepository.FindByCurrentUser(
                     this.currentUser.UserId, 
                     cancellationToken);
 
@@ -44,10 +44,9 @@ namespace Forum.Application.PublicUsers.Posts.Commands.Create
                 var post = this.postFactory
                     .WithDescription(request.Description)
                     .WithCategory(category)
-                    .WithImageUrl(request.ImageUrl)
                     .Build();
 
-                user.AddPost(post);
+                publicUser.AddPost(post);
 
                 await this.postRepository.Save(post, cancellationToken);
 
