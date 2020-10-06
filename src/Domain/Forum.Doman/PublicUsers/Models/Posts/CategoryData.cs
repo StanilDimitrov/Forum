@@ -5,8 +5,6 @@ using System.Collections.Generic;
 
 namespace Forum.Domain.PublicUsers.Models.Posts
 {
-
-
     internal class CategoryData : IInitialData
     {
         public Type EntityType => typeof(Category);

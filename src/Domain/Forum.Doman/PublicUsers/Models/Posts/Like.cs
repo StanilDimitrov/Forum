@@ -1,6 +1,4 @@
-﻿using Forum.Domain.Common.Models;
-
-namespace Forum.Doman.PublicUsers.Models.Posts
+﻿namespace Forum.Doman.PublicUsers.Models.Posts
 {
     public class Like
     {

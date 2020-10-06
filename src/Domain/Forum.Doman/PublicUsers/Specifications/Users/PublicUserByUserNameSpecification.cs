@@ -5,11 +5,11 @@ using System.Linq.Expressions;
 
 namespace Forum.Domain.PublicUsers.Specifications.Users
 {
-    public class UserByUserNameSpecification : Specification<PublicUser>
+    public class PublicUserByUserNameSpecification : Specification<PublicUser>
     {
         private readonly string? userName;
 
-        public UserByUserNameSpecification(string? userName) 
+        public PublicUserByUserNameSpecification(string? userName) 
             => this.userName = userName;
 
         protected override bool Include => this.userName != null;

@@ -83,8 +83,8 @@ namespace Forum.Application.PublicUsers.Posts.Queries.Common
                 => new PostByCategorySpecification(request.Category)
                     .And(new PostByCreatedOnSpecification(request.StartDate, request.EndDate));
             private Specification<PublicUser> GetUserSpecification(PostsQuery request, int? userId)
-                => new UserByIdSpecification(userId)
-                    .And(new UserByUserNameSpecification(request.User));
+                => new PublicUserByIdSpecification(userId)
+                    .And(new PublicUserByUserNameSpecification(request.User));
         }
     }
 }
