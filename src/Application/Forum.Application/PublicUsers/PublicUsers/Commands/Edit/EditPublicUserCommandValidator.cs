@@ -10,7 +10,7 @@ namespace Forum.Application.PublicUsers.PublicUsers.Commands.Edit
             this.RuleFor(u => u.Email)
                 .MinimumLength(MinEmailLength)
                 .MaximumLength(MaxEmailLength)
-                .Matches(EmailRegularExpression)
+                .EmailAddress()
                 .NotEmpty();
         }
     }
