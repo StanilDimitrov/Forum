@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Forum.Doman.Common
+namespace Forum.Domain.Common
 {
     public abstract class Specification<T>
     {

@@ -1,9 +1,9 @@
-﻿using Forum.Doman.Common;
-using Forum.Doman.PublicUsers.Models.Users;
+﻿using Forum.Domain.Common;
+using Forum.Domain.PublicUsers.Models.Users;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Forum.Doman.PublicUsers.Repositories
+namespace Forum.Domain.PublicUsers.Repositories
 {
     public interface IPublicUserDomainRepository : IDomainRepository<PublicUser>
     {

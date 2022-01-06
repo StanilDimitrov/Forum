@@ -1,12 +1,12 @@
 ﻿using Forum.Application.Common;
 using Forum.Application.Common.Contracts;
 using Forum.Application.PublicUsers.Comments.Commands.Common;
-using Forum.Doman.PublicUsers.Repositories;
+using Forum.Domain.PublicUsers.Repositories;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Forum.Application.PublicUsers.Posts.Commands.Edit
+namespace Forum.Application.PublicUsers.Comments.Commands.Edit
 {
     public class EditCommentCommand : CommentCommand<EditCommentCommand>, IRequest<Result>
     {
@@ -35,7 +35,7 @@ namespace Forum.Application.PublicUsers.Posts.Commands.Edit
                     .GetPostByCommentId(request.Id, cancellationToken);
                 var comment = await this.postRepository
                     .GetComment(request.Id, cancellationToken);
-                var publicUser = await this.userRepository.FindByCurrentUser(currentUser.UserId);
+                var publicUser = await this.userRepository.FindByCurrentUser(currentUser.UserId, cancellationToken);
 
                 if (comment.PublicUser != publicUser)
                 {

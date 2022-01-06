@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Forum.Application.Common.Mapping;
-using Forum.Doman.PublicUsers.Models.Posts;
+using Forum.Domain.PublicUsers.Models.Posts;
 using System;
 
-namespace Forum.Application.PublicUsers.Posts.Queries.Categories
+namespace Forum.Application.PublicUsers.Posts.Queries.Comments
 {
     public class GetPostCommentOutputModel : IMapFrom<Comment>
     {

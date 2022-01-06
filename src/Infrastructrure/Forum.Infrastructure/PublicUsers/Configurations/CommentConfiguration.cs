@@ -1,4 +1,4 @@
-﻿using Forum.Doman.PublicUsers.Models.Posts;
+﻿using Forum.Domain.PublicUsers.Models.Posts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using static Forum.Domain.PublicUsers.Models.ModelConstants.Comment;

@@ -2,7 +2,7 @@
 using Forum.Application.PublicUsers.Messages.Commands.Create;
 using Forum.Application.PublicUsers.Messages.Commands.Delete;
 using Forum.Application.PublicUsers.Messages.Queries.Common;
-using Forum.Application.PublicUsers.Users.Queries.Messages;
+using Forum.Application.PublicUsers.PublicUsers.Queries.Messages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;

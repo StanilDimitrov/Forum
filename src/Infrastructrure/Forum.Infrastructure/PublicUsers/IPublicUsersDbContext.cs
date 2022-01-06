@@ -1,5 +1,5 @@
-﻿using Forum.Doman.PublicUsers.Models.Posts;
-using Forum.Doman.PublicUsers.Models.Users;
+﻿using Forum.Domain.PublicUsers.Models.Posts;
+using Forum.Domain.PublicUsers.Models.Users;
 using Forum.Infrastructure.Common.Persistence;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,6 +1,6 @@
 ﻿using Forum.Domain.Common;
 
-namespace Forum.Doman.PublicUsers.Events.Posts
+namespace Forum.Domain.PublicUsers.Events.Posts
 {
     public class LikeAddedEvent : IDomainEvent
     {

@@ -1,8 +1,8 @@
 ﻿using Forum.Application.Common;
 using Forum.Application.PublicUsers.PublicUsers.Commands.Create;
 using Forum.Application.PublicUsers.PublicUsers.Commands.Edit;
-using Forum.Application.PublicUsers.Users.Queries.Details;
-using Forum.Application.PublicUsers.Users.Queries.Posts;
+using Forum.Application.PublicUsers.PublicUsers.Queries.Details;
+using Forum.Application.PublicUsers.PublicUsers.Queries.Posts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace Forum.Web.Features
         [HttpPost]
         [Authorize]
         public async Task<ActionResult<CreatePublicUserOutputModel>> Create(
-            CreatePublicUserCommnad command)
+            CreatePublicUserCommand command)
             => await this.Send(command);
 
         [HttpPut]

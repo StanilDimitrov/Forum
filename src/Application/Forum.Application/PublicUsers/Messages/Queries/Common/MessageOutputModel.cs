@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Forum.Application.Common.Mapping;
-using Forum.Doman.PublicUsers.Models.Users;
+using Forum.Domain.PublicUsers.Models.Users;
 using System;
 
 namespace Forum.Application.PublicUsers.Messages.Queries.Common

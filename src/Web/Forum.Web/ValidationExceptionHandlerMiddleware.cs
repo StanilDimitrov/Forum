@@ -1,5 +1,4 @@
 ﻿using Forum.Application.Common.Exceptions;
-using Forum.Domain.Exceptions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
@@ -7,6 +6,7 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using Forum.Domain.Common;
 
 namespace Forum.Web
 {

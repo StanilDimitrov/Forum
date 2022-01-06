@@ -1,9 +1,9 @@
 ﻿using Forum.Domain.Common.Models;
-using Forum.Doman.PublicUsers.Exceptions;
+using Forum.Domain.PublicUsers.Exceptions;
 using System;
 using static Forum.Domain.PublicUsers.Models.ModelConstants.Message;
 
-namespace Forum.Doman.PublicUsers.Models.Users
+namespace Forum.Domain.PublicUsers.Models.Users
 {
     public class Message : Entity<int>
     {

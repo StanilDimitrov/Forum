@@ -1,6 +1,6 @@
 ﻿using Forum.Application.Common;
 using Forum.Application.PublicUsers.Messages.Queries.Common;
-using Forum.Application.PublicUsers.Users;
+using Forum.Application.PublicUsers.PublicUsers;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;

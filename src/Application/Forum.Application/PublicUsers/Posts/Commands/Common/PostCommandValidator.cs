@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using Forum.Application.Common;
-using Forum.Doman.PublicUsers.Repositories;
-using System;
+using Forum.Domain.PublicUsers.Repositories;
 using static Forum.Domain.PublicUsers.Models.ModelConstants.Post;
 
 namespace Forum.Application.PublicUsers.Posts.Commands.Common

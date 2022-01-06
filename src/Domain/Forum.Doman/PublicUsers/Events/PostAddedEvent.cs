@@ -1,6 +1,6 @@
 ﻿using Forum.Domain.Common;
 
-namespace Forum.Doman.PublicUsers.Events
+namespace Forum.Domain.PublicUsers.Events
 {
     public class PostAddedEvent : IDomainEvent
     {

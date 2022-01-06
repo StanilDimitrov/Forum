@@ -1,9 +1,6 @@
 ﻿using Forum.Application.Common;
 using Forum.Application.Common.Contracts;
-using Forum.Application.PublicUsers.Posts;
-using Forum.Doman.PublicUsers.Models.Posts;
-using System.Threading;
-using System.Threading.Tasks;
+using Forum.Domain.PublicUsers.Models.Posts;
 
 namespace Forum.Application.PublicUsers.Likes.Commands.Common
 {

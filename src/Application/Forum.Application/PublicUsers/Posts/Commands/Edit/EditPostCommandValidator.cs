@@ -1,9 +1,8 @@
 ﻿using FluentValidation;
 using Forum.Application.PublicUsers.Posts.Commands.Common;
-using Forum.Application.PublicUsers.Posts.Commands.Edit;
-using Forum.Doman.PublicUsers.Repositories;
+using Forum.Domain.PublicUsers.Repositories;
 
-namespace CarRentalSystem.Application.Dealerships.CarAds.Commands.Edit
+namespace Forum.Application.PublicUsers.Posts.Commands.Edit
 {
     public class EditPostCommandValidator : AbstractValidator<EditPostCommand>
     {

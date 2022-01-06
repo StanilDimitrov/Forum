@@ -1,25 +1,25 @@
 ﻿using Forum.Application.Common.Contracts;
 using Forum.Domain.PublicUsers.Factories.Users;
-using Forum.Doman.PublicUsers.Repositories;
+using Forum.Domain.PublicUsers.Repositories;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Forum.Application.PublicUsers.PublicUsers.Commands.Create
 {
-    public class CreatePublicUserCommnad : IRequest<CreatePublicUserOutputModel>
+    public class CreatePublicUserCommand : IRequest<CreatePublicUserOutputModel>
     {
         public string UserName { get; set; } = default!;
 
         public string Email { get; set; } = default!;
 
-        public class CreatePublicUserCommnadHandler : IRequestHandler<CreatePublicUserCommnad, CreatePublicUserOutputModel>
+        public class CreatePublicUserCommandHandler : IRequestHandler<CreatePublicUserCommand, CreatePublicUserOutputModel>
         {
             private readonly ICurrentUser currentUser;
             private readonly IPublicUserFactory publicUserFactory;
             private readonly IPublicUserDomainRepository publicUserRepository;
 
-            public CreatePublicUserCommnadHandler(
+            public CreatePublicUserCommandHandler(
                 ICurrentUser currentUser,
                 IPublicUserFactory publicUserFactory,
                 IPublicUserDomainRepository publicUserRepository)
@@ -30,7 +30,7 @@ namespace Forum.Application.PublicUsers.PublicUsers.Commands.Create
             }
 
             public async Task<CreatePublicUserOutputModel> Handle(
-                CreatePublicUserCommnad request,
+                CreatePublicUserCommand request,
                 CancellationToken cancellationToken)
             {
                 var publicUser = this.publicUserFactory

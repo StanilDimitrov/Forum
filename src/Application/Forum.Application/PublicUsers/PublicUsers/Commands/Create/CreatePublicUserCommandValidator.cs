@@ -3,7 +3,7 @@ using static Forum.Domain.PublicUsers.Models.ModelConstants.Common;
 
 namespace Forum.Application.PublicUsers.PublicUsers.Commands.Create
 {
-    public class CreatePublicUserCommandValidator : AbstractValidator<CreatePublicUserCommnad>
+    public class CreatePublicUserCommandValidator : AbstractValidator<CreatePublicUserCommand>
     {
         public CreatePublicUserCommandValidator()
         {

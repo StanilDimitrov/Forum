@@ -1,15 +1,14 @@
 ﻿using Forum.Domain.Common;
 using Forum.Domain.Common.Models;
-using Forum.Domain.PublicUsers.Models.Posts;
-using Forum.Doman.PublicUsers.Events.Posts;
-using Forum.Doman.PublicUsers.Exceptions;
-using Forum.Doman.PublicUsers.Models.Users;
+using Forum.Domain.PublicUsers.Events.Posts;
+using Forum.Domain.PublicUsers.Exceptions;
+using Forum.Domain.PublicUsers.Models.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using static Forum.Domain.PublicUsers.Models.ModelConstants.Post;
 
-namespace Forum.Doman.PublicUsers.Models.Posts
+namespace Forum.Domain.PublicUsers.Models.Posts
 {
     public class Post : Entity<int>, IAggregateRoot
     {

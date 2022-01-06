@@ -1,14 +1,14 @@
 ﻿using Forum.Application.Common.Contracts;
 using Forum.Application.PublicUsers.Messages.Queries.Common;
+using Forum.Application.PublicUsers.PublicUsers.Queries.Details;
+using Forum.Application.PublicUsers.PublicUsers.Queries.Posts;
 using Forum.Application.PublicUsers.Users.Queries.Common;
-using Forum.Application.PublicUsers.Users.Queries.Details;
-using Forum.Application.PublicUsers.Users.Queries.Posts;
-using Forum.Doman.PublicUsers.Models.Users;
+using Forum.Domain.PublicUsers.Models.Users;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Forum.Application.PublicUsers.Users
+namespace Forum.Application.PublicUsers.PublicUsers
 {
     public interface IPublicUserQueryRepository : IQueryRepository<PublicUser>
     {

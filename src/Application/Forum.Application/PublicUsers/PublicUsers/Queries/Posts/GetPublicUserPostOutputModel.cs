@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
 using Forum.Application.Common.Mapping;
-using Forum.Doman.PublicUsers.Models.Posts;
 using System;
-using System.Collections.Generic;
+using Forum.Domain.PublicUsers.Models.Posts;
 
-namespace Forum.Application.PublicUsers.Users.Queries.Posts
+namespace Forum.Application.PublicUsers.PublicUsers.Queries.Posts
 {
     public class GetPublicUserPostOutputModel : IMapFrom<Post>
     {

@@ -1,13 +1,12 @@
 ﻿using Forum.Application.Common;
 using Forum.Application.Common.Contracts;
 using Forum.Application.PublicUsers.Likes.Commands.Common;
-using Forum.Application.PublicUsers.Posts;
-using Forum.Doman.PublicUsers.Repositories;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using Forum.Domain.PublicUsers.Repositories;
 
-namespace Forum.Application.PublicUsers.Likes.Commands.Create.Comment
+namespace Forum.Application.PublicUsers.Likes.Commands.Create
 {
     public class CreatePostLikeCommand : PostLikeCommand<CreatePostLikeCommand>, IRequest<Result>
     {

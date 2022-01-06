@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Forum.Domain.Exceptions
+namespace Forum.Domain.Common
 {
     public abstract class BaseDomainException : Exception
     {

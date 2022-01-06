@@ -1,10 +1,10 @@
 ﻿using Forum.Application.Common;
 using Forum.Application.Common.Contracts;
 using Forum.Application.PublicUsers.Likes.Commands.Common;
-using Forum.Doman.PublicUsers.Repositories;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using Forum.Domain.PublicUsers.Repositories;
 
 namespace Forum.Application.PublicUsers.Likes.Commands.Edit
 {

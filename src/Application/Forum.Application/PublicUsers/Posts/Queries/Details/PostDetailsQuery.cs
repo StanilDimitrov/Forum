@@ -1,11 +1,10 @@
 ﻿using Forum.Application.Common;
-using Forum.Application.PublicUsers.Posts;
-using Forum.Application.PublicUsers.Posts.Queries.Details;
+using Forum.Application.PublicUsers.PublicUsers;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Forum.Application.PublicUsers.Users.Queries.Common
+namespace Forum.Application.PublicUsers.Posts.Queries.Details
 {
     public class PostDetailsQuery : EntityCommand<int>, IRequest<PostDetailsOutputModel>
     {

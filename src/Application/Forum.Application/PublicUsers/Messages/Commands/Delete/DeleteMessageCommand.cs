@@ -1,6 +1,6 @@
 ﻿using Forum.Application.Common;
 using Forum.Application.Common.Contracts;
-using Forum.Doman.PublicUsers.Repositories;
+using Forum.Domain.PublicUsers.Repositories;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,9 +26,9 @@ namespace Forum.Application.PublicUsers.Messages.Commands.Delete
                 DeleteMessageCommand request,
                 CancellationToken cancellationToken)
             {
-                var user = await this.userRepository.FindByCurrentUser(currentUser.UserId);
-                var message = await this.userRepository.GetMessage(request.Id);
-                var userHasMessage = await this.userRepository.HasMessage(user.Id, request.Id);
+                var user = await this.userRepository.FindByCurrentUser(currentUser.UserId, cancellationToken);
+                var message = await this.userRepository.GetMessage(request.Id, cancellationToken);
+                var userHasMessage = await this.userRepository.HasMessage(user.Id, request.Id, cancellationToken);
 
                 if (!userHasMessage)
                 {

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Forum.Application.PublicUsers.Posts.Queries.Common;
-using Forum.Application.PublicUsers.Users.Queries.Common;
-using Forum.Doman.PublicUsers.Models.Posts;
+using Forum.Domain.PublicUsers.Models;
+using Forum.Domain.PublicUsers.Models.Posts;
 
 namespace Forum.Application.PublicUsers.Posts.Queries.Details
 {

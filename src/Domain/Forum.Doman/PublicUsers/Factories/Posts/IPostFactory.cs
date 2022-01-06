@@ -1,6 +1,5 @@
 ﻿using Forum.Domain.Common;
-using Forum.Doman.PublicUsers.Models.Posts;
-using Forum.Doman.PublicUsers.Models.Users;
+using Forum.Domain.PublicUsers.Models.Posts;
 
 namespace Forum.Domain.PublicUsers.Factories.Posts
 {

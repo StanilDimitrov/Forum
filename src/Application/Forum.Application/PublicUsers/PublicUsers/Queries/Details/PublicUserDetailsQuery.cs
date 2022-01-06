@@ -3,7 +3,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Forum.Application.PublicUsers.Users.Queries.Details
+namespace Forum.Application.PublicUsers.PublicUsers.Queries.Details
 {
     public class PublicUserDetailsQuery : EntityCommand<int>, IRequest<PublicUserDetailsOutputModel>
     {

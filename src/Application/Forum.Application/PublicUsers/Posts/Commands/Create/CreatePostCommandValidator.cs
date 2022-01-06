@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using Forum.Application.PublicUsers.Posts.Commands.Common;
-using Forum.Doman.PublicUsers.Repositories;
+using Forum.Domain.PublicUsers.Repositories;
 
 namespace Forum.Application.PublicUsers.Posts.Commands.Create
 {

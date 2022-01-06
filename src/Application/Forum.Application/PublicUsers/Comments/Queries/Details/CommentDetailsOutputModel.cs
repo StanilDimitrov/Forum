@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Forum.Application.PublicUsers.Comments.Queries.Common;
-using Forum.Doman.PublicUsers.Models.Posts;
+using Forum.Domain.PublicUsers.Models.Posts;
 
 namespace Forum.Application.PublicUsers.Comments.Queries.Details
 {

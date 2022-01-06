@@ -1,5 +1,5 @@
 ﻿using Forum.Application.Common;
-using Forum.Doman.PublicUsers.Models.Posts;
+using Forum.Domain.PublicUsers.Models.Posts;
 using System;
 using System.Linq.Expressions;
 

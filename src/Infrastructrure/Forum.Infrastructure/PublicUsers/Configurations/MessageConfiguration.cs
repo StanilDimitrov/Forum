@@ -1,4 +1,4 @@
-﻿using Forum.Doman.PublicUsers.Models.Users;
+﻿using Forum.Domain.PublicUsers.Models.Users;
 using Forum.Infrastructure.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

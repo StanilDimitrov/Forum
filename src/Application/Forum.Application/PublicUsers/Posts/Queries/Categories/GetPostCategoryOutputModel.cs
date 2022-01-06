@@ -1,5 +1,5 @@
 ﻿using Forum.Application.Common.Mapping;
-using Forum.Doman.PublicUsers.Models.Posts;
+using Forum.Domain.PublicUsers.Models.Posts;
 
 namespace Forum.Application.PublicUsers.Posts.Queries.Categories
 {

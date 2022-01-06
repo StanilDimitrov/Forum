@@ -1,9 +1,9 @@
 ﻿using Forum.Domain.Common.Models;
-using Forum.Doman.PublicUsers.Exceptions;
+using Forum.Domain.PublicUsers.Exceptions;
 using static Forum.Domain.PublicUsers.Models.ModelConstants.Category;
 using static Forum.Domain.PublicUsers.Models.ModelConstants.Common;
 
-namespace Forum.Doman.PublicUsers.Models.Posts
+namespace Forum.Domain.PublicUsers.Models.Posts
 {
     public class Category : Entity<int>
     {

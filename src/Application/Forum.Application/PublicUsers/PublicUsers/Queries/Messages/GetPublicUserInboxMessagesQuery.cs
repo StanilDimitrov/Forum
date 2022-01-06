@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Forum.Application.PublicUsers.Users.Queries.Messages
+namespace Forum.Application.PublicUsers.PublicUsers.Queries.Messages
 {
     public class GetPublicUserInboxMessagesQuery : EntityCommand<int>, IRequest<IEnumerable<MessageOutputModel>>
     {

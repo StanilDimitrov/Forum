@@ -3,8 +3,10 @@ using MediatR;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Forum.Application.PublicUsers.PublicUsers;
+using Forum.Application.PublicUsers.PublicUsers.Queries.Posts;
 
-namespace Forum.Application.PublicUsers.Users.Queries.Posts
+namespace Forum.Application.PublicUsers.PublicUsers.Queries.Posts
 {
     public class GetPublicUserPostsQuery : EntityCommand<int>, IRequest<IEnumerable<GetPublicUserPostOutputModel>>
     {

@@ -1,5 +1,5 @@
 ﻿using Forum.Domain.Common;
-using Forum.Doman.PublicUsers.Models.Users;
+using Forum.Domain.PublicUsers.Models.Users;
 
 namespace Forum.Domain.PublicUsers.Factories.Users
 {

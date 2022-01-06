@@ -1,7 +1,6 @@
 ﻿using Forum.Application.Common;
 using Forum.Application.Common.Contracts;
 using Forum.Application.Identity;
-using Forum.Doman.Common;
 using Forum.Infrastructure.Common;
 using Forum.Infrastructure.Common.Events;
 using Forum.Infrastructure.Common.Persistence;
@@ -14,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Forum.Domain.Common;
 
 namespace Forum.Infrastructure
 {

@@ -1,9 +1,8 @@
 ﻿using Forum.Application.Common;
 using Forum.Application.PublicUsers.Comments.Commands.Create;
-using Forum.Application.PublicUsers.Comments.Commands.Create.Comment;
 using Forum.Application.PublicUsers.Comments.Commands.Delete;
+using Forum.Application.PublicUsers.Comments.Commands.Edit;
 using Forum.Application.PublicUsers.Comments.Queries.Details;
-using Forum.Application.PublicUsers.Posts.Commands.Edit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

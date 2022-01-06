@@ -1,4 +1,4 @@
-﻿namespace Forum.Doman.PublicUsers.Models.Posts
+﻿namespace Forum.Domain.PublicUsers.Models.Posts
 {
     public class Like
     {

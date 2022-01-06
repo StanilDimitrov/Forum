@@ -1,7 +1,6 @@
 ﻿using Forum.Application.Common;
 using Forum.Application.Common.Contracts;
-using Forum.Application.PublicUsers.Comments.Commands.Common;
-using Forum.Doman.PublicUsers.Repositories;
+using Forum.Domain.PublicUsers.Repositories;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,8 +30,8 @@ namespace Forum.Application.PublicUsers.Comments.Commands.Delete
                 CancellationToken cancellationToken)
             {
                 var post = await this.postRepository.GetPostByCommentId(request.Id, cancellationToken);
-                var publicUser = await userRepository.FindByCurrentUser(currentUser.UserId);
-                var comment = await this.postRepository.GetComment(request.Id);
+                var publicUser = await userRepository.FindByCurrentUser(currentUser.UserId, cancellationToken);
+                var comment = await this.postRepository.GetComment(request.Id, cancellationToken);
 
                 if (comment.PublicUser != publicUser)
                 {

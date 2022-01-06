@@ -1,7 +1,7 @@
 ﻿using Forum.Application.Common;
 using Forum.Application.Common.Contracts;
 using Forum.Application.PublicUsers.Posts.Commands.Common;
-using Forum.Doman.PublicUsers.Repositories;
+using Forum.Domain.PublicUsers.Repositories;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;

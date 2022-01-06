@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Forum.Application.PublicUsers.Users.Queries.Common;
-using Forum.Doman.PublicUsers.Models.Users;
+using Forum.Domain.PublicUsers.Models.Users;
 
-namespace Forum.Application.PublicUsers.Users.Queries.Details
+namespace Forum.Application.PublicUsers.PublicUsers.Queries.Details
 {
     public class PublicUserDetailsOutputModel : PublicUserOutputModel
     {

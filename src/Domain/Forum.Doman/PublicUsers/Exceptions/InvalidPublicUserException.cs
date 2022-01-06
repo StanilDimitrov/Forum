@@ -1,6 +1,6 @@
-﻿using Forum.Domain.Exceptions;
+﻿using Forum.Domain.Common;
 
-namespace Forum.Doman.PublicUsers.Exceptions
+namespace Forum.Domain.PublicUsers.Exceptions
 {
     public class InvalidPublicUserException : BaseDomainException
     {

@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{87FE174D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{A3E9BA8E-AFD6-4B8F-83EB-01FCD3BAA18B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forum.Doman", "src\Domain\Forum.Doman\Forum.Doman.csproj", "{050A6CC5-35D0-438B-9348-65C113D19FA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forum.Domain", "src\Domain\Forum.Doman\Forum.Domain.csproj", "{050A6CC5-35D0-438B-9348-65C113D19FA0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{56D34EB3-191D-4405-8FCB-169A8417C826}"
 EndProject
@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forum.StartUp", "src\StartU
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{D3D28F59-A756-46DD-A06F-AD99EE62577F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forum.Web", "src\Web\Forum.Web\Forum.Web.csproj", "{B6F9A30C-D7D9-454B-8B0D-A11745154043}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forum.Web", "src\Web\Forum.Web\Forum.Web.csproj", "{B6F9A30C-D7D9-454B-8B0D-A11745154043}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

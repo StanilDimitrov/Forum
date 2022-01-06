@@ -1,13 +1,13 @@
 ﻿using Forum.Domain.Common;
 using Forum.Domain.Common.Models;
-using Forum.Doman.PublicUsers.Events.PublicUsers;
-using Forum.Doman.PublicUsers.Exceptions;
-using Forum.Doman.PublicUsers.Models.Posts;
+using Forum.Domain.PublicUsers.Models.Posts;
 using System.Collections.Generic;
 using System.Linq;
+using Forum.Domain.PublicUsers.Events.PublicUsers;
+using Forum.Domain.PublicUsers.Exceptions;
 using static Forum.Domain.PublicUsers.Models.ModelConstants.Common;
 
-namespace Forum.Doman.PublicUsers.Models.Users
+namespace Forum.Domain.PublicUsers.Models.Users
 {
     public class PublicUser : Entity<int>, IAggregateRoot
     {

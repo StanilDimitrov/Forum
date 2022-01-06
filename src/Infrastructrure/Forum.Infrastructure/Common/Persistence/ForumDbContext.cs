@@ -1,6 +1,6 @@
-﻿using Forum.Domain.Common.Models;
-using Forum.Doman.PublicUsers.Models.Posts;
-using Forum.Doman.PublicUsers.Models.Users;
+﻿using Forum.Domain.Common;
+using Forum.Domain.PublicUsers.Models.Posts;
+using Forum.Domain.PublicUsers.Models.Users;
 using Forum.Infrastructure.Common.Events;
 using Forum.Infrastructure.Identity;
 using Forum.Infrastructure.PublicUsers;

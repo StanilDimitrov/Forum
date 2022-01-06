@@ -2,12 +2,13 @@
 using Forum.Application.PublicUsers.Comments.Queries.Details;
 using Forum.Application.PublicUsers.Posts;
 using Forum.Application.PublicUsers.Posts.Queries.Categories;
+using Forum.Application.PublicUsers.Posts.Queries.Comments;
 using Forum.Application.PublicUsers.Posts.Queries.Common;
 using Forum.Application.PublicUsers.Posts.Queries.Details;
-using Forum.Doman.Common;
-using Forum.Doman.PublicUsers.Models.Posts;
-using Forum.Doman.PublicUsers.Models.Users;
-using Forum.Doman.PublicUsers.Repositories;
+using Forum.Domain.Common;
+using Forum.Domain.PublicUsers.Models.Posts;
+using Forum.Domain.PublicUsers.Models.Users;
+using Forum.Domain.PublicUsers.Repositories;
 using Forum.Infrastructure.Common;
 using Forum.Infrastructure.Common.Persistence;
 using Microsoft.EntityFrameworkCore;

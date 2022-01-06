@@ -1,4 +1,4 @@
-﻿namespace Forum.Domain.Common.Models
+﻿namespace Forum.Domain.Common
 {
     using System.Collections.Generic;
 

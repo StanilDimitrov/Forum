@@ -1,5 +1,4 @@
 ﻿using Forum.Domain.Common;
-using Forum.Doman.PublicUsers.Models.Posts;
 using System;
 using System.Collections.Generic;
 

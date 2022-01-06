@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Forum.Doman.Common
+namespace Forum.Domain.Common
 {
     public interface IDomainRepository<in TEntity>
         where TEntity : IAggregateRoot

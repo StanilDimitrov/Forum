@@ -1,8 +1,8 @@
-﻿using Forum.Domain.PublicUsers.Specifications.Posts;
+﻿using Forum.Domain.Common;
+using Forum.Domain.PublicUsers.Models.Posts;
+using Forum.Domain.PublicUsers.Models.Users;
+using Forum.Domain.PublicUsers.Specifications.Posts;
 using Forum.Domain.PublicUsers.Specifications.Users;
-using Forum.Doman.Common;
-using Forum.Doman.PublicUsers.Models.Posts;
-using Forum.Doman.PublicUsers.Models.Users;
 using System;
 using System.Collections.Generic;
 using System.Threading;

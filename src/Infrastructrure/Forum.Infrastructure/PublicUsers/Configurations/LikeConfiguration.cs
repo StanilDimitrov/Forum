@@ -1,4 +1,4 @@
-﻿using Forum.Doman.PublicUsers.Models.Posts;
+﻿using Forum.Domain.PublicUsers.Models.Posts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

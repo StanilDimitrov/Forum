@@ -1,5 +1,5 @@
 ﻿using Forum.Application.Common;
-using Forum.Application.PublicUsers.Likes.Commands.Create.Comment;
+using Forum.Application.PublicUsers.Likes.Commands.Create;
 using Forum.Application.PublicUsers.Likes.Commands.Edit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -1,10 +1,10 @@
 ﻿using Forum.Domain.Common.Models;
-using Forum.Doman.PublicUsers.Exceptions;
-using Forum.Doman.PublicUsers.Models.Users;
+using Forum.Domain.PublicUsers.Exceptions;
+using Forum.Domain.PublicUsers.Models.Users;
 using System;
 using static Forum.Domain.PublicUsers.Models.ModelConstants.Comment;
 
-namespace Forum.Doman.PublicUsers.Models.Posts
+namespace Forum.Domain.PublicUsers.Models.Posts
 {
     public class Comment : Entity<int>
     {
